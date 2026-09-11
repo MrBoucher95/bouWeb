@@ -1,0 +1,185 @@
+/* ============================================================
+   booWeb tokens — change values here, they apply everywhere.
+   ============================================================ */
+
+@font-face {
+  font-family: 'TikTok Sans';
+  src: url('../fonts/TikTokSans-VariableFont_opsz,slnt,wdth,wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-stretch: 75% 150%;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('../fonts/Geist-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('../fonts/Geist-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  /* --- Brand colors (edit these) --- */
+  --white: #ffffff;
+  --black: #000000;
+
+  --accent-yellow: #ffbe0b;
+  --accent-orange: #fb5607;
+  --accent-pink: #ff006e;
+  --accent-purple: #8338ec;
+  --accent-blue: #3a86ff;
+  --accent-teal: #00bbf9;
+  --accent-lime: #8ac926;
+  --accent-mint: #06d6a0;
+
+  /* Text sitting on each accent */
+  --on-yellow: var(--black);
+  --on-orange: var(--white);
+  --on-pink: var(--white);
+  --on-purple: var(--white);
+  --on-blue: var(--white);
+  --on-teal: var(--black);
+  --on-lime: var(--black);
+  --on-mint: var(--black);
+
+  /* Semantic roles */
+  --accent: var(--accent-orange);
+  --on-accent: var(--on-orange);
+  --gold: var(--accent-yellow);
+  --teal: var(--accent-teal);
+  --nav-accent: var(--accent);
+
+  /* Nav tiles — accents only, no black / white fills */
+  --nav-open-bg: var(--black);
+  --tile-home-bg: var(--accent-yellow);
+  --tile-home-fg: var(--on-yellow);
+  --tile-about-bg: var(--accent-orange);
+  --tile-about-fg: var(--on-orange);
+  --tile-print-bg: var(--accent-blue);
+  --tile-print-fg: var(--on-blue);
+  --tile-digital-bg: var(--accent-pink);
+  --tile-digital-fg: var(--on-pink);
+  --tile-web-bg: var(--accent-purple);
+  --tile-web-fg: var(--on-purple);
+  --tile-apps-bg: var(--accent-teal);
+  --tile-apps-fg: var(--on-teal);
+  --tile-estimate-bg: var(--accent-lime);
+  --tile-estimate-fg: var(--on-lime);
+  --tile-contact-bg: var(--accent-mint);
+  --tile-contact-fg: var(--on-mint);
+
+  /* Type */
+  --display: 'TikTok Sans', sans-serif;
+  --sans: 'Geist', sans-serif;
+  --fw-display: 800;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --fs-display: clamp(3.4rem, 10vw, 8.5rem);
+  --fs-h1: clamp(2.6rem, 6vw, 4.6rem);
+  --fs-h2: clamp(1.8rem, 4vw, 2.8rem);
+  --fs-h3: 1.35rem;
+  --fs-lead: 1.08rem;
+  --fs-ui: 0.72rem;
+  --lh-tight: 1.08;
+  --lh-body: 1.5;
+  --tracking-display: -0.03em;
+  --tracking-ui: 0.12em;
+
+  /* Space & size */
+  --button: 90px;
+  --button-size: var(--button);
+  --button-closed: calc(var(--button) * 2 / 3);
+  --gap: 10px;
+  --nav-tile-gap: var(--gap);
+  --page-pad: 7vw;
+  --page-pad-s: 1.25rem;
+  --page-max: 1180px;
+  --page-rule: 28px;
+  --radius: 16px;
+  --radius-btn: 50px;
+  --header-offset: 7rem;
+
+  /* Motion */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --swoop: cubic-bezier(0.6, 0, 0, 1);
+  --nav-easing: var(--ease);
+  --nav-easing-swoop: var(--swoop);
+}
+
+@media (max-width: 991px) {
+  :root {
+    --button: 64px;
+    --gap: 6px;
+    --page-pad: 1.25rem;
+  }
+}
+
+/* --- Dark (default) --- */
+:root,
+[data-theme='dark'] {
+  --nav-open-bg: #000000;
+  --ink: var(--black);
+  --charcoal: var(--black);
+  --paper: var(--white);
+  --sand: color-mix(in srgb, var(--accent-yellow) 72%, var(--white));
+  --bg: var(--black);
+  --bg-deep: color-mix(in srgb, var(--white) 6%, var(--black));
+  --bg-raised: color-mix(in srgb, var(--white) 12%, var(--black));
+  --fg: var(--white);
+  --line: color-mix(in srgb, var(--white) 22%, var(--black));
+  --line-dark: color-mix(in srgb, var(--black) 12%, var(--white));
+  --muted: color-mix(in srgb, var(--white) 74%, var(--black));
+  --invert-bg: var(--white);
+  --invert-fg: var(--black);
+  --smoke: var(--bg-raised);
+  --switch-bg: color-mix(in srgb, var(--white) 12%, var(--black));
+  --logo-ground: var(--black);
+  --logo-deep: var(--black);
+  --logo-hair: color-mix(in srgb, var(--white) 28%, transparent);
+  --logo-grid: color-mix(in srgb, var(--white) 14%, transparent);
+  --logo-fg: var(--white);
+  --card-1: color-mix(in srgb, var(--accent-orange) 28%, var(--black));
+  --card-2: color-mix(in srgb, var(--accent-blue) 28%, var(--black));
+  --card-3: color-mix(in srgb, var(--accent-yellow) 28%, var(--black));
+  --card-4: color-mix(in srgb, var(--accent-purple) 22%, var(--black));
+  --project-1: color-mix(in srgb, var(--accent-orange) 22%, var(--black));
+  --project-2: color-mix(in srgb, var(--accent-blue) 22%, var(--black));
+  --project-3: color-mix(in srgb, var(--accent-pink) 18%, var(--black));
+}
+
+/* --- Light --- */
+[data-theme='light'] {
+  --nav-open-bg: #ffffff;
+  --gold: var(--accent-orange);
+  --sand: color-mix(in srgb, var(--black) 58%, var(--white));
+  --bg: var(--white);
+  --bg-deep: color-mix(in srgb, var(--black) 6%, var(--white));
+  --bg-raised: color-mix(in srgb, var(--black) 5%, var(--white));
+  --fg: var(--black);
+  --line: color-mix(in srgb, var(--black) 16%, var(--white));
+  --muted: color-mix(in srgb, var(--black) 62%, var(--white));
+  --invert-bg: var(--black);
+  --invert-fg: var(--white);
+  --smoke: var(--bg-raised);
+  --switch-bg: color-mix(in srgb, var(--black) 6%, var(--white));
+  --logo-ground: var(--white);
+  --logo-deep: color-mix(in srgb, var(--black) 6%, var(--white));
+  --logo-hair: color-mix(in srgb, var(--black) 16%, transparent);
+  --logo-grid: color-mix(in srgb, var(--black) 8%, transparent);
+  --logo-fg: var(--black);
+  --card-1: color-mix(in srgb, var(--accent-orange) 16%, var(--white));
+  --card-2: color-mix(in srgb, var(--accent-blue) 16%, var(--white));
+  --card-3: color-mix(in srgb, var(--accent-yellow) 22%, var(--white));
+  --card-4: color-mix(in srgb, var(--accent-purple) 12%, var(--white));
+  --project-1: color-mix(in srgb, var(--accent-orange) 12%, var(--white));
+  --project-2: color-mix(in srgb, var(--accent-blue) 12%, var(--white));
+  --project-3: color-mix(in srgb, var(--accent-pink) 10%, var(--white));
+}
