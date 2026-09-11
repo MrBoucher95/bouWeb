@@ -1,6 +1,13 @@
 .logo-page {
   --logo-in: cubic-bezier(0.6, 0, 0.6, 1);
-  --logo-gutter: calc(var(--button) * 2 / 3);
+  --logo-gutter: var(--page-gutter);
+  --plane-end: 240px;
+  --plane-gutter: 6vw;
+  --plane-start: min(
+    calc(100vw - 32vw - var(--plane-gutter)),
+    calc(82svh * 4558 / 2658),
+    1702px
+  );
   --p: 0;
   background: var(--logo-ground);
   color: var(--logo-fg);
@@ -22,10 +29,10 @@
 .logo-plane {
   position: relative;
   top: calc(50svh - (var(--plane-h) / 2));
-  left: calc(100vw - var(--plane-w) - 8vw);
+  left: calc(100vw - var(--plane-w) - var(--plane-gutter));
   width: var(--plane-w);
   height: var(--plane-h);
-  --plane-w: calc(240px + var(--p) * (min(42vw, 620px) - 240px));
+  --plane-w: calc(var(--plane-end) + (1 - var(--p)) * (var(--plane-start) - var(--plane-end)));
   --plane-h: calc(var(--plane-w) * 2658 / 4558);
 }
 
@@ -189,7 +196,7 @@
   min-height: 100svh;
   display: flex;
   align-items: center;
-  padding: 8rem 46vw 8rem var(--logo-gutter);
+  padding: 8rem calc(var(--plane-end) + var(--plane-gutter) + 2rem) 8rem var(--logo-gutter);
 }
 
 .logo-rule {
@@ -317,14 +324,14 @@
 
 @media (max-width: 991px) {
   .logo-page {
-    --logo-gutter: 1.25rem;
+    --logo-gutter: var(--page-gutter);
+    --plane-end: 200px;
+    --plane-start: min(86vw, 640px);
   }
 
   .logo-plane {
-    left: 50%;
+    left: calc(50vw - (var(--plane-w) / 2));
     top: calc(58svh - (var(--plane-h) / 2));
-    --plane-w: calc(200px + var(--p) * (min(78vw, 420px) - 200px));
-    transform: translateX(-50%);
   }
 
   .logo-opening {

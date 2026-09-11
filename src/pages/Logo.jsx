@@ -7,6 +7,10 @@ function clamp(value, min = 0, max = 1) {
   return Math.min(max, Math.max(min, value))
 }
 
+function easeInOutCubic(t) {
+  return t < 0.5 ? 4 * t * t * t : 1 - ((-2 * t + 2) ** 3) / 2
+}
+
 export default function Logo() {
   const { t } = useLanguage()
   const { logo } = t
@@ -27,17 +31,15 @@ export default function Logo() {
   }, [])
 
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setProgress(1)
-      setEntered(true)
-      return
-    }
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduced) setEntered(true)
 
     const update = () => {
       const opening = openingRef.current
       if (!opening) return
       const traveled = -opening.getBoundingClientRect().top
-      setProgress(clamp(traveled / (window.innerHeight * 0.72)))
+      const next = clamp(traveled / (window.innerHeight * 0.5))
+      setProgress(reduced ? next : easeInOutCubic(next))
     }
 
     update()

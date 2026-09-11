@@ -13,7 +13,7 @@ export default function ServicePage() {
       <div className="page-inner">
         <p className="tag eyebrow">{data.eyebrow}</p>
         <h1>{data.title}</h1>
-        <p className="role" style={{ margin: '1rem 0 1.4rem', color: 'var(--sand)' }}>
+        <p className="role" style={{ margin: '1rem 0 1.4rem', color: 'var(--gold)' }}>
           {data.subtitle}
         </p>
         <p className="lead">{data.intro}</p>

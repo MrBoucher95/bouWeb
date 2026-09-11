@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useLanguage } from '../context/LanguageContext'
 import { useTheme } from '../context/ThemeContext'
@@ -103,6 +103,8 @@ export default function Nav() {
   const [warp, setWarp] = useState(false)
   const [closing, setClosing] = useState(false)
   const [enlarged, setEnlarged] = useState(null)
+  const [settle, setSettle] = useState(false)
+  const closeTimer = useRef(0)
 
   const current = useMemo(() => {
     if (pathname === '/logo') return t.nav.logo
@@ -115,7 +117,10 @@ export default function Nav() {
     return () => document.body.classList.remove('nav-open')
   }, [open])
 
+  useEffect(() => () => window.clearTimeout(closeTimer.current), [])
+
   const toggle = () => {
+    if (closing) return
     setWarp(true)
     setClosing(false)
     setEnlarged(null)
@@ -124,18 +129,27 @@ export default function Nav() {
 
   const go = (event, tile) => {
     event.preventDefault()
+    if (closing) return
     if (tile.to === pathname) {
       toggle()
       return
     }
+
     setWarp(true)
     setEnlarged(tile.id)
     setClosing(true)
-    setOpen(false)
-    window.setTimeout(() => {
+    window.clearTimeout(closeTimer.current)
+    closeTimer.current = window.setTimeout(() => {
       navigate(tile.to)
+      window.scrollTo(0, 0)
+      setSettle(true)
+      setOpen(false)
       setClosing(false)
       setEnlarged(null)
+      setWarp(false)
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => setSettle(false))
+      })
     }, 620)
   }
 
@@ -144,6 +158,7 @@ export default function Nav() {
     open ? 'open' : '',
     warp ? 'warp' : '',
     closing ? 'close' : '',
+    settle ? 'settle' : '',
   ]
     .filter(Boolean)
     .join(' ')
