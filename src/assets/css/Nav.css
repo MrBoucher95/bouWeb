@@ -68,7 +68,7 @@ html[data-theme='light'] .brand-nav.open .nav-wrapper:not(.nav-wrapper-gridlines
   padding: 23px;
   overflow: hidden;
   text-decoration: none;
-  color: inherit;
+  color: var(--white);
 }
 
 .brand-nav .nav-tile .tile * {
@@ -251,7 +251,7 @@ html[data-theme='light'] .brand-nav.open .nav-wrapper:not(.nav-wrapper-gridlines
   width: 100%;
   height: 100%;
   background: var(--nav-accent);
-  color: var(--on-accent);
+  color: var(--white);
   cursor: pointer;
   display: block;
   position: relative;
@@ -320,7 +320,7 @@ html[data-theme='light'] .brand-nav.open .nav-wrapper:not(.nav-wrapper-gridlines
 .brand-nav .nav-button-highlight {
   position: absolute;
   inset: 0;
-  background: var(--on-accent);
+  background: var(--white);
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.2s var(--nav-easing);

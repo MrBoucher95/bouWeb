@@ -1,32 +1,40 @@
 import { Link } from 'react-router-dom'
+import { LogoPlane, useLogoScroll } from '../components/LogoMark'
+import ProjectGrid from '../components/ProjectGrid'
+import QuoteSwiper from '../components/QuoteSwiper'
 import { useLanguage } from '../context/LanguageContext'
+import '../assets/css/Logo.css'
+import '../assets/css/Portfolio.css'
 
 export default function Home() {
   const { t } = useLanguage()
   const { home } = t
+  const { openingRef, progress, entered } = useLogoScroll()
 
   return (
-    <>
-      <header className="hero">
-        <svg className="hero-wave" viewBox="0 0 1440 420" fill="none" aria-hidden="true">
-          <path
-            d="M0 220 C 180 40, 260 400, 480 220 S 780 40, 960 220 1260 400, 1440 220"
-            stroke="currentColor"
-            strokeWidth="18"
-          />
-        </svg>
-        <p className="eyebrow hero-kicker reveal">{home.role}</p>
-        <h1 className="display reveal reveal-2">{home.name}</h1>
-        <p className="lead reveal reveal-3">{home.intro}</p>
-        <div className="btn-row reveal reveal-3">
-          <a className="btn btn-fill" href="#services">
-            {home.ctaServices}
-          </a>
-          <Link className="btn" to="/contact">
-            {home.ctaContact}
-          </Link>
-        </div>
-      </header>
+    <div className={`logo-page home-stage${entered ? ' is-in' : ''}`} style={{ '--p': progress }}>
+      <div className="logo-pin">
+        <LogoPlane />
+
+        <header className="logo-opening" ref={openingRef}>
+          <div>
+            <p className="logo-note">{home.role}</p>
+            <h1 className="logo-opening-title">{home.name}</h1>
+            <div className="logo-copy">
+              <p>{home.intro}</p>
+              <div className="btn-row">
+                <a className="btn btn-fill" href="#services">
+                  {home.ctaServices}
+                </a>
+                <Link className="btn" to="/contact">
+                  {home.ctaContact}
+                </Link>
+              </div>
+            </div>
+          </div>
+        </header>
+        <div className="logo-pin-spacer" aria-hidden="true" />
+      </div>
 
       <div className="marquee" aria-hidden="true">
         <div className="marquee-track">
@@ -35,7 +43,7 @@ export default function Home() {
         </div>
       </div>
 
-      <main className="page">
+      <main className="page logo-body">
         <div className="page-inner">
           <section id="services" className="section">
             <div className="section-head">
@@ -45,7 +53,11 @@ export default function Home() {
             </div>
             <div className="service-grid">
               {home.services.map((service) => (
-                <Link key={service.slug} className="service-card" to={`/services/${service.slug}`}>
+                <Link
+                  key={service.slug}
+                  className={`service-card service-card--${service.slug}`}
+                  to={`/services/${service.slug}`}
+                >
                   <div>
                     <h3>{service.title}</h3>
                     <p>{service.text}</p>
@@ -56,18 +68,16 @@ export default function Home() {
             </div>
           </section>
 
-          <section className="section">
-            <div className="section-head">
-              <p className="tag eyebrow">{home.projectsEyebrow}</p>
+          <section id="projects" className="section folio-section">
+            <div className="section-head folio-head">
               <h2>{home.projectsEyebrow}</h2>
               <p className="lead">{home.projectsLead}</p>
             </div>
-            <div className="project-grid">
-              {home.projects.map((project) => (
-                <article key={project} className="project-card">
-                  {project}
-                </article>
-              ))}
+            <ProjectGrid projects={home.projects} />
+            <div className="folio-cta">
+              <Link className="btn" to="/contact">
+                {home.projectsCta}
+              </Link>
             </div>
           </section>
 
@@ -78,26 +88,16 @@ export default function Home() {
               {home.ctaButton}
             </Link>
           </section>
-
-          <section className="section">
-            <div className="section-head">
-              <p className="tag eyebrow">{home.quotesEyebrow}</p>
-              <h2>{home.quotesTitle}</h2>
-            </div>
-            <div className="quote-grid">
-              {home.quotes.map((quote) => (
-                <blockquote key={quote.name} className="quote-card">
-                  <p>{quote.text}</p>
-                  <footer>
-                    <strong>{quote.name}</strong>
-                    <span className="role">{quote.role}</span>
-                  </footer>
-                </blockquote>
-              ))}
-            </div>
-          </section>
         </div>
       </main>
-    </>
+
+      <QuoteSwiper
+        quotes={home.quotes}
+        eyebrow={home.quotesEyebrow}
+        title={home.quotesTitle}
+        prevLabel={home.quotesPrev}
+        nextLabel={home.quotesNext}
+      />
+    </div>
   )
 }

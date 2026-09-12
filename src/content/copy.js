@@ -66,6 +66,9 @@ export const copy = {
       projectsEyebrow: 'Derniers projets',
       projectsLead: 'Découvrez les derniers projets que j’ai réalisés pour mes clients.',
       projectsCta: 'Voir tous les projets',
+      lightboxClose: 'Fermer',
+      lightboxPrev: 'Projet précédent',
+      lightboxNext: 'Projet suivant',
       projects: [
         'Projet 1',
         'Projet 2',
@@ -83,6 +86,8 @@ export const copy = {
       ctaButton: 'Soumettre votre projet',
       quotesEyebrow: 'Témoignages',
       quotesTitle: 'Ce que les gens disent de moi',
+      quotesPrev: 'Témoignage précédent',
+      quotesNext: 'Témoignage suivant',
       quotes: [
         {
           name: 'Jean Dupont',
@@ -665,6 +670,9 @@ export const copy = {
       projectsEyebrow: 'Latest Projects',
       projectsLead: 'Discover the latest projects I have completed for my clients.',
       projectsCta: 'View All Projects',
+      lightboxClose: 'Close',
+      lightboxPrev: 'Previous project',
+      lightboxNext: 'Next project',
       projects: [
         'Project 1',
         'Project 2',
@@ -682,6 +690,8 @@ export const copy = {
       ctaButton: 'Submit Your Project',
       quotesEyebrow: 'Testimonials',
       quotesTitle: 'What People Say About Me',
+      quotesPrev: 'Previous testimonial',
+      quotesNext: 'Next testimonial',
       quotes: [
         {
           name: 'Jean Dupont',

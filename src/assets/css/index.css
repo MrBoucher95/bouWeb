@@ -125,9 +125,10 @@ img {
 
 .page-inner {
   position: relative;
-  max-width: var(--page-max);
+  max-width: none;
   margin: 0;
   padding-left: var(--page-rule);
+  padding-right: var(--page-rule);
 }
 
 .page-inner::before {
@@ -237,16 +238,6 @@ h3 {
   align-content: end;
   padding: 8rem var(--page-pad) 5rem var(--page-gutter);
   position: relative;
-  overflow: hidden;
-}
-
-.hero-wave {
-  position: absolute;
-  inset: 8% -8% auto;
-  width: 116%;
-  height: auto;
-  opacity: 0.22;
-  pointer-events: none;
 }
 
 .hero-kicker {
@@ -311,7 +302,6 @@ h3 {
 }
 
 .service-grid,
-.project-grid,
 .quote-grid,
 .group-grid {
   display: grid;
@@ -323,7 +313,6 @@ h3 {
 }
 
 .service-card,
-.project-card,
 .quote-card,
 .group-card,
 .info-card {
@@ -339,15 +328,13 @@ h3 {
   transition: transform 0.45s var(--swoop), border-color 0.3s var(--ease);
 }
 
-.service-card:hover,
-.project-card:hover {
+.service-card:hover {
   transform: translateY(-6px);
-  border-color: var(--gold);
 }
 
-.service-card h3,
-.project-card {
+.service-card h3 {
   font-family: var(--display);
+  font-size: var(--fs-h3);
 }
 
 .service-card p,
@@ -357,40 +344,36 @@ h3 {
   margin: 0.8rem 0 1.2rem;
 }
 
-.service-card:nth-child(1) {
-  background: var(--card-1);
-}
-.service-card:nth-child(2) {
-  background: var(--card-2);
-}
-.service-card:nth-child(3) {
-  background: var(--card-3);
-}
-.service-card:nth-child(4) {
-  background: var(--card-4);
+.service-card {
+  min-height: 0;
+  background: var(--white);
+  color: var(--black);
+  border: 0;
+  box-shadow: 0 6px 18px rgb(0 0 0 / 0.08);
 }
 
-.project-grid {
-  grid-template-columns: repeat(3, 1fr);
+.service-card p {
+  color: color-mix(in srgb, var(--black) 62%, var(--white));
 }
 
-.project-card {
-  min-height: 180px;
-  align-items: flex-end;
-  background:
-    linear-gradient(180deg, transparent, color-mix(in srgb, var(--ink) 22%, transparent)),
-    var(--bg-raised);
-  font-size: 1.4rem;
+.service-card .mono {
+  color: var(--service-accent, var(--accent));
 }
 
-.project-card:nth-child(3n + 1) {
-  background-color: var(--project-1);
+.service-card--applications {
+  --service-accent: var(--tile-apps-bg);
 }
-.project-card:nth-child(3n + 2) {
-  background-color: var(--project-2);
+
+.service-card--web {
+  --service-accent: var(--tile-web-bg);
 }
-.project-card:nth-child(3n) {
-  background-color: var(--project-3);
+
+.service-card--imprime {
+  --service-accent: var(--tile-print-bg);
+}
+
+.service-card--numerique {
+  --service-accent: var(--tile-digital-bg);
 }
 
 .cta-band {
@@ -647,7 +630,6 @@ h3 {
   }
 
   .service-grid,
-  .project-grid,
   .quote-grid,
   .group-grid,
   .contact-grid {

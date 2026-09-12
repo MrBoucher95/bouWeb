@@ -1,22 +1,13 @@
-import { useEffect, useRef, useState } from 'react'
-import mark from '../assets/img/mb_logo.svg'
+import { useEffect } from 'react'
+import { LogoPlane, useLogoScroll } from '../components/LogoMark'
 import { useLanguage } from '../context/LanguageContext'
+import mark from '../assets/img/mb_logo.svg'
 import '../assets/css/Logo.css'
-
-function clamp(value, min = 0, max = 1) {
-  return Math.min(max, Math.max(min, value))
-}
-
-function easeInOutCubic(t) {
-  return t < 0.5 ? 4 * t * t * t : 1 - ((-2 * t + 2) ** 3) / 2
-}
 
 export default function Logo() {
   const { t } = useLanguage()
   const { logo } = t
-  const openingRef = useRef(null)
-  const [progress, setProgress] = useState(0)
-  const [entered, setEntered] = useState(false)
+  const { openingRef, progress, entered } = useLogoScroll()
 
   useEffect(() => {
     document.title = logo.metaTitle
@@ -25,74 +16,10 @@ export default function Logo() {
     }
   }, [logo.metaTitle, t.meta.title])
 
-  useEffect(() => {
-    const frame = requestAnimationFrame(() => setEntered(true))
-    return () => cancelAnimationFrame(frame)
-  }, [])
-
-  useEffect(() => {
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reduced) setEntered(true)
-
-    const update = () => {
-      const opening = openingRef.current
-      if (!opening) return
-      const traveled = -opening.getBoundingClientRect().top
-      const next = clamp(traveled / (window.innerHeight * 0.5))
-      setProgress(reduced ? next : easeInOutCubic(next))
-    }
-
-    update()
-    window.addEventListener('scroll', update, { passive: true })
-    window.addEventListener('resize', update)
-    return () => {
-      window.removeEventListener('scroll', update)
-      window.removeEventListener('resize', update)
-    }
-  }, [])
-
   return (
     <div className={`logo-page${entered ? ' is-in' : ''}`} style={{ '--p': progress }}>
       <div className="logo-pin">
-        <div className="logo-sticky" aria-hidden="true">
-          <div className="logo-plane">
-            <span className="logo-hair logo-hair-t" />
-            <span className="logo-hair logo-hair-b" />
-            <span className="logo-hair logo-hair-l" />
-            <span className="logo-hair logo-hair-r" />
-
-            <span className="logo-grid logo-grid-h" style={{ top: '16%', '--d': '0.38s' }} />
-            <span className="logo-grid logo-grid-h" style={{ top: '33%', '--d': '0.46s' }} />
-            <span className="logo-grid logo-grid-h" style={{ top: '50%', '--d': '0.54s' }} />
-            <span className="logo-grid logo-grid-h" style={{ top: '67%', '--d': '0.62s' }} />
-            <span className="logo-grid logo-grid-h" style={{ top: '84%', '--d': '0.7s' }} />
-            <span className="logo-grid logo-grid-v" style={{ left: '14%', '--d': '0.42s' }} />
-            <span className="logo-grid logo-grid-v" style={{ left: '32%', '--d': '0.5s' }} />
-            <span className="logo-grid logo-grid-v" style={{ left: '50%', '--d': '0.58s' }} />
-            <span className="logo-grid logo-grid-v" style={{ left: '68%', '--d': '0.66s' }} />
-            <span className="logo-grid logo-grid-v" style={{ left: '86%', '--d': '0.74s' }} />
-
-            <span className="logo-dot" style={{ top: '0%', left: '0%' }} />
-            <span className="logo-dot" style={{ top: '0%', left: '50%' }} />
-            <span className="logo-dot" style={{ top: '0%', left: '100%' }} />
-            <span className="logo-dot" style={{ top: '16%', left: '14%' }} />
-            <span className="logo-dot" style={{ top: '16%', left: '86%' }} />
-            <span className="logo-dot" style={{ top: '33%', left: '32%' }} />
-            <span className="logo-dot" style={{ top: '33%', left: '68%' }} />
-            <span className="logo-dot" style={{ top: '50%', left: '0%' }} />
-            <span className="logo-dot" style={{ top: '50%', left: '50%' }} />
-            <span className="logo-dot" style={{ top: '50%', left: '100%' }} />
-            <span className="logo-dot" style={{ top: '67%', left: '32%' }} />
-            <span className="logo-dot" style={{ top: '67%', left: '68%' }} />
-            <span className="logo-dot" style={{ top: '84%', left: '14%' }} />
-            <span className="logo-dot" style={{ top: '84%', left: '86%' }} />
-            <span className="logo-dot" style={{ top: '100%', left: '0%' }} />
-            <span className="logo-dot" style={{ top: '100%', left: '50%' }} />
-            <span className="logo-dot" style={{ top: '100%', left: '100%' }} />
-
-            <img className="logo-glyph" src={mark} alt="" />
-          </div>
-        </div>
+        <LogoPlane />
 
         <header className="logo-opening" ref={openingRef}>
           <h1 className="logo-opening-title">{logo.title}</h1>

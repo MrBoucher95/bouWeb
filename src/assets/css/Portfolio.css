@@ -1,0 +1,299 @@
+.folio-section {
+  overflow: hidden;
+}
+
+.folio-head {
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  max-width: none;
+  justify-items: center;
+}
+
+.folio-head .lead {
+  margin: 0;
+}
+
+.folio-grid {
+  --folio-p: 0;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 16px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 0 0;
+}
+
+.folio-card {
+  position: relative;
+  min-height: 180px;
+  display: flex;
+  align-items: flex-end;
+  padding: 16px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 12px;
+  color: var(--white);
+  background: #333;
+  font: inherit;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+  transform-origin: center center;
+  transform: translate(
+      calc((1 - var(--folio-p)) * var(--dx)),
+      calc((1 - var(--folio-p)) * var(--dy))
+    )
+    rotate(calc((1 - var(--folio-p)) * var(--rot)))
+    scale(calc(0.9 + var(--folio-p) * 0.1));
+  opacity: calc(0.8 + var(--folio-p) * 0.2);
+  transition: transform 0.3s var(--ease);
+}
+
+.folio-card:hover {
+  transform: translate(0, 0) rotate(0deg) scale(1.02);
+  opacity: 1;
+}
+
+.folio-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.folio-title {
+  position: relative;
+  z-index: 1;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: rgb(0 0 0 / 0.4);
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--white);
+}
+
+.folio-span-3 {
+  grid-column: span 3;
+}
+
+.folio-span-6 {
+  grid-column: span 4;
+}
+
+.folio-cta {
+  display: flex;
+  justify-content: center;
+  padding: 3rem 0 0;
+}
+
+.folio-lightbox {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--white);
+}
+
+.folio-lightbox::backdrop {
+  background: rgb(0 0 0 / 0.88);
+}
+
+.folio-lightbox[open] {
+  display: grid;
+  place-items: center;
+}
+
+.folio-lightbox-image {
+  position: relative;
+  z-index: 1;
+  max-width: min(92vw, 1400px);
+  max-height: 78svh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+.folio-lightbox-caption {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  bottom: 1.4rem;
+  margin: 0;
+  transform: translateX(-50%);
+  padding: 0.4rem 0.85rem;
+  border-radius: 8px;
+  background: rgb(0 0 0 / 0.5);
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.folio-lightbox-close,
+.folio-lightbox-nav {
+  position: absolute;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.12);
+  color: var(--white);
+  cursor: pointer;
+}
+
+.folio-lightbox-close:hover,
+.folio-lightbox-nav:hover {
+  background: rgb(255 255 255 / 0.22);
+}
+
+.folio-lightbox-close svg,
+.folio-lightbox-nav svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.folio-lightbox-close {
+  top: 1.1rem;
+  right: 1.1rem;
+}
+
+.folio-lightbox-prev {
+  left: 1.1rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.folio-lightbox-next {
+  right: 1.1rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@media (max-width: 768px) {
+  .folio-lightbox-image {
+    max-width: 94vw;
+    max-height: 72svh;
+  }
+
+  .folio-lightbox-close,
+  .folio-lightbox-nav {
+    width: 42px;
+    height: 42px;
+  }
+
+  .folio-lightbox-prev {
+    left: 0.6rem;
+  }
+
+  .folio-lightbox-next {
+    right: 0.6rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  .folio-grid {
+    grid-template-columns: repeat(8, 1fr);
+    gap: 12px;
+  }
+
+  .folio-span-3,
+  .folio-span-6 {
+    grid-column: span 4;
+  }
+}
+
+@media (max-width: 768px) {
+  .folio-grid {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+    padding: 1rem 0 0;
+  }
+
+  .folio-span-3 {
+    grid-column: span 3;
+  }
+
+  .folio-span-6 {
+    grid-column: span 6;
+  }
+
+  .folio-card {
+    min-height: 120px;
+    padding: 12px;
+  }
+
+  .folio-title {
+    padding: 4px 8px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .folio-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+  }
+
+  .folio-span-3 {
+    grid-column: span 2;
+  }
+
+  .folio-span-6 {
+    grid-column: span 4;
+  }
+
+  .folio-card {
+    min-height: 100px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 360px) {
+  .folio-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px;
+  }
+
+  .folio-span-3,
+  .folio-span-6 {
+    grid-column: span 2;
+  }
+
+  .folio-card {
+    min-height: 80px;
+    padding: 6px;
+  }
+
+  .folio-title {
+    padding: 2px 6px;
+    font-size: 0.7rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .folio-grid {
+    --folio-p: 1;
+  }
+
+  .folio-card {
+    transform: none;
+    opacity: 1;
+  }
+}

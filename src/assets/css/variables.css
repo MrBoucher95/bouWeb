@@ -101,7 +101,7 @@
   --button-closed: calc(var(--button) * 2 / 3);
   --gap: 10px;
   --nav-tile-gap: var(--gap);
-  --page-pad: 7vw;
+  --page-pad: var(--page-gutter);
   --page-pad-s: 1.25rem;
   --page-gutter: var(--button-closed);
   --page-max: 1180px;
