@@ -64,9 +64,22 @@ img {
 }
 
 .app {
+  position: relative;
   min-height: 100svh;
   --gold: var(--accent);
   --nav-accent: var(--accent);
+}
+
+.app::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--page-gutter);
+  width: 1px;
+  background: var(--line);
+  pointer-events: none;
+  z-index: 4;
 }
 
 .app[data-page='home'] {
@@ -129,16 +142,6 @@ img {
   margin: 0;
   padding-left: var(--page-rule);
   padding-right: var(--page-rule);
-}
-
-.page-inner::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background: var(--line);
 }
 
 .eyebrow,
@@ -330,6 +333,8 @@ h3 {
 
 .service-card:hover {
   transform: translateY(-6px);
+  background: var(--service-accent);
+  color: var(--service-on, var(--white));
 }
 
 .service-card h3 {
@@ -350,51 +355,74 @@ h3 {
   color: var(--black);
   border: 0;
   box-shadow: 0 6px 18px rgb(0 0 0 / 0.08);
+  transition: transform 0.45s var(--swoop), background-color 0.3s var(--ease), color 0.3s var(--ease);
 }
 
 .service-card p {
   color: color-mix(in srgb, var(--black) 62%, var(--white));
+  transition: color 0.3s var(--ease);
 }
 
 .service-card .mono {
   color: var(--service-accent, var(--accent));
+  transition: color 0.3s var(--ease);
+}
+
+.service-card:hover p,
+.service-card:hover .mono {
+  color: var(--service-on, var(--white));
 }
 
 .service-card--applications {
   --service-accent: var(--tile-apps-bg);
+  --service-on: var(--white);
 }
 
 .service-card--web {
   --service-accent: var(--tile-web-bg);
+  --service-on: var(--tile-web-fg);
 }
 
 .service-card--imprime {
   --service-accent: var(--tile-print-bg);
+  --service-on: var(--tile-print-fg);
 }
 
 .service-card--numerique {
   --service-accent: var(--tile-digital-bg);
+  --service-on: var(--tile-digital-fg);
 }
 
 .cta-band {
   margin-top: 6rem;
   padding: 3.5rem 2rem;
-  background: var(--bg-raised);
-  color: var(--fg);
-  border: 1px solid var(--line);
+  background: var(--accent);
+  color: var(--white);
+  border: 0;
   border-radius: var(--radius);
 }
 
 .cta-band .lead {
-  color: var(--muted);
+  color: color-mix(in srgb, var(--white) 86%, transparent);
   margin: 1rem 0 1.8rem;
+}
+
+.cta-band .btn {
+  border-color: var(--white);
+  color: var(--white);
+  background: transparent;
+}
+
+.cta-band .btn-fill {
+  background: var(--white);
+  color: var(--black);
 }
 
 .cta-band .btn:hover,
 .cta-band .btn-fill:hover {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--on-accent);
+  background: var(--black);
+  border-color: var(--black);
+  color: var(--white);
 }
 
 .quote-grid {
@@ -551,10 +579,50 @@ h3 {
 }
 
 .site-footer {
-  padding: 1rem var(--page-pad) 1.25rem var(--page-gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem calc(var(--page-gutter) + var(--page-rule)) 1.25rem calc(var(--page-gutter) + var(--page-rule));
   color: var(--muted);
   border-top: 1px solid var(--line);
   font-size: 0.8rem;
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+.footer-socials {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-socials a {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  color: var(--muted);
+  border-radius: 50%;
+  transition: color 0.25s var(--ease), background-color 0.25s var(--ease);
+}
+
+.footer-socials svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.footer-socials a:hover {
+  color: var(--fg);
+  background: color-mix(in srgb, var(--fg) 8%, transparent);
 }
 
 .site-tools {

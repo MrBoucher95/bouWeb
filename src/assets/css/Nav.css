@@ -69,6 +69,7 @@ html[data-theme='light'] .brand-nav.open .nav-wrapper:not(.nav-wrapper-gridlines
   overflow: hidden;
   text-decoration: none;
   color: var(--white);
+  border-radius: 12px;
 }
 
 .brand-nav .nav-tile .tile * {
@@ -258,6 +259,7 @@ html[data-theme='light'] .brand-nav.open .nav-wrapper:not(.nav-wrapper-gridlines
   padding: 0;
   border: 0;
   transition: background-color 0.35s var(--nav-easing), color 0.35s var(--nav-easing);
+  border-radius: 12px;
 }
 
 .brand-nav:not(.warp) .nav-button,

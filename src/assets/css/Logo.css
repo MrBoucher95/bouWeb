@@ -366,6 +366,10 @@
     padding: 18vh var(--logo-gutter) 0;
   }
 
+  .home-stage .logo-opening {
+    padding: 18vh calc(var(--page-gutter) + var(--page-rule)) 0;
+  }
+
   .logo-opening-title {
     font-size: clamp(3.4rem, 18vw, 5.5rem);
   }
@@ -410,6 +414,11 @@
     calc(82svh * 4558 / 2658),
     1702px
   );
+}
+
+.home-stage .logo-opening {
+  padding-left: calc(var(--page-gutter) + var(--page-rule));
+  padding-right: calc(var(--page-gutter) + var(--page-rule));
 }
 
 .home-stage .logo-opening-title {

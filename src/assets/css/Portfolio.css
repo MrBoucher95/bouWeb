@@ -2,17 +2,19 @@
   overflow: hidden;
 }
 
-.folio-head {
+.section-head.folio-head {
   display: grid;
   gap: 0.75rem;
+  width: 100%;
+  max-width: none;
+  margin-inline: auto;
   margin-bottom: 0.5rem;
   text-align: center;
-  max-width: none;
   justify-items: center;
 }
 
 .folio-head .lead {
-  margin: 0;
+  margin: 0 auto;
 }
 
 .folio-grid {
