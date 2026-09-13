@@ -19,7 +19,7 @@ export default function ServicePage() {
   const group = data.groups[active]
   const estimateLabel = data.actions?.[0] ?? t.nav.estimate
   const contactLabel = data.actions?.[1] ?? t.home.ctaContact
-  const banner = `• ${data.title} • ${data.list.slice(0, 8).join(' • ')} •`
+  const banner = data.banner
 
   return (
     <main className="sv-page">

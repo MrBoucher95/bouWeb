@@ -145,6 +145,8 @@ export const copy = {
         eyebrow: 'Services',
         title: 'Imprime',
         subtitle: 'Solutions d’impression professionnelles pour valoriser votre image',
+        banner:
+          'IMPRIMÉ • CARTES DE VISITE • FLYERS • AFFICHES • PACKAGING • SIGNALÉTIQUE • GRAND FORMAT • PAPETERIE • ',
         intro:
           'Je vous accompagne dans tous vos projets d’impression, de la conception à la réalisation. Cartes de visite, flyers, affiches, packaging et bien plus encore - je mets mon expertise au service de votre communication imprimée.',
         sectionTitle: 'Services d’Impression',
@@ -216,6 +218,8 @@ export const copy = {
         eyebrow: 'Services',
         title: 'Numérique',
         subtitle: 'Des solutions numériques innovantes pour propulser votre entreprise',
+        banner:
+          'NUMÉRIQUE • IDENTITÉ VISUELLE • MOTION DESIGN • RÉSEAUX SOCIAUX • STRATÉGIE DIGITALE • ILLUSTRATION • ',
         intro:
           'Je conçois des expériences numériques uniques, alignées sur vos besoins et vos valeurs. De la stratégie au design, en passant par l’automatisation marketing, je vous accompagne dans chaque étape de votre transformation numérique.',
         actions: ['Estimation', 'Contactez-moi'],
@@ -296,6 +300,8 @@ export const copy = {
         eyebrow: 'Services',
         title: 'Web',
         subtitle: 'Développement web moderne et sur mesure pour votre présence en ligne',
+        banner:
+          'WEB • WORDPRESS • E-COMMERCE • REACT • SEO • SITES VITRINES • PERFORMANCE • MAINTENANCE • ',
         intro:
           'Je crée des sites web performants, responsives et optimisés qui reflètent votre identité de marque. De la conception à la mise en ligne, je vous accompagne dans tous les aspects de votre projet web.',
         sectionTitle: 'Services Web',
@@ -368,6 +374,8 @@ export const copy = {
         eyebrow: 'Services',
         title: 'Applications',
         subtitle: 'Applications React et React Native modernes sur mesure',
+        banner:
+          'APPLICATIONS • REACT • REACT NATIVE • ANDROID • NEXT.JS • TYPESCRIPT • API • ',
         intro:
           'Je développe des applications React et React Native performantes qui transforment vos idées en expériences utilisateur exceptionnelles. De la conception à la publication, je vous accompagne dans tous les aspects de votre projet d’application.',
         sectionTitle: 'Services d’Applications',
@@ -425,7 +433,7 @@ export const copy = {
           'Next.js',
           'TypeScript',
           'Applications web',
-          'iOS & Android',
+          'Android',
           'Interfaces natives',
           'Single Page Apps',
           'Interfaces interactives',
@@ -450,6 +458,8 @@ export const copy = {
         eyebrow: 'Services',
         title: 'Drone',
         subtitle: 'Services de photographie et vidéographie aériennes professionnelles',
+        banner:
+          'DRONE • PHOTO AÉRIENNE • VIDÉO AÉRIENNE • INSPECTION • CARTOGRAPHIE 3D • IMMOBILIER • ',
         intro:
           'Je propose des services de drone professionnels pour capturer vos projets sous un angle unique. Photographie aérienne, vidéographie, inspection et cartographie - je mets la technologie drone au service de vos besoins.',
         sectionTitle: 'Services Drone',
@@ -749,6 +759,8 @@ export const copy = {
         eyebrow: 'Services',
         title: 'Print',
         subtitle: 'Professional print solutions to elevate your image',
+        banner:
+          'PRINT • BUSINESS CARDS • FLYERS • POSTERS • PACKAGING • SIGNAGE • LARGE FORMAT • STATIONERY • ',
         intro:
           'I support you through every print project, from concept to production. Business cards, flyers, posters, packaging and more — I put my expertise at the service of your printed communication.',
         sectionTitle: 'Print Services',
@@ -818,6 +830,8 @@ export const copy = {
         eyebrow: 'Services',
         title: 'Numeric',
         subtitle: 'Innovative digital solutions to propel your business',
+        banner:
+          'DIGITAL • VISUAL IDENTITY • MOTION DESIGN • SOCIAL MEDIA • DIGITAL STRATEGY • ILLUSTRATION • ',
         intro:
           'I design unique digital experiences aligned with your needs and values. From strategy to design and marketing automation, I support every step of your digital transformation.',
         actions: ['Estimate', 'Contact me'],
@@ -897,6 +911,8 @@ export const copy = {
         eyebrow: 'Services',
         title: 'Web',
         subtitle: 'Modern, custom web development for your online presence',
+        banner:
+          'WEB • WORDPRESS • E-COMMERCE • REACT • SEO • LANDING PAGES • PERFORMANCE • MAINTENANCE • ',
         intro:
           'I build fast, responsive, optimized websites that reflect your brand. From concept to launch, I support every part of your web project.',
         sectionTitle: 'Web Services',
@@ -969,6 +985,8 @@ export const copy = {
         eyebrow: 'Services',
         title: 'Applications',
         subtitle: 'Modern custom React and React Native apps',
+        banner:
+          'APPS • REACT • REACT NATIVE • ANDROID • NEXT.JS • TYPESCRIPT • API • ',
         intro:
           'I build high-performance React and React Native apps that turn your ideas into exceptional user experiences. From concept to launch, I support every part of your app project.',
         sectionTitle: 'Application Services',
@@ -1026,7 +1044,7 @@ export const copy = {
           'Next.js',
           'TypeScript',
           'Web apps',
-          'iOS & Android',
+          'Android',
           'Native interfaces',
           'Single Page Apps',
           'Interactive interfaces',
@@ -1050,6 +1068,8 @@ export const copy = {
         eyebrow: 'Services',
         title: 'Drone',
         subtitle: 'Professional aerial photography and videography services',
+        banner:
+          'DRONE • AERIAL PHOTO • AERIAL VIDEO • INSPECTION • 3D MAPPING • REAL ESTATE • ',
         intro:
           'I offer professional drone services to capture your projects from a unique angle. Aerial photography, videography, inspection and mapping — I put drone technology at the service of your needs.',
         sectionTitle: 'Drone Services',

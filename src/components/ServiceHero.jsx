@@ -2,7 +2,6 @@ import { useEffect, useId, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import beforeAfter from '../assets/img/hero/befAft.png'
 import essence from '../assets/img/hero/essence.png'
-import heroImg from '../assets/img/hero/hero01.jpg'
 import watch from '../assets/img/hero/watch.png'
 import taping from '../assets/video/taping.mp4'
 import '../assets/css/ServiceHero.css'
@@ -47,7 +46,7 @@ function mediaValues() {
   }
 }
 
-function useServiceHero(headRef, pathRef, mediaRefs) {
+function useServiceHero(pathRef, mediaRefs) {
   useEffect(() => {
     const path = pathRef.current
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -72,28 +71,30 @@ function useServiceHero(headRef, pathRef, mediaRefs) {
     }
 
     const update = () => {
-      const head = headRef.current
-      if (head && !reduced) {
-        const section = head.closest('.sv-hi')
-        const y = section ? Math.max(0, -section.getBoundingClientRect().top) : window.scrollY
-        head.style.transform = `translate(${Math.min(y * 0.25, 200)}px, ${Math.min(y * 0.15, 150)}px)`
-      }
-
       const [video, shotA, shotB, shotC] = mediaRefs.current
       if (!video || !shotA || !shotB || !shotC) return
+      const packed = Boolean(video.closest('.sv-hi-visual'))
       const values = mediaValues()
+      const damp = packed ? 0.35 : 1
       const p1 = reduced ? 1 : viewProgress(video)
       const p2 = reduced ? 1 : viewProgress(shotA)
       const p3 = reduced ? 1 : viewProgress(shotB)
       const p4 = reduced ? 1 : viewProgress(shotC)
 
-      video.style.transform = `translate(-50%, -50%) scale(${lerp(values.video.scaleFrom, values.video.scaleTo, p1)})`
+      video.style.transform = `translate(-50%, -50%) scale(${lerp(values.video.scaleFrom, values.video.scaleTo, packed ? 0.55 + p1 * 0.45 : p1)})`
       video.style.opacity = String(lerp(0.7, 1, p1))
-      shotA.style.transform = `translate(${lerp(values.a.xFrom, values.a.xTo, p2)}px, calc(-50% + ${lerp(values.a.yFrom, values.a.yTo, p2)}px))`
+      const shift = (from, to, p) => lerp(from, to, p) * damp
+      if (packed) {
+        shotA.style.transform = `translate(${shift(values.a.xFrom, values.a.xTo, p2)}px, ${shift(values.a.yFrom, values.a.yTo, p2)}px)`
+        shotB.style.transform = `translate(${shift(values.b.xFrom, values.b.xTo, p3)}px, ${shift(values.b.yFrom, values.b.yTo, p3)}px)`
+        shotC.style.transform = `translate(${shift(values.c.xFrom, values.c.xTo, p4)}px, ${shift(values.c.yFrom, values.c.yTo, p4)}px)`
+      } else {
+        shotA.style.transform = `translate(${shift(values.a.xFrom, values.a.xTo, p2)}px, calc(-50% + ${shift(values.a.yFrom, values.a.yTo, p2)}px))`
+        shotB.style.transform = `translate(${shift(values.b.xFrom, values.b.xTo, p3)}px, calc(-50% + ${shift(values.b.yFrom, values.b.yTo, p3)}px))`
+        shotC.style.transform = `translate(${shift(values.c.xFrom, values.c.xTo, p4)}px, calc(-50% + ${shift(values.c.yFrom, values.c.yTo, p4)}px))`
+      }
       shotA.style.opacity = String(lerp(0.6, 1, p2))
-      shotB.style.transform = `translate(${lerp(values.b.xFrom, values.b.xTo, p3)}px, calc(-50% + ${lerp(values.b.yFrom, values.b.yTo, p3)}px))`
       shotB.style.opacity = String(lerp(0.6, 1, p3))
-      shotC.style.transform = `translate(${lerp(values.c.xFrom, values.c.xTo, p4)}px, calc(-50% + ${lerp(values.c.yFrom, values.c.yTo, p4)}px))`
       shotC.style.opacity = String(lerp(0.6, 1, p4))
     }
 
@@ -105,7 +106,46 @@ function useServiceHero(headRef, pathRef, mediaRefs) {
       window.removeEventListener('scroll', update)
       window.removeEventListener('resize', update)
     }
-  }, [headRef, pathRef, mediaRefs])
+  }, [pathRef, mediaRefs])
+}
+
+function HeroStage({ mediaRefs }) {
+  return (
+    <div className="sv-hi-stage-inner">
+      <video
+        ref={(node) => {
+          mediaRefs.current[0] = node
+        }}
+        className="sv-hi-shot sv-hi-shot-video"
+        src={taping}
+        autoPlay
+        loop
+        muted
+        playsInline
+      />
+      <div
+        ref={(node) => {
+          mediaRefs.current[1] = node
+        }}
+        className="sv-hi-shot sv-hi-shot-a"
+        style={{ backgroundImage: `url(${beforeAfter})` }}
+      />
+      <div
+        ref={(node) => {
+          mediaRefs.current[2] = node
+        }}
+        className="sv-hi-shot sv-hi-shot-b"
+        style={{ backgroundImage: `url(${essence})` }}
+      />
+      <div
+        ref={(node) => {
+          mediaRefs.current[3] = node
+        }}
+        className="sv-hi-shot sv-hi-shot-c"
+        style={{ backgroundImage: `url(${watch})` }}
+      />
+    </div>
+  )
 }
 
 function HeroAction({ action }) {
@@ -126,12 +166,11 @@ function HeroAction({ action }) {
 
 export default function ServiceHero({ title, subtitle, intro, actions = [], banner, mediaOnly = false }) {
   const curveId = `svHiCurve${useId().replace(/:/g, '')}`
-  const headRef = useRef(null)
   const pathRef = useRef(null)
   const mediaRefs = useRef([])
   const bannerText = `${banner} ${banner} ${banner}`
 
-  useServiceHero(headRef, pathRef, mediaRefs)
+  useServiceHero(pathRef, mediaRefs)
 
   return (
     <section className={`sv-hi${mediaOnly ? ' sv-hi--media' : ''}`}>
@@ -150,7 +189,7 @@ export default function ServiceHero({ title, subtitle, intro, actions = [], bann
             </div>
           </div>
           <div className="sv-hi-visual">
-            <img ref={headRef} className="sv-hi-head" alt="" src={heroImg} />
+            <HeroStage mediaRefs={mediaRefs} />
           </div>
         </div>
       )}
@@ -169,42 +208,11 @@ export default function ServiceHero({ title, subtitle, intro, actions = [], bann
         </svg>
       </div>
 
-      <div className="sv-hi-stage">
-        <div className="sv-hi-stage-inner">
-          <video
-            ref={(node) => {
-              mediaRefs.current[0] = node
-            }}
-            className="sv-hi-shot sv-hi-shot-video"
-            src={taping}
-            autoPlay
-            loop
-            muted
-            playsInline
-          />
-          <div
-            ref={(node) => {
-              mediaRefs.current[1] = node
-            }}
-            className="sv-hi-shot sv-hi-shot-a"
-            style={{ backgroundImage: `url(${beforeAfter})` }}
-          />
-          <div
-            ref={(node) => {
-              mediaRefs.current[2] = node
-            }}
-            className="sv-hi-shot sv-hi-shot-b"
-            style={{ backgroundImage: `url(${essence})` }}
-          />
-          <div
-            ref={(node) => {
-              mediaRefs.current[3] = node
-            }}
-            className="sv-hi-shot sv-hi-shot-c"
-            style={{ backgroundImage: `url(${watch})` }}
-          />
+      {mediaOnly ? (
+        <div className="sv-hi-stage">
+          <HeroStage mediaRefs={mediaRefs} />
         </div>
-      </div>
+      ) : null}
     </section>
   )
 }
