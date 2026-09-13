@@ -34,11 +34,15 @@
   width: 100%;
   margin: 0;
   padding: 1.6rem;
-  background: var(--white);
-  color: var(--black);
+  background: var(--bg-raised);
+  color: var(--fg);
   border: 0;
   border-radius: var(--radius);
   box-shadow: 0 6px 18px rgb(0 0 0 / 0.08);
+}
+
+[data-theme='light'] .quote-slide {
+  background: var(--white);
 }
 
 .quote-slide p {

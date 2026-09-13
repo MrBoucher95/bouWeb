@@ -351,15 +351,19 @@ h3 {
 
 .service-card {
   min-height: 0;
-  background: var(--white);
-  color: var(--black);
+  background: var(--bg-raised);
+  color: var(--fg);
   border: 0;
   box-shadow: 0 6px 18px rgb(0 0 0 / 0.08);
   transition: transform 0.45s var(--swoop), background-color 0.3s var(--ease), color 0.3s var(--ease);
 }
 
+[data-theme='light'] .service-card {
+  background: var(--white);
+}
+
 .service-card p {
-  color: color-mix(in srgb, var(--black) 62%, var(--white));
+  color: var(--muted);
   transition: color 0.3s var(--ease);
 }
 
