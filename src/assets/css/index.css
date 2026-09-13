@@ -133,15 +133,15 @@ img {
 }
 
 .page {
-  padding: 0 var(--page-pad) 8rem var(--page-gutter);
+  padding: 0 0 8rem var(--page-gutter);
 }
 
 .page-inner {
   position: relative;
+  width: 100%;
   max-width: none;
   margin: 0;
-  padding-left: var(--page-rule);
-  padding-right: var(--page-rule);
+  padding-inline: var(--page-rule);
 }
 
 .eyebrow,
@@ -690,7 +690,7 @@ h3 {
 
 @media (max-width: 991px) {
   .page {
-    padding: 0 var(--page-pad) 7rem;
+    padding: 0 0 7rem var(--page-pad);
   }
 
   .site-footer {

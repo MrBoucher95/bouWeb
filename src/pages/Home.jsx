@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { LogoPlane, useLogoScroll } from '../components/LogoMark'
 import ProjectGrid from '../components/ProjectGrid'
 import QuoteSwiper from '../components/QuoteSwiper'
+import ServiceHero from '../components/ServiceHero'
 import { useLanguage } from '../context/LanguageContext'
 import '../assets/css/Logo.css'
 import '../assets/css/Portfolio.css'
@@ -36,12 +37,7 @@ export default function Home() {
         <div className="logo-pin-spacer" aria-hidden="true" />
       </div>
 
-      <div className="marquee" aria-hidden="true">
-        <div className="marquee-track">
-          <span>{home.marquee}</span>
-          <span>{home.marquee}</span>
-        </div>
-      </div>
+      <ServiceHero mediaOnly banner={home.marquee} />
 
       <main className="page logo-body">
         <div className="page-inner">
