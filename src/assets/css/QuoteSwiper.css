@@ -1,0 +1,131 @@
+.quote-band {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  padding: 6.5rem 0 5rem;
+  overflow: hidden;
+}
+
+.quote-band-head {
+  display: grid;
+  gap: 1rem;
+  justify-items: center;
+  text-align: center;
+  margin: 0 auto 2.5rem;
+  padding: 0 var(--page-gutter);
+}
+
+.quote-swiper {
+  width: 100%;
+  overflow: hidden;
+  padding: 12px 16px 4.2rem;
+}
+
+.quote-swiper .swiper-slide {
+  height: auto;
+  display: flex;
+}
+
+.quote-slide {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.6rem;
+  width: 100%;
+  margin: 0;
+  padding: 1.6rem;
+  background: var(--bg-raised);
+  color: var(--fg);
+  border: 0;
+  border-radius: var(--radius);
+  box-shadow: 0 6px 18px rgb(0 0 0 / 0.08);
+}
+
+[data-theme='light'] .quote-slide {
+  background: var(--white);
+}
+
+.quote-slide p {
+  margin: 0;
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: var(--fs-lead);
+  letter-spacing: 0;
+  line-height: var(--lh-body);
+}
+
+.quote-slide footer {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.quote-slide .role {
+  color: var(--gold);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.quote-swiper .swiper-button-prev,
+.quote-swiper .swiper-button-next {
+  width: 48px;
+  height: 48px;
+  margin-top: 0;
+  top: auto;
+  bottom: 0.4rem;
+  color: var(--fg);
+}
+
+.quote-swiper .swiper-button-prev {
+  left: auto;
+  right: calc(var(--page-pad) + 64px);
+}
+
+.quote-swiper .swiper-button-next {
+  right: var(--page-pad);
+}
+
+.quote-swiper .swiper-button-prev::after,
+.quote-swiper .swiper-button-next::after {
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.quote-swiper .swiper-pagination {
+  bottom: 1.15rem;
+  left: var(--page-gutter);
+  right: auto;
+  width: auto;
+  text-align: left;
+}
+
+.quote-swiper .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  margin: 0 5px 0 0 !important;
+  background: var(--fg);
+  opacity: 0.28;
+}
+
+.quote-swiper .swiper-pagination-bullet-active {
+  opacity: 1;
+  background: var(--accent);
+}
+
+@media (max-width: 991px) {
+  .quote-band-head {
+    padding-left: var(--page-pad);
+  }
+
+  .quote-swiper .swiper-pagination {
+    left: var(--page-pad);
+  }
+}
+
+@media (max-width: 767px) {
+  .quote-swiper {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}

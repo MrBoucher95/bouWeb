@@ -1,10 +1,18 @@
 .logo-page {
   --logo-in: cubic-bezier(0.6, 0, 0.6, 1);
-  --logo-gutter: calc(var(--button) * 2 / 3);
+  --logo-gutter: var(--page-gutter);
+  --plane-end: 240px;
+  --plane-gutter: 6vw;
+  --plane-start: min(
+    calc(100vw - 32vw - var(--plane-gutter)),
+    calc(82svh * 4558 / 2658),
+    1702px
+  );
   --p: 0;
   background: var(--logo-ground);
   color: var(--logo-fg);
   overflow-x: clip;
+  max-width: 100%;
 }
 
 .logo-pin {
@@ -14,7 +22,7 @@
 .logo-sticky {
   position: sticky;
   top: 0;
-  z-index: 2;
+  z-index: 1;
   height: 0;
   pointer-events: none;
 }
@@ -22,10 +30,10 @@
 .logo-plane {
   position: relative;
   top: calc(50svh - (var(--plane-h) / 2));
-  left: calc(100vw - var(--plane-w) - 8vw);
+  left: calc(100vw - var(--plane-w) - var(--plane-gutter));
   width: var(--plane-w);
   height: var(--plane-h);
-  --plane-w: calc(240px + var(--p) * (min(42vw, 620px) - 240px));
+  --plane-w: calc(var(--plane-end) + (1 - var(--p)) * (var(--plane-start) - var(--plane-end)));
   --plane-h: calc(var(--plane-w) * 2658 / 4558);
 }
 
@@ -171,25 +179,26 @@
   opacity: 0;
   transform: scale(0.92);
   transform-origin: left center;
-  transition: opacity 0.7s var(--logo-in) 0.18s, transform 0.7s var(--logo-in) 0.18s;
+  transition: opacity 1.55s var(--logo-in) 0.28s, transform 1.55s var(--logo-in) 0.28s;
 }
 
 .logo-page.is-in .logo-opening-title {
-  opacity: calc(1 - var(--p) * 1.35);
+  opacity: calc(1 - max(0, (var(--p) - 0.42) / 0.58));
   transform: none;
 }
 
 .logo-body {
   position: relative;
-  z-index: 1;
+  z-index: 3;
 }
 
 .logo-chapter {
   position: relative;
+  z-index: 3;
   min-height: 100svh;
   display: flex;
   align-items: center;
-  padding: 8rem 46vw 8rem var(--logo-gutter);
+  padding: 8rem calc(var(--plane-end) + var(--plane-gutter) + 2rem) 8rem var(--logo-gutter);
 }
 
 .logo-rule {
@@ -317,14 +326,39 @@
 
 @media (max-width: 991px) {
   .logo-page {
-    --logo-gutter: 1.25rem;
+    --logo-gutter: var(--page-gutter);
+    --plane-end: 160px;
+    --plane-gutter: 10vw;
+    --plane-start: 80vw;
+  }
+
+  .logo-sticky {
+    width: 100%;
+    max-width: 100%;
+    left: 0;
   }
 
   .logo-plane {
-    left: 50%;
-    top: calc(58svh - (var(--plane-h) / 2));
-    --plane-w: calc(200px + var(--p) * (min(78vw, 420px) - 200px));
-    transform: translateX(-50%);
+    position: absolute;
+    left: calc(10vw + var(--p) * 22vw);
+    right: calc(10vw + var(--p) * 22vw);
+    width: auto;
+    height: auto;
+    aspect-ratio: 4558 / 2658;
+    top: min(48svh, calc(100svh - 12rem));
+  }
+
+  .logo-glyph {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    object-fit: contain;
+    object-position: center;
   }
 
   .logo-opening {
@@ -332,8 +366,26 @@
     padding: 18vh var(--logo-gutter) 0;
   }
 
+  .home-stage .logo-opening {
+    padding: 18vh calc(var(--page-gutter) + var(--page-rule)) 0;
+  }
+
   .logo-opening-title {
     font-size: clamp(3.4rem, 18vw, 5.5rem);
+  }
+
+  .home-stage .logo-opening-title {
+    font-size: clamp(2.8rem, 14vw, 4.2rem);
+  }
+
+  .home-stage .logo-plane {
+    left: calc(14vw + var(--p) * 20vw);
+    right: calc(6vw + var(--p) * 20vw);
+  }
+
+  .home-stage .logo-opening .logo-copy {
+    margin-left: 0;
+    max-width: 28rem;
   }
 
   .logo-chapter {
@@ -355,6 +407,59 @@
   }
 }
 
+.home-stage.logo-page {
+  --plane-gutter: 3vw;
+  --plane-start: min(
+    calc(100vw - 38vw - var(--plane-gutter)),
+    calc(82svh * 4558 / 2658),
+    1702px
+  );
+}
+
+.home-stage .logo-opening {
+  padding-left: calc(var(--page-gutter) + var(--page-rule));
+  padding-right: calc(var(--page-gutter) + var(--page-rule));
+}
+
+.home-stage .logo-opening-title {
+  max-width: 9ch;
+  font-size: clamp(3.2rem, 8.5vw, 8.5rem);
+}
+
+.home-stage .logo-opening .logo-note {
+  opacity: 0;
+  transition: opacity 1.55s var(--logo-in) 0.28s;
+}
+
+.home-stage.is-in .logo-opening .logo-note {
+  opacity: calc(1 - max(0, (var(--p) - 0.42) / 0.58));
+}
+
+.home-stage .logo-opening .logo-copy {
+  margin: 1.5rem 0 0;
+  max-width: 34rem;
+  opacity: 0;
+  transition: opacity 1.55s var(--logo-in) 0.45s;
+}
+
+.home-stage.is-in .logo-opening .logo-copy {
+  opacity: calc(1 - max(0, (var(--p) - 0.42) / 0.58));
+}
+
+.home-stage .logo-opening .btn-row {
+  pointer-events: auto;
+  margin-top: 1.6rem;
+}
+
+.home-stage .logo-pin-spacer {
+  height: 100svh;
+}
+
+.home-stage .marquee {
+  position: relative;
+  z-index: 3;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .logo-hair,
   .logo-grid,
@@ -366,3 +471,4 @@
     opacity: 1;
   }
 }
+
