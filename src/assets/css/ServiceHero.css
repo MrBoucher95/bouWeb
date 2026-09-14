@@ -138,6 +138,24 @@
   min-height: 70vh;
 }
 
+.sv-hi--media .sv-hi-stage {
+  height: 320vh;
+  min-height: 0;
+}
+
+.sv-hi--media .sv-hi-stage-inner {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  min-height: 100svh;
+  margin-top: 0;
+  overflow: visible;
+}
+
+.sv-hi--media .sv-hi-shot-video {
+  z-index: 5;
+}
+
 .sv-hi-stage-inner {
   position: relative;
   width: 100%;

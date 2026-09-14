@@ -74,8 +74,33 @@ function useServiceHero(pathRef, mediaRefs) {
       const [video, shotA, shotB, shotC] = mediaRefs.current
       if (!video || !shotA || !shotB || !shotC) return
       const packed = Boolean(video.closest('.sv-hi-visual'))
+      const stage = video.closest('.sv-hi-stage')
+      const pinned = Boolean(stage?.closest('.sv-hi--media'))
       const values = mediaValues()
       const damp = packed ? 0.35 : 1
+      const shift = (from, to, p) => lerp(from, to, p) * damp
+
+      if (pinned) {
+        const range = Math.max(stage.offsetHeight - window.innerHeight, 1)
+        const p = reduced ? 1 : clamp(-stage.getBoundingClientRect().top / range)
+        const grow = clamp(p / 0.62)
+        const leave = clamp((p - 0.78) / 0.22)
+        const cover = Math.max(window.innerWidth / Math.max(video.offsetWidth, 1), window.innerHeight / Math.max(video.offsetHeight, 1))
+        const scale = leave > 0 ? lerp(cover, cover * 1.4, leave) : lerp(1, cover, grow)
+        video.style.transform = `translate(-50%, -50%) scale(${scale}) skewY(${leave * 14}deg)`
+        video.style.opacity = String(1 - leave)
+        video.style.borderRadius = `${lerp(16, 0, grow)}px`
+        video.style.zIndex = grow > 0.08 ? '6' : '2'
+        const fade = 1 - grow
+        shotA.style.opacity = String(fade)
+        shotB.style.opacity = String(fade)
+        shotC.style.opacity = String(fade)
+        shotA.style.transform = `translate(${shift(values.a.xFrom, values.a.xTo, grow)}px, calc(-50% + ${shift(values.a.yFrom, values.a.yTo, grow)}px))`
+        shotB.style.transform = `translate(${shift(values.b.xFrom, values.b.xTo, grow)}px, calc(-50% + ${shift(values.b.yFrom, values.b.yTo, grow)}px))`
+        shotC.style.transform = `translate(${shift(values.c.xFrom, values.c.xTo, grow)}px, calc(-50% + ${shift(values.c.yFrom, values.c.yTo, grow)}px))`
+        return
+      }
+
       const p1 = reduced ? 1 : viewProgress(video)
       const p2 = reduced ? 1 : viewProgress(shotA)
       const p3 = reduced ? 1 : viewProgress(shotB)
@@ -83,7 +108,6 @@ function useServiceHero(pathRef, mediaRefs) {
 
       video.style.transform = `translate(-50%, -50%) scale(${lerp(values.video.scaleFrom, values.video.scaleTo, packed ? 0.55 + p1 * 0.45 : p1)})`
       video.style.opacity = String(lerp(0.7, 1, p1))
-      const shift = (from, to, p) => lerp(from, to, p) * damp
       if (packed) {
         shotA.style.transform = `translate(${shift(values.a.xFrom, values.a.xTo, p2)}px, ${shift(values.a.yFrom, values.a.yTo, p2)}px)`
         shotB.style.transform = `translate(${shift(values.b.xFrom, values.b.xTo, p3)}px, ${shift(values.b.yFrom, values.b.yTo, p3)}px)`
