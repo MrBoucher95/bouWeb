@@ -424,11 +424,12 @@
 .home-stage .logo-opening-title {
   max-width: 9ch;
   font-size: clamp(3.2rem, 8.5vw, 8.5rem);
+  transition: opacity 0.7s var(--logo-in) 0.08s, transform 0.7s var(--logo-in) 0.08s;
 }
 
 .home-stage .logo-opening .logo-note {
   opacity: 0;
-  transition: opacity 1.55s var(--logo-in) 0.28s;
+  transition: opacity 0.7s var(--logo-in) 0.08s;
 }
 
 .home-stage.is-in .logo-opening .logo-note {
@@ -439,7 +440,7 @@
   margin: 1.5rem 0 0;
   max-width: 34rem;
   opacity: 0;
-  transition: opacity 1.55s var(--logo-in) 0.45s;
+  transition: opacity 0.7s var(--logo-in) 0.16s;
 }
 
 .home-stage.is-in .logo-opening .logo-copy {

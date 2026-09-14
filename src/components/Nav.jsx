@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useLanguage } from '../context/LanguageContext'
 import { useTheme } from '../context/ThemeContext'
 import '../assets/css/Nav.css'
@@ -267,6 +267,12 @@ export default function Nav() {
           </button>
         </div>
 
+        <Link className="nav-brand" to="/" aria-label={t.nav.home}>
+          <svg viewBox="0 0 4558 2658" aria-hidden="true">
+            <path d="M0,1789.78c0,0 823.538,-946.287 1006.04,-1124.76c182.502,-178.472 477.596,-286.577 727.539,123.683c-37.854,117.745 -177.85,434.541 -177.85,434.541c-0,0 513.65,-795.159 654.514,-1036.84c140.865,-241.677 533.495,-271.569 719.857,49.002c186.361,320.57 889.155,1554.37 889.155,1554.37l-997.836,0l-268.821,-502.745l84.358,-194.526l-440.687,697.271l-837.743,0l-93.759,-157.136l-133.708,157.136l-1131.06,0Z" />
+            <path d="M4557.53,1886.13c-0,-0 -690.341,407.958 -843.325,484.9c-152.985,76.942 -400.351,123.548 -609.869,-53.321c31.732,-50.762 149.085,-187.337 149.085,-187.337c-0,-0 -430.574,342.804 -548.655,446.995c-118.081,104.19 -447.208,117.077 -603.428,-21.126c-156.22,-138.202 -745.345,-670.111 -745.345,-670.111l836.448,-0l225.342,216.741l-70.714,83.863l369.411,-300.604l702.249,-0l78.594,67.743l112.082,-67.743l948.125,-0Z" />
+          </svg>
+        </Link>
         <div className="nav-page-title">{current}</div>
       </div>
     </>

@@ -390,10 +390,30 @@ html[data-theme='light'] .brand-nav.open .nav-wrapper:not(.nav-wrapper-gridlines
   bottom: 0;
 }
 
-.brand-nav .nav-page-title {
+.brand-nav .nav-brand {
   position: fixed;
   z-index: 99;
   top: 16px;
+  left: 16px;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 26px;
+  margin-bottom: 2rem;
+  color: var(--fg);
+}
+
+.brand-nav .nav-brand svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  fill: currentColor;
+}
+
+.brand-nav .nav-page-title {
+  position: fixed;
+  z-index: 99;
+  top: 52px;
   left: 20px;
   color: var(--white);
   mix-blend-mode: difference;
@@ -581,6 +601,13 @@ html[data-theme='light'] .brand-nav.open .nav-wrapper:not(.nav-wrapper-gridlines
 
   .brand-nav .nav-page-title {
     display: none;
+  }
+
+  .brand-nav .nav-brand {
+    top: 14px;
+    left: 14px;
+    width: 36px;
+    height: 22px;
   }
 
   .brand-nav .nav-button-svg {
