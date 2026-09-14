@@ -83,8 +83,8 @@ function useServiceHero(pathRef, mediaRefs) {
       if (pinned) {
         const range = Math.max(stage.offsetHeight - window.innerHeight, 1)
         const p = reduced ? 1 : clamp(-stage.getBoundingClientRect().top / range)
-        const grow = clamp(p / 0.62)
-        const leave = clamp((p - 0.78) / 0.22)
+        const grow = clamp(p / 0.5)
+        const leave = clamp((p - 0.88) / 0.12)
         const cover = Math.max(window.innerWidth / Math.max(video.offsetWidth, 1), window.innerHeight / Math.max(video.offsetHeight, 1))
         const scale = leave > 0 ? lerp(cover, cover * 1.4, leave) : lerp(1, cover, grow)
         video.style.transform = `translate(-50%, -50%) scale(${scale}) skewY(${leave * 14}deg)`

@@ -108,6 +108,7 @@ export default function Nav() {
 
   const current = useMemo(() => {
     if (pathname === '/logo') return t.nav.logo
+    if (pathname.startsWith('/blog')) return t.nav.blog
     const match = tiles.find((tile) => tile.to === pathname)
     return match ? t.nav[match.key] : t.nav.home
   }, [pathname, t])

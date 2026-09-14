@@ -71,6 +71,8 @@
   --tile-contact-fg: var(--on-mint);
   --tile-drone-bg: color-mix(in srgb, var(--accent-blue) 42%, var(--accent-teal));
   --tile-drone-fg: var(--black);
+  --tile-blog-bg: color-mix(in srgb, var(--accent-pink) 42%, var(--accent-purple));
+  --tile-blog-fg: var(--white);
 
   /* Semantic roles — default to Accueil; each page overrides on .app */
   --accent: var(--tile-home-bg);
@@ -83,7 +85,7 @@
   --display: 'TikTok Sans', sans-serif;
   --sans: 'Geist', sans-serif;
   --fw-display: 800;
-  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --mono: var(--sans);
   --fs-display: clamp(3.4rem, 10vw, 8.5rem);
   --fs-h1: clamp(2.6rem, 6vw, 4.6rem);
   --fs-h2: clamp(1.8rem, 4vw, 2.8rem);

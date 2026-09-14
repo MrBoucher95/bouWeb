@@ -1,0 +1,133 @@
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 400;
+  border-radius: 50%;
+  opacity: 0;
+  mix-blend-mode: difference;
+  will-change: transform;
+}
+
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  background: #fff;
+  transition: opacity 0.85s var(--swoop);
+}
+
+.cursor-ring {
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 1.5px solid #fff;
+  background: transparent;
+  transition:
+    width 0.85s var(--swoop),
+    height 0.85s var(--swoop),
+    margin 0.85s var(--swoop),
+    background-color 0.85s var(--swoop),
+    border-color 0.85s var(--swoop),
+    mix-blend-mode 0s linear 0.85s,
+    opacity 0.25s var(--ease);
+}
+
+html.cursor-on .cursor-dot,
+html.cursor-on .cursor-ring {
+  opacity: 1;
+}
+
+html.cursor-hover .cursor-ring {
+  width: 22px;
+  height: 22px;
+  margin: -11px 0 0 -11px;
+  border-color: #000;
+  background: #000;
+  mix-blend-mode: normal;
+  transition:
+    width 0.6s var(--swoop),
+    height 0.6s var(--swoop),
+    margin 0.6s var(--swoop),
+    background-color 0.6s var(--swoop),
+    border-color 0.6s var(--swoop),
+    mix-blend-mode 0s,
+    opacity 0.25s var(--ease);
+}
+
+html.cursor-hover .cursor-dot {
+  opacity: 0;
+  transition-duration: 0.45s;
+}
+
+html.cursor-down .cursor-ring {
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  transition-duration: 0.14s;
+}
+
+html.cursor-down .cursor-dot {
+  width: 4px;
+  height: 4px;
+  margin: -2px 0 0 -2px;
+  transition:
+    width 0.14s var(--ease),
+    height 0.14s var(--ease),
+    margin 0.14s var(--ease),
+    opacity 0.14s var(--ease);
+}
+
+.cursor-pulse {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 399;
+}
+
+.cursor-pulse span {
+  display: block;
+  width: 22px;
+  height: 22px;
+  margin: -11px 0 0 -11px;
+  border: 1.5px solid #fff;
+  border-radius: 50%;
+  opacity: 0;
+  mix-blend-mode: difference;
+}
+
+html.cursor-hover .cursor-pulse span {
+  border-color: #000;
+  mix-blend-mode: normal;
+}
+
+html.cursor-click .cursor-pulse span {
+  animation: cursor-click 0.55s var(--swoop) forwards;
+}
+
+@keyframes cursor-click {
+  0% {
+    opacity: 0.85;
+    transform: scale(0.55);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.15);
+  }
+}
+
+html.has-cursor,
+html.has-cursor * {
+  cursor: none !important;
+}
+
+@media (pointer: coarse) {
+  .cursor-dot,
+  .cursor-ring,
+  .cursor-pulse {
+    display: none;
+  }
+}

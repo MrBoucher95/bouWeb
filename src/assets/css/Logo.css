@@ -242,6 +242,7 @@
 .logo-note {
   color: var(--accent) !important;
   font-family: var(--mono);
+  font-weight: 500;
   font-size: 0.72rem !important;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -257,6 +258,7 @@
   background: var(--accent);
   color: var(--on-accent) !important;
   font-family: var(--mono);
+  font-weight: 500;
   font-size: 0.68rem !important;
   letter-spacing: 0.12em;
   text-transform: uppercase;

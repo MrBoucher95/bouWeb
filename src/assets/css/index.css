@@ -127,6 +127,11 @@ img {
   --on-accent: var(--tile-drone-fg);
 }
 
+.app[data-page='blog'] {
+  --accent: var(--tile-blog-bg);
+  --on-accent: var(--tile-blog-fg);
+}
+
 .app[data-page='logo'] {
   --accent: var(--tile-web-bg);
   --on-accent: var(--tile-web-fg);
@@ -147,6 +152,7 @@ img {
 .eyebrow,
 .mono {
   font-family: var(--mono);
+  font-weight: 500;
   font-size: var(--fs-ui);
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -554,6 +560,7 @@ h3 {
 .option small {
   color: var(--gold);
   font-family: var(--mono);
+  font-weight: 500;
 }
 
 .option.active small {
@@ -595,6 +602,25 @@ h3 {
 
 .site-footer p {
   margin: 0;
+}
+
+.footer-copy {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.85rem 1.25rem;
+}
+
+.footer-copy a {
+  color: var(--fg);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: var(--fs-ui);
+  font-weight: 500;
+}
+
+.footer-copy a:hover {
+  color: var(--accent);
 }
 
 .footer-socials {
@@ -653,6 +679,7 @@ h3 {
 
 .lang-switch {
   font-family: var(--mono);
+  font-weight: 500;
   font-size: var(--fs-ui);
   letter-spacing: 0.08em;
 }

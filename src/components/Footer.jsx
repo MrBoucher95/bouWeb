@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useLanguage } from '../context/LanguageContext'
 
 const socials = [
@@ -58,7 +59,10 @@ export default function Footer() {
 
   return (
     <footer className="site-footer">
-      <p>{t.footer}</p>
+      <div className="footer-copy">
+        <p>{t.footer}</p>
+        <Link to="/blog">{t.nav.blog}</Link>
+      </div>
       <ul className="footer-socials">
         {socials.map((social) => (
           <li key={social.id}>

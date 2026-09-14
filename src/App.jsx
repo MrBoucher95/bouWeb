@@ -1,7 +1,10 @@
 import { Route, Routes, useLocation } from 'react-router-dom'
+import Cursor from './components/Cursor'
 import Footer from './components/Footer'
 import Nav from './components/Nav'
 import About from './pages/About'
+import Blog from './pages/Blog'
+import BlogPost from './pages/BlogPost'
 import Contact from './pages/Contact'
 import Estimate from './pages/Estimate'
 import Home from './pages/Home'
@@ -18,6 +21,7 @@ const PAGE_BY_PATH = [
   ['/services/drone', 'drone'],
   ['/estimation', 'estimate'],
   ['/contact', 'contact'],
+  ['/blog', 'blog'],
   ['/logo', 'logo'],
   ['/', 'home'],
 ]
@@ -33,6 +37,7 @@ export default function App() {
 
   return (
     <div className="app" data-page={page}>
+      <Cursor />
       <Nav />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -40,6 +45,8 @@ export default function App() {
         <Route path="/services/:slug" element={<ServicePage />} />
         <Route path="/estimation" element={<Estimate />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
+        <Route path="/blog" element={<Blog />} />
         <Route path="/logo" element={<Logo />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

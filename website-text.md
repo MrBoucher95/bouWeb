@@ -16,6 +16,7 @@ Le français est la langue par défaut. Les traductions anglaises sont à la fin
   - Applications
 - Estimation
 - Contact
+- Blog
 - EN / FR
 
 ---
@@ -585,6 +586,36 @@ Suivez-moi
 
 ---
 
+## Blog
+
+**Le blog**  
+Notes sur le design, le web et la marque — pour les entreprises qui veulent une image claire, en ligne comme hors ligne.
+
+Lire l’article  
+Tous les articles  
+Article précédent  
+Article suivant
+
+Un projet en tête ?  
+Logo, site, identité : parlons de ce dont vous avez besoin.
+
+### Sujets
+
+Le détail des titres, descriptions, cibles et slugs est dans `blogs.md`.
+
+1. Pourquoi un logo vectoriel est indispensable pour votre marque ?
+2. Les tendances graphiques 2026 à adopter pour votre site web
+3. Comment choisir la palette de couleurs parfaite pour votre brand ?
+4. Intégration web : les bonnes pratiques pour un site rapide et responsive
+5. Freelance vs agence : quel choix pour votre projet graphique ?
+6. Les erreurs à éviter dans la création d’un logo
+7. Comment créer une identité visuelle cohérente pour votre marque ?
+8. Les outils indispensables pour un graphiste freelance en 2026
+9. Pourquoi l’UX/UI design est crucial pour convertir vos visiteurs ?
+10. Comment optimiser vos images pour le web sans perdre en qualité ?
+
+---
+
 ## Estimateur de projet
 
 Répondez à quelques questions pour obtenir une estimation indicative de votre projet.
@@ -705,7 +736,8 @@ Nouvelle estimation
 
 ## Pied de page
 
-© 2026 m-boucher. Tous droits réservés.
+© 2026 m-boucher. Tous droits réservés.  
+Blog
 
 ---
 
@@ -736,6 +768,7 @@ Texte anglais disponible via le bouton EN. Les pages Imprime, Numérique, Web et
 - Services
 - Estimate
 - Contact
+- Blog
 
 ## Home
 
@@ -875,6 +908,21 @@ Location
 Follow Me  
 Montreal, Quebec
 
+## Blog
+
+**The blog**  
+Notes on design, the web, and brand — for businesses that want a clear image, online and off.
+
+Read the article  
+All articles  
+Previous article  
+Next article
+
+A project in mind?  
+Logo, site, identity: let’s talk about what you need.
+
+See `blogs.md` for titles, descriptions, audiences, and slugs.
+
 ## Project Estimator
 
 Answer a few questions to get an indicative estimate for your project.
@@ -993,7 +1041,8 @@ New estimate
 
 ## Footer
 
-All Rights Reserved
+All Rights Reserved  
+Blog
 
 ## 404
 
