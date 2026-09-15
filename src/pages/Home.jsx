@@ -71,7 +71,7 @@ export default function Home() {
             </div>
             <ProjectGrid projects={home.projects} />
             <div className="folio-cta">
-              <Link className="btn" to="/contact">
+              <Link className="btn" to="/portfolio">
                 {home.projectsCta}
               </Link>
             </div>

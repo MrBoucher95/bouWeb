@@ -62,6 +62,7 @@ export default function Footer() {
       <div className="footer-copy">
         <p>{t.footer}</p>
         <Link to="/blog">{t.nav.blog}</Link>
+        <Link to="/portfolio">{t.nav.portfolio}</Link>
       </div>
       <ul className="footer-socials">
         {socials.map((social) => (

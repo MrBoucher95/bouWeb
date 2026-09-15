@@ -132,6 +132,11 @@ img {
   --on-accent: var(--tile-blog-fg);
 }
 
+.app[data-page='portfolio'] {
+  --accent: var(--tile-portfolio-bg);
+  --on-accent: var(--tile-portfolio-fg);
+}
+
 .app[data-page='logo'] {
   --accent: var(--tile-web-bg);
   --on-accent: var(--tile-web-fg);
@@ -406,33 +411,40 @@ h3 {
 .cta-band {
   margin-top: 6rem;
   padding: 3.5rem 2rem;
-  background: var(--accent);
-  color: var(--white);
+  background: #1f1f1f;
+  color: var(--fg);
   border: 0;
   border-radius: var(--radius);
+  box-shadow: 0 10px 28px rgb(0 0 0 / 0.45);
+}
+
+[data-theme='light'] .cta-band {
+  background: var(--white);
+  box-shadow: 0 8px 32px rgb(0 0 0 / 0.12);
 }
 
 .cta-band .lead {
-  color: color-mix(in srgb, var(--white) 86%, transparent);
+  color: var(--muted);
   margin: 1rem 0 1.8rem;
 }
 
 .cta-band .btn {
-  border-color: var(--white);
-  color: var(--white);
+  border-color: var(--accent);
+  color: var(--accent);
   background: transparent;
 }
 
 .cta-band .btn-fill {
-  background: var(--white);
-  color: var(--black);
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
 }
 
 .cta-band .btn:hover,
 .cta-band .btn-fill:hover {
-  background: var(--black);
-  border-color: var(--black);
-  color: var(--white);
+  background: var(--fg);
+  border-color: var(--fg);
+  color: var(--bg);
 }
 
 .quote-grid {

@@ -1,3 +1,4 @@
+import { useLayoutEffect } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import Cursor from './components/Cursor'
 import Footer from './components/Footer'
@@ -10,6 +11,7 @@ import Estimate from './pages/Estimate'
 import Home from './pages/Home'
 import Logo from './pages/Logo'
 import NotFound from './pages/NotFound'
+import Portfolio from './pages/Portfolio'
 import ServicePage from './pages/ServicePage'
 
 const PAGE_BY_PATH = [
@@ -22,6 +24,7 @@ const PAGE_BY_PATH = [
   ['/estimation', 'estimate'],
   ['/contact', 'contact'],
   ['/blog', 'blog'],
+  ['/portfolio', 'portfolio'],
   ['/logo', 'logo'],
   ['/', 'home'],
 ]
@@ -35,6 +38,15 @@ export default function App() {
   const { pathname } = useLocation()
   const page = pageFromPath(pathname)
 
+  useLayoutEffect(() => {
+    if (window.location.hash) return
+    const html = document.documentElement
+    const previous = html.style.scrollBehavior
+    html.style.scrollBehavior = 'auto'
+    window.scrollTo(0, 0)
+    html.style.scrollBehavior = previous
+  }, [pathname])
+
   return (
     <div className="app" data-page={page}>
       <Cursor />
@@ -47,6 +59,7 @@ export default function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/logo" element={<Logo />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

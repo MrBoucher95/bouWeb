@@ -73,6 +73,8 @@
   --tile-drone-fg: var(--black);
   --tile-blog-bg: color-mix(in srgb, var(--accent-pink) 42%, var(--accent-purple));
   --tile-blog-fg: var(--white);
+  --tile-portfolio-bg: color-mix(in srgb, var(--accent-orange) 42%, var(--accent-yellow));
+  --tile-portfolio-fg: var(--black);
 
   /* Semantic roles — default to Accueil; each page overrides on .app */
   --accent: var(--tile-home-bg);

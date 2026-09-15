@@ -139,13 +139,13 @@
 }
 
 .sv-hi--media .sv-hi-stage {
-  height: 420vh;
-  min-height: 0;
+  height: 100svh;
+  min-height: 100svh;
 }
 
 .sv-hi--media .sv-hi-stage-inner {
-  position: sticky;
-  top: 0;
+  position: relative;
+  top: auto;
   height: 100svh;
   min-height: 100svh;
   margin-top: 0;

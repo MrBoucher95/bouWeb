@@ -46,7 +46,7 @@ function mediaValues() {
   }
 }
 
-function useServiceHero(pathRef, mediaRefs) {
+function useServiceHero(pathRef, mediaRefs, lockMedia = false) {
   useEffect(() => {
     const path = pathRef.current
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -72,34 +72,26 @@ function useServiceHero(pathRef, mediaRefs) {
 
     const update = () => {
       const [video, shotA, shotB, shotC] = mediaRefs.current
-      if (!video || !shotA || !shotB || !shotC) return
+      if (!video) return
+
+      if (lockMedia) {
+        if (reduced) {
+          video.style.transform = 'translate(-50%, -50%) scale(1)'
+          return
+        }
+        const stage = video.closest('.sv-hi-stage') || video
+        const rect = stage.getBoundingClientRect()
+        const vh = window.innerHeight
+        const p = clamp((vh - rect.top) / (vh + rect.height))
+        video.style.transform = `translate(-50%, -50%) scale(${lerp(1, 1.1, p)})`
+        return
+      }
+
+      if (!shotA || !shotB || !shotC) return
       const packed = Boolean(video.closest('.sv-hi-visual'))
-      const stage = video.closest('.sv-hi-stage')
-      const pinned = Boolean(stage?.closest('.sv-hi--media'))
       const values = mediaValues()
       const damp = packed ? 0.35 : 1
       const shift = (from, to, p) => lerp(from, to, p) * damp
-
-      if (pinned) {
-        const range = Math.max(stage.offsetHeight - window.innerHeight, 1)
-        const p = reduced ? 1 : clamp(-stage.getBoundingClientRect().top / range)
-        const grow = clamp(p / 0.5)
-        const leave = clamp((p - 0.88) / 0.12)
-        const cover = Math.max(window.innerWidth / Math.max(video.offsetWidth, 1), window.innerHeight / Math.max(video.offsetHeight, 1))
-        const scale = leave > 0 ? lerp(cover, cover * 1.4, leave) : lerp(1, cover, grow)
-        video.style.transform = `translate(-50%, -50%) scale(${scale}) skewY(${leave * 14}deg)`
-        video.style.opacity = String(1 - leave)
-        video.style.borderRadius = `${lerp(16, 0, grow)}px`
-        video.style.zIndex = grow > 0.08 ? '6' : '2'
-        const fade = 1 - grow
-        shotA.style.opacity = String(fade)
-        shotB.style.opacity = String(fade)
-        shotC.style.opacity = String(fade)
-        shotA.style.transform = `translate(${shift(values.a.xFrom, values.a.xTo, grow)}px, calc(-50% + ${shift(values.a.yFrom, values.a.yTo, grow)}px))`
-        shotB.style.transform = `translate(${shift(values.b.xFrom, values.b.xTo, grow)}px, calc(-50% + ${shift(values.b.yFrom, values.b.yTo, grow)}px))`
-        shotC.style.transform = `translate(${shift(values.c.xFrom, values.c.xTo, grow)}px, calc(-50% + ${shift(values.c.yFrom, values.c.yTo, grow)}px))`
-        return
-      }
 
       const p1 = reduced ? 1 : viewProgress(video)
       const p2 = reduced ? 1 : viewProgress(shotA)
@@ -130,7 +122,7 @@ function useServiceHero(pathRef, mediaRefs) {
       window.removeEventListener('scroll', update)
       window.removeEventListener('resize', update)
     }
-  }, [pathRef, mediaRefs])
+  }, [pathRef, mediaRefs, lockMedia])
 }
 
 function HeroStage({ mediaRefs }) {
@@ -194,7 +186,7 @@ export default function ServiceHero({ title, subtitle, intro, actions = [], bann
   const mediaRefs = useRef([])
   const bannerText = `${banner} ${banner} ${banner}`
 
-  useServiceHero(pathRef, mediaRefs)
+  useServiceHero(pathRef, mediaRefs, mediaOnly)
 
   return (
     <section className={`sv-hi${mediaOnly ? ' sv-hi--media' : ''}`}>

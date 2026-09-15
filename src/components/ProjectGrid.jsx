@@ -1,17 +1,14 @@
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useLanguage } from '../context/LanguageContext'
-import p01 from '../assets/img/project/p01.png'
-import p02 from '../assets/img/project/p02.png'
-import p03 from '../assets/img/project/p03.png'
-import p04 from '../assets/img/project/p04.png'
-import p05 from '../assets/img/project/p05.png'
-import p06 from '../assets/img/project/p06.png'
-import p07 from '../assets/img/project/p07.png'
-import p08 from '../assets/img/project/p08.png'
-import p09 from '../assets/img/project/p09.png'
+const IMAGE_MAP = import.meta.glob('../assets/img/project/*.{png,jpg,jpeg,webp}', {
+  eager: true,
+  import: 'default',
+})
 
-const IMAGES = [p01, p02, p03, p04, p05, p06, p07, p08, p09]
+const IMAGES = Object.entries(IMAGE_MAP)
+  .sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }))
+  .map(([, src]) => src)
 
 const LAYOUT = [
   { span: 3, dx: -50, dy: -40, rot: -8 },
@@ -100,10 +97,10 @@ export default function ProjectGrid({ projects }) {
     <>
       <div className="folio-grid" ref={gridRef}>
         {projects.map((project, index) => {
-          const layout = LAYOUT[index] ?? LAYOUT[0]
+          const layout = LAYOUT[index % LAYOUT.length]
           return (
             <button
-              key={project}
+              key={`${project}-${index}`}
               type="button"
               className={`folio-card folio-span-${layout.span}`}
               style={{

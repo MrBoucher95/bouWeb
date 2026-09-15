@@ -18,6 +18,7 @@ export const copy = {
       contact: 'Contact',
       blog: 'Blog',
       logo: 'Logo',
+      portfolio: 'Portfolio',
       open: 'Ouvrir le menu',
       close: 'Fermer le menu',
       themeLight: 'Passer en mode clair',
@@ -602,6 +603,16 @@ export const copy = {
       metaDescription:
         'Articles sur le logo vectoriel, l’identité visuelle, le design web et l’intégration. Conseils concrets pour entreprises et startups au Québec.',
     },
+    portfolio: {
+      eyebrow: 'Portfolio',
+      title: 'Les projets',
+      lead: 'Une sélection de travaux en design, web et identité — les mêmes pièces que sur l’accueil, et d’autres à venir.',
+      metaTitle: 'Portfolio — Mathieu Boucher',
+      metaDescription:
+        'Portfolio de Mathieu Boucher : sites, identité visuelle et projets numériques pour entreprises au Québec.',
+      ctaTitle: 'Un projet en tête ?',
+      ctaText: 'Parlons de ce dont vous avez besoin. Logo, site, identité.',
+    },
     logo: {
       metaTitle: 'Logo — Mathieu Boucher',
       title: 'Logo',
@@ -650,6 +661,7 @@ export const copy = {
       contact: 'Contact',
       blog: 'Blog',
       logo: 'Logo',
+      portfolio: 'Portfolio',
       open: 'Open menu',
       close: 'Close menu',
       themeLight: 'Switch to light mode',
@@ -1227,6 +1239,16 @@ export const copy = {
       metaTitle: 'Blog — design, web and brand | Mathieu Boucher',
       metaDescription:
         'Articles on vector logos, visual identity, web design and front-end. Practical notes for businesses and startups in Quebec.',
+    },
+    portfolio: {
+      eyebrow: 'Portfolio',
+      title: 'The work',
+      lead: 'A selection of design, web and identity pieces — the same set as on the home page, with more to come.',
+      metaTitle: 'Portfolio — Mathieu Boucher',
+      metaDescription:
+        'Portfolio of Mathieu Boucher: websites, visual identity and digital work for businesses in Quebec.',
+      ctaTitle: 'A project in mind?',
+      ctaText: 'Let’s talk about what you need. Logo, site, identity.',
     },
     logo: {
       metaTitle: 'Logo — Mathieu Boucher',

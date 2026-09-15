@@ -410,9 +410,9 @@
 }
 
 .home-stage.logo-page {
-  --plane-gutter: 3vw;
+  --plane-gutter: 2vw;
   --plane-start: min(
-    calc(100vw - 38vw - var(--plane-gutter)),
+    calc(100vw - 42vw - var(--plane-gutter)),
     calc(82svh * 4558 / 2658),
     1702px
   );
