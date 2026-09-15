@@ -110,7 +110,7 @@ export default function Estimate() {
                 <Link className="btn btn-fill" to="/contact">
                   {t.estimate.discuss}
                 </Link>
-                <button type="button" className="btn" onClick={reset}>
+                <button type="button" className="btn btn-fill" onClick={reset}>
                   {t.estimate.again}
                 </button>
               </div>
@@ -143,7 +143,7 @@ export default function Estimate() {
               <div className="btn-row">
                 <button
                   type="button"
-                  className="btn"
+                  className="btn btn-fill"
                   onClick={() => (step === 0 ? reset() : setStep((value) => value - 1))}
                 >
                   {t.estimate.prev}

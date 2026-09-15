@@ -215,9 +215,10 @@ h3 {
   justify-content: center;
   min-height: 52px;
   padding: 0 1.6rem;
-  border: 1px solid var(--fg);
+  border: 1px solid var(--nav-accent);
+  background: var(--nav-accent);
   border-radius: var(--radius-btn);
-  color: var(--fg);
+  color: var(--white);
   font-family: var(--display);
   font-weight: var(--fw-display);
   font-size: var(--fs-ui);
@@ -226,16 +227,22 @@ h3 {
   transition: background 0.25s var(--ease), color 0.25s var(--ease), border-color 0.25s var(--ease);
 }
 
-.btn:hover,
-.btn-fill:hover {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--on-accent);
-}
-
 .btn-fill {
   background: var(--fg);
+  border-color: var(--fg);
   color: var(--bg);
+}
+
+.btn:hover {
+  background: var(--fg);
+  border-color: var(--fg);
+  color: var(--bg);
+}
+
+.btn-fill:hover {
+  background: var(--nav-accent);
+  border-color: var(--nav-accent);
+  color: var(--white);
 }
 
 .btn-row {
@@ -348,7 +355,7 @@ h3 {
 .service-card:hover {
   transform: translateY(-6px);
   background: var(--service-accent);
-  color: var(--service-on, var(--fg));
+  color: var(--white);
 }
 
 .service-card h3 {
@@ -376,6 +383,12 @@ h3 {
   background: var(--white);
 }
 
+[data-theme='light'] .service-card:hover,
+[data-theme='light'] .service-card:focus-visible {
+  background: var(--service-accent);
+  color: var(--white);
+}
+
 .service-card p {
   color: var(--muted);
   transition: color 0.3s var(--ease);
@@ -389,7 +402,7 @@ h3 {
 .service-card:hover p,
 .service-card:hover .mono,
 .service-card:hover h3 {
-  color: var(--service-on, var(--fg));
+  color: var(--white);
 }
 
 .service-card--applications {
@@ -433,22 +446,27 @@ h3 {
 }
 
 .cta-band .btn {
-  border-color: var(--accent);
-  color: var(--accent);
-  background: transparent;
+  background: var(--nav-accent);
+  border-color: var(--nav-accent);
+  color: var(--white);
 }
 
 .cta-band .btn-fill {
   background: var(--accent);
   border-color: var(--accent);
-  color: var(--on-accent);
+  color: var(--white);
 }
 
-.cta-band .btn:hover,
-.cta-band .btn-fill:hover {
+.cta-band .btn:hover {
   background: var(--fg);
   border-color: var(--fg);
   color: var(--bg);
+}
+
+.cta-band .btn-fill:hover {
+  background: var(--nav-accent);
+  border-color: var(--nav-accent);
+  color: var(--white);
 }
 
 .quote-grid {

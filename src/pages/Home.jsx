@@ -76,24 +76,26 @@ export default function Home() {
               </Link>
             </div>
           </section>
+        </div>
 
+        <QuoteSwiper
+          quotes={home.quotes}
+          eyebrow={home.quotesEyebrow}
+          title={home.quotesTitle}
+          prevLabel={home.quotesPrev}
+          nextLabel={home.quotesNext}
+        />
+
+        <div className="page-inner">
           <section className="cta-band">
             <h2>{home.ctaTitle}</h2>
             <p className="lead">{home.ctaText}</p>
-            <Link className="btn btn-fill" to="/estimation">
+            <Link className="btn" to="/estimation">
               {home.ctaButton}
             </Link>
           </section>
         </div>
       </main>
-
-      <QuoteSwiper
-        quotes={home.quotes}
-        eyebrow={home.quotesEyebrow}
-        title={home.quotesTitle}
-        prevLabel={home.quotesPrev}
-        nextLabel={home.quotesNext}
-      />
     </div>
   )
 }
