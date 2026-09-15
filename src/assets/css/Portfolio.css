@@ -33,7 +33,7 @@
 
 .folio-card {
   position: relative;
-  min-height: 180px;
+  min-height: clamp(180px, 18vw, 400px);
   display: flex;
   align-items: flex-end;
   padding: 16px;

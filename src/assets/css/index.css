@@ -143,7 +143,10 @@ img {
 }
 
 .page {
+  position: relative;
+  z-index: 2;
   padding: 0 0 8rem var(--page-gutter);
+  background: var(--bg);
 }
 
 .page-inner {
@@ -345,7 +348,7 @@ h3 {
 .service-card:hover {
   transform: translateY(-6px);
   background: var(--service-accent);
-  color: var(--service-on, var(--white));
+  color: var(--service-on, var(--fg));
 }
 
 .service-card h3 {
@@ -384,13 +387,14 @@ h3 {
 }
 
 .service-card:hover p,
-.service-card:hover .mono {
-  color: var(--service-on, var(--white));
+.service-card:hover .mono,
+.service-card:hover h3 {
+  color: var(--service-on, var(--fg));
 }
 
 .service-card--applications {
   --service-accent: var(--tile-apps-bg);
-  --service-on: var(--white);
+  --service-on: var(--tile-apps-fg);
 }
 
 .service-card--web {

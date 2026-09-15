@@ -14,36 +14,48 @@ function lerp(from, to, t) {
   return from + (to - from) * t
 }
 
-function viewProgress(el, start = 0.8, end = 0.2) {
-  const top = el.getBoundingClientRect().top
+function scrollProgress(el) {
+  const rect = el.getBoundingClientRect()
   const vh = window.innerHeight
-  return clamp((vh * start - top) / (vh * start - vh * end))
+  const y = rect.top + rect.height * 0.35
+  const start = vh * 0.9
+  const end = vh * 0.28
+  return clamp((start - y) / (start - end))
+}
+
+function easeOut(t) {
+  return 1 - (1 - t) * (1 - t)
 }
 
 function mediaValues() {
   const width = window.innerWidth
   if (width <= 480) {
     return {
-      video: { scaleFrom: 0.98, scaleTo: 1.02 },
-      a: { xFrom: -20, xTo: 10, yFrom: -30, yTo: 20 },
-      b: { xFrom: -15, xTo: 8, yFrom: 15, yTo: -8 },
-      c: { xFrom: 25, xTo: -10, yFrom: -15, yTo: 10 },
+      video: { xFrom: 0, xTo: 0, yFrom: 48, yTo: 0, scaleFrom: 0.78, scaleTo: 1.42 },
+      a: { xFrom: -72, xTo: 0, yFrom: -40, yTo: 0, scaleFrom: 0.8, scaleTo: 1.24 },
+      b: { xFrom: -56, xTo: 0, yFrom: 28, yTo: 0, scaleFrom: 0.82, scaleTo: 1.22 },
+      c: { xFrom: 72, xTo: 0, yFrom: 28, yTo: 0, scaleFrom: 0.78, scaleTo: 1.26 },
     }
   }
   if (width <= 768) {
     return {
-      video: { scaleFrom: 0.85, scaleTo: 1.15 },
-      a: { xFrom: -35, xTo: 15, yFrom: -40, yTo: 25 },
-      b: { xFrom: -25, xTo: 12, yFrom: 25, yTo: -12 },
-      c: { xFrom: 40, xTo: -15, yFrom: -25, yTo: 15 },
+      video: { xFrom: 0, xTo: 0, yFrom: 72, yTo: 0, scaleFrom: 0.64, scaleTo: 1.55 },
+      a: { xFrom: -110, xTo: 0, yFrom: -56, yTo: 0, scaleFrom: 0.72, scaleTo: 1.32 },
+      b: { xFrom: -88, xTo: 0, yFrom: 36, yTo: 0, scaleFrom: 0.74, scaleTo: 1.3 },
+      c: { xFrom: 120, xTo: 0, yFrom: 40, yTo: 0, scaleFrom: 0.7, scaleTo: 1.34 },
     }
   }
   return {
-    video: { scaleFrom: 0.8, scaleTo: 1.2 },
-    a: { xFrom: -50, xTo: 20, yFrom: -50, yTo: 30 },
-    b: { xFrom: -30, xTo: 15, yFrom: 30, yTo: -15 },
-    c: { xFrom: 50, xTo: -20, yFrom: -30, yTo: 20 },
+    video: { xFrom: 0, xTo: 0, yFrom: 110, yTo: 0, scaleFrom: 0.55, scaleTo: 1.72 },
+    a: { xFrom: -160, xTo: 0, yFrom: -80, yTo: 0, scaleFrom: 0.7, scaleTo: 1.4 },
+      b: { xFrom: -130, xTo: 0, yFrom: 40, yTo: 0, scaleFrom: 0.72, scaleTo: 1.36 },
+    c: { xFrom: 180, xTo: 0, yFrom: 50, yTo: 0, scaleFrom: 0.66, scaleTo: 1.42 },
   }
+}
+
+function stillTransform(packed, x, y, scale) {
+  if (packed) return `translate(${x}px, ${y}px) scale(${scale})`
+  return `translate(${x}px, calc(-50% + ${y}px)) scale(${scale})`
 }
 
 function useServiceHero(pathRef, mediaRefs, lockMedia = false) {
@@ -51,6 +63,7 @@ function useServiceHero(pathRef, mediaRefs, lockMedia = false) {
     const path = pathRef.current
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     let frame = 0
+    let ticking = false
 
     if (path && !reduced) {
       try {
@@ -72,94 +85,91 @@ function useServiceHero(pathRef, mediaRefs, lockMedia = false) {
 
     const update = () => {
       const [video, shotA, shotB, shotC] = mediaRefs.current
-      if (!video) return
+      if (!video || !shotA || !shotB || !shotC) return
 
-      if (lockMedia) {
-        if (reduced) {
-          video.style.transform = 'translate(-50%, -50%) scale(1)'
-          return
-        }
-        const stage = video.closest('.sv-hi-stage') || video
-        const rect = stage.getBoundingClientRect()
-        const vh = window.innerHeight
-        const p = clamp((vh - rect.top) / (vh + rect.height))
-        video.style.transform = `translate(-50%, -50%) scale(${lerp(1, 1.1, p)})`
+      const packed = Boolean(video.closest('.sv-hi-visual'))
+      const restStill = packed ? 'translate(0, 0) scale(1)' : 'translate(0, -50%) scale(1)'
+
+      if (reduced) {
+        video.style.transform = 'translate(-50%, -50%) scale(1)'
+        shotA.style.transform = restStill
+        shotB.style.transform = 'translate(0, 0) scale(1)'
+        shotC.style.transform = restStill
         return
       }
 
-      if (!shotA || !shotB || !shotC) return
-      const packed = Boolean(video.closest('.sv-hi-visual'))
+      const driver = lockMedia
+        ? video.closest('.sv-hi-stage') || video
+        : video.closest('.sv-hi-visual') || video
+      const p = easeOut(scrollProgress(driver))
       const values = mediaValues()
-      const damp = packed ? 0.35 : 1
-      const shift = (from, to, p) => lerp(from, to, p) * damp
+      const shift = (from, to) => lerp(from, to, p)
 
-      const p1 = reduced ? 1 : viewProgress(video)
-      const p2 = reduced ? 1 : viewProgress(shotA)
-      const p3 = reduced ? 1 : viewProgress(shotB)
-      const p4 = reduced ? 1 : viewProgress(shotC)
+      video.style.transform = `translate(calc(-50% + ${shift(values.video.xFrom, values.video.xTo)}px), calc(-50% + ${shift(values.video.yFrom, values.video.yTo)}px)) scale(${lerp(values.video.scaleFrom, values.video.scaleTo, p)})`
+      shotA.style.transform = stillTransform(
+        packed,
+        shift(values.a.xFrom, values.a.xTo),
+        shift(values.a.yFrom, values.a.yTo),
+        lerp(values.a.scaleFrom, values.a.scaleTo, p),
+      )
+      shotB.style.transform = stillTransform(
+        true,
+        shift(values.b.xFrom, values.b.xTo),
+        shift(values.b.yFrom, values.b.yTo),
+        lerp(values.b.scaleFrom, values.b.scaleTo, p),
+      )
+      shotC.style.transform = stillTransform(
+        packed,
+        shift(values.c.xFrom, values.c.xTo),
+        shift(values.c.yFrom, values.c.yTo),
+        lerp(values.c.scaleFrom, values.c.scaleTo, p),
+      )
+    }
 
-      video.style.transform = `translate(-50%, -50%) scale(${lerp(values.video.scaleFrom, values.video.scaleTo, packed ? 0.55 + p1 * 0.45 : p1)})`
-      video.style.opacity = String(lerp(0.7, 1, p1))
-      if (packed) {
-        shotA.style.transform = `translate(${shift(values.a.xFrom, values.a.xTo, p2)}px, ${shift(values.a.yFrom, values.a.yTo, p2)}px)`
-        shotB.style.transform = `translate(${shift(values.b.xFrom, values.b.xTo, p3)}px, ${shift(values.b.yFrom, values.b.yTo, p3)}px)`
-        shotC.style.transform = `translate(${shift(values.c.xFrom, values.c.xTo, p4)}px, ${shift(values.c.yFrom, values.c.yTo, p4)}px)`
-      } else {
-        shotA.style.transform = `translate(${shift(values.a.xFrom, values.a.xTo, p2)}px, calc(-50% + ${shift(values.a.yFrom, values.a.yTo, p2)}px))`
-        shotB.style.transform = `translate(${shift(values.b.xFrom, values.b.xTo, p3)}px, calc(-50% + ${shift(values.b.yFrom, values.b.yTo, p3)}px))`
-        shotC.style.transform = `translate(${shift(values.c.xFrom, values.c.xTo, p4)}px, calc(-50% + ${shift(values.c.yFrom, values.c.yTo, p4)}px))`
-      }
-      shotA.style.opacity = String(lerp(0.6, 1, p2))
-      shotB.style.opacity = String(lerp(0.6, 1, p3))
-      shotC.style.opacity = String(lerp(0.6, 1, p4))
+    const onScroll = () => {
+      if (ticking) return
+      ticking = true
+      requestAnimationFrame(() => {
+        update()
+        ticking = false
+      })
     }
 
     update()
-    window.addEventListener('scroll', update, { passive: true })
-    window.addEventListener('resize', update)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
     return () => {
       cancelAnimationFrame(frame)
-      window.removeEventListener('scroll', update)
-      window.removeEventListener('resize', update)
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
     }
   }, [pathRef, mediaRefs, lockMedia])
+}
+
+function HeroShot({ mediaRefs, index, className, src, image }) {
+  return (
+    <div
+      ref={(node) => {
+        mediaRefs.current[index] = node
+      }}
+      className={`sv-hi-shot ${className}`}
+    >
+      {src ? (
+        <video className="sv-hi-shot-face" src={src} autoPlay loop muted playsInline />
+      ) : (
+        <div className="sv-hi-shot-face" style={{ backgroundImage: `url(${image})` }} />
+      )}
+    </div>
+  )
 }
 
 function HeroStage({ mediaRefs }) {
   return (
     <div className="sv-hi-stage-inner">
-      <video
-        ref={(node) => {
-          mediaRefs.current[0] = node
-        }}
-        className="sv-hi-shot sv-hi-shot-video"
-        src={taping}
-        autoPlay
-        loop
-        muted
-        playsInline
-      />
-      <div
-        ref={(node) => {
-          mediaRefs.current[1] = node
-        }}
-        className="sv-hi-shot sv-hi-shot-a"
-        style={{ backgroundImage: `url(${beforeAfter})` }}
-      />
-      <div
-        ref={(node) => {
-          mediaRefs.current[2] = node
-        }}
-        className="sv-hi-shot sv-hi-shot-b"
-        style={{ backgroundImage: `url(${essence})` }}
-      />
-      <div
-        ref={(node) => {
-          mediaRefs.current[3] = node
-        }}
-        className="sv-hi-shot sv-hi-shot-c"
-        style={{ backgroundImage: `url(${watch})` }}
-      />
+      <HeroShot mediaRefs={mediaRefs} index={0} className="sv-hi-shot-video" src={taping} />
+      <HeroShot mediaRefs={mediaRefs} index={1} className="sv-hi-shot-a" image={beforeAfter} />
+      <HeroShot mediaRefs={mediaRefs} index={2} className="sv-hi-shot-b" image={essence} />
+      <HeroShot mediaRefs={mediaRefs} index={3} className="sv-hi-shot-c" image={watch} />
     </div>
   )
 }
@@ -211,7 +221,7 @@ export default function ServiceHero({ title, subtitle, intro, actions = [], bann
       )}
 
       <div className="sv-hi-banner" aria-hidden="true">
-        <svg className="sv-hi-svg" viewBox="0 0 1600 500" width="1600" height="500" preserveAspectRatio="xMidYMid meet">
+        <svg className="sv-hi-svg" viewBox="0 0 1600 500" preserveAspectRatio="xMidYMid meet">
           <defs>
             <path id={curveId} d="M -360,330 C 406,65 1194,595 1960,330" />
           </defs>

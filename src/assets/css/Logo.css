@@ -190,6 +190,7 @@
 .logo-body {
   position: relative;
   z-index: 3;
+  background: var(--bg);
 }
 
 .logo-chapter {
