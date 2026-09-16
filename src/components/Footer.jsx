@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useLanguage } from '../context/LanguageContext'
-import { sendMailto } from '../lib/mail'
+import { sendMessage, plainText } from '../lib/mail'
 import taping from '../assets/video/taping.mp4'
 
 export const socials = [
@@ -70,7 +70,9 @@ export default function Footer() {
   const placeholders = [contact.namePh, contact.emailPh, contact.subjectPh, contact.messagePh]
 
   const update = (key, value) => {
-    setForm((current) => ({ ...current, [key]: value }))
+    const next = plainText(value)
+    if (value !== next) return
+    setForm((current) => ({ ...current, [key]: next }))
     if (status === 'error') setStatus('')
   }
 
@@ -126,8 +128,9 @@ export default function Footer() {
     },
   ]
 
-  function onSubmit(event) {
+  async function onSubmit(event) {
     event.preventDefault()
+    if (status === 'pending') return
     if (!valid(field, form[field])) {
       setStatus('error')
       return
@@ -137,10 +140,15 @@ export default function Footer() {
       setStatus('')
       return
     }
-    sendMailto(form)
-    setStatus('success')
-    setForm({ name: '', email: '', subject: '', message: '' })
-    setStep(0)
+    setStatus('pending')
+    try {
+      await sendMessage(form)
+      setStatus('success')
+      setForm({ name: '', email: '', subject: '', message: '' })
+      setStep(0)
+    } catch {
+      setStatus('send-error')
+    }
   }
 
   return (
@@ -198,7 +206,7 @@ export default function Footer() {
           <figure className="mb-newslet-sticker" aria-hidden="true">
             <video src={taping} autoPlay loop muted playsInline />
           </figure>
-          <form className="mb-newslet-form" onSubmit={onSubmit} noValidate aria-label={home2.formTitle}>
+          <form className="mb-newslet-form" onSubmit={onSubmit} noValidate autoComplete="off" aria-label={home2.formTitle}>
             <h2>{home2.formTitle}</h2>
             {status === 'success' ? (
               <p className="mb-newslet-msg is-ok is-on" role="status">
@@ -209,27 +217,45 @@ export default function Footer() {
                 <p className="mb-newslet-step">
                   {t.estimate.step} {step + 1} / {footFields.length}
                 </p>
-                <label className="mb-newslet-field">
+                <label className="mb-newslet-field" htmlFor={`footer-${field}`}>
                   <span>{labels[step]}</span>
                   {field === 'message' ? (
                     <textarea
-                      name="message"
+                      key="message"
+                      id="footer-message"
+                      name="mbq-d"
                       rows={4}
                       required
+                      autoComplete="off"
+                      data-1p-ignore="true"
+                      data-lpignore="true"
+                      data-form-type="other"
+                      spellCheck={false}
                       placeholder={placeholders[step]}
                       value={form.message}
                       onChange={(event) => update('message', event.target.value)}
+                      onInput={(event) => update('message', event.target.value)}
                       aria-invalid={status === 'error'}
                     />
                   ) : (
                     <input
-                      type={field === 'email' ? 'email' : 'text'}
-                      name={field}
-                      autoComplete={field === 'name' ? 'name' : field === 'email' ? 'email' : 'off'}
+                      key={field}
+                      id={`footer-${field}`}
+                      type="text"
+                      inputMode={field === 'email' ? 'email' : 'text'}
+                      name={field === 'name' ? 'mbq-a' : field === 'email' ? 'mbq-b' : 'mbq-c'}
+                      autoComplete="off"
+                      data-1p-ignore="true"
+                      data-lpignore="true"
+                      data-form-type="other"
+                      spellCheck={false}
                       required
+                      readOnly
+                      onFocus={(event) => event.currentTarget.removeAttribute('readonly')}
                       placeholder={placeholders[step]}
                       value={form[field]}
                       onChange={(event) => update(field, event.target.value)}
+                      onInput={(event) => update(field, event.target.value)}
                       aria-invalid={status === 'error'}
                     />
                   )}
@@ -240,7 +266,7 @@ export default function Footer() {
                       {contact.prev}
                     </button>
                   ) : null}
-                  <button className="mb-newslet-submit" type="submit">
+                  <button className="mb-newslet-submit" type="submit" disabled={status === 'pending'}>
                     {status === 'pending'
                       ? home2.formPending
                       : step === footFields.length - 1
@@ -248,8 +274,8 @@ export default function Footer() {
                         : contact.next}
                   </button>
                 </div>
-                <p className={`mb-newslet-msg${status === 'error' ? ' is-on' : ''}`} role="alert">
-                  {status === 'error' ? home2.formError : ''}
+                <p className={`mb-newslet-msg${status === 'error' || status === 'send-error' ? ' is-on' : ''}`} role="alert">
+                  {status === 'error' ? home2.formError : status === 'send-error' ? contact.sendError : ''}
                 </p>
               </>
             )}

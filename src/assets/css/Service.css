@@ -91,6 +91,56 @@
   background: var(--accent);
 }
 
+.sv-article {
+  max-width: 46rem;
+  margin: 0 0 3.5rem;
+}
+
+.sv-article h2,
+.sv-process h2,
+.sv-faq h2 {
+  margin-bottom: 1.15rem;
+}
+
+.sv-article-lead,
+.sv-article p,
+.sv-process p {
+  margin: 0 0 1.1rem;
+  color: var(--muted);
+  font-size: var(--fs-lead);
+  line-height: 1.7;
+}
+
+.sv-article-lead {
+  color: var(--fg);
+}
+
+.sv-process {
+  padding-top: 3.5rem;
+}
+
+.sv-faq {
+  max-width: 46rem;
+  padding-top: 3.5rem;
+}
+
+.sv-faq-item {
+  border-top: 1px solid var(--line);
+  padding: 1.15rem 0 0.35rem;
+}
+
+.sv-faq-item h3 {
+  font-size: 1.05rem;
+  margin: 0 0 0.45rem;
+  letter-spacing: var(--tracking-display);
+}
+
+.sv-faq-item p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
 .sv-index {
   padding: 5rem 0 0;
 }

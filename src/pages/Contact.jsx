@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import PageShell from '../components/PageShell'
 import { useLanguage } from '../context/LanguageContext'
-import { sendMailto } from '../lib/mail'
+import { sendMessage, plainText } from '../lib/mail'
 import '../assets/css/Contact.css'
 
 const fields = ['name', 'email', 'subject', 'message']
@@ -14,7 +14,7 @@ export default function Contact() {
   const { t } = useLanguage()
   const { contact } = t
   const [step, setStep] = useState(0)
-  const [sent, setSent] = useState(false)
+  const [status, setStatus] = useState('')
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
 
   const labels = [contact.name, contact.emailField, contact.subject, contact.message]
@@ -22,16 +22,27 @@ export default function Contact() {
   const field = fields[step]
   const phoneHref = `tel:${contact.phone.replace(/\s/g, '')}`
 
-  const update = (key, value) => setForm((current) => ({ ...current, [key]: value }))
+  const update = (key, value) => {
+    const next = plainText(value)
+    if (value !== next) return
+    setForm((current) => ({ ...current, [key]: next }))
+    if (status === 'error') setStatus('')
+  }
 
-  const submit = (event) => {
+  const submit = async (event) => {
     event.preventDefault()
+    if (status === 'pending') return
     if (step < fields.length - 1) {
       setStep((value) => value + 1)
       return
     }
-    sendMailto(form)
-    setSent(true)
+    setStatus('pending')
+    try {
+      await sendMessage(form)
+      setStatus('sent')
+    } catch {
+      setStatus('error')
+    }
   }
 
   return (
@@ -73,11 +84,11 @@ export default function Contact() {
                 <a href={`mailto:${contact.email}`}>{contact.email}</a>
               </div>
             </div>
-            <form className="contact-form" onSubmit={submit}>
+            <form className="contact-form" onSubmit={submit} autoComplete="off">
               <p className="contact-step">
                 {t.estimate.step} {step + 1} / {fields.length}
               </p>
-              {sent ? (
+              {status === 'sent' ? (
                 <p className="contact-sent">{contact.sent}</p>
               ) : (
                 <>
@@ -86,6 +97,10 @@ export default function Contact() {
                     {field === 'message' ? (
                       <textarea
                         required
+                        autoComplete="off"
+                        data-1p-ignore="true"
+                        data-lpignore="true"
+                        data-form-type="other"
                         value={form.message}
                         placeholder={placeholders[step]}
                         onChange={(event) => update('message', event.target.value)}
@@ -93,7 +108,13 @@ export default function Contact() {
                     ) : (
                       <input
                         required
-                        type={field === 'email' ? 'email' : 'text'}
+                        type="text"
+                        inputMode={field === 'email' ? 'email' : 'text'}
+                        name={field === 'name' ? 'mbq-a' : field === 'email' ? 'mbq-b' : 'mbq-c'}
+                        autoComplete="off"
+                        data-1p-ignore="true"
+                        data-lpignore="true"
+                        data-form-type="other"
                         value={form[field]}
                         placeholder={placeholders[step]}
                         onChange={(event) => update(field, event.target.value)}
@@ -106,10 +127,11 @@ export default function Contact() {
                         {contact.prev}
                       </button>
                     ) : null}
-                    <button type="submit" className="mb-btn mb-btn-fill">
-                      {step === fields.length - 1 ? contact.send : contact.next}
+                    <button type="submit" className="mb-btn mb-btn-fill" disabled={status === 'pending'}>
+                      {status === 'pending' ? t.home2.formPending : step === fields.length - 1 ? contact.send : contact.next}
                     </button>
                   </div>
+                  {status === 'error' ? <p className="contact-sent is-err">{contact.sendError}</p> : null}
                 </>
               )}
             </form>

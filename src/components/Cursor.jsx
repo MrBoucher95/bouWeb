@@ -37,7 +37,8 @@ export default function Cursor() {
       root.classList.toggle('cursor-hover', Boolean(event.target.closest(HOVER)))
     }
 
-    const down = () => {
+    const down = (event) => {
+      if (event.target.closest('input, textarea, select, [class*="autofill"]')) return
       root.classList.add('cursor-down')
       root.classList.remove('cursor-click')
       void pulse.offsetWidth

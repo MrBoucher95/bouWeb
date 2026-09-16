@@ -76,6 +76,10 @@
   color: #6b6b6b;
 }
 
+.contact-sent.is-err {
+  color: #c45c5c;
+}
+
 .contact-field {
   display: grid;
   gap: 0.5rem;

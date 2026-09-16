@@ -1,7 +1,52 @@
-export const CONTACT_MAIL = 'sesese77790@gmail.com'
+export const CONTACT_MAIL = 'mrboucher95@gmail.com'
 
-export function sendMailto(form) {
+export function plainText(value) {
+  if (typeof value !== 'string') return ''
+  if (/<\/?[a-z][\s\S]*?>/i.test(value) || value.includes('data-discover') || value.includes('&quot;')) {
+    return ''
+  }
+  return value
+}
+
+export async function sendMessage(form) {
+  const name = form.name.trim()
+  const email = form.email.trim()
   const subject = form.subject.trim()
-  const body = `${form.name.trim()}\n${form.email.trim()}\n\n${form.message.trim()}`
-  window.location.href = `mailto:${CONTACT_MAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+  const message = form.message.trim()
+  if (!name || !email || !subject || !message) throw new Error('incomplete')
+
+  const key = import.meta.env.VITE_WEB3FORMS_KEY
+  const response = key
+    ? await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: key,
+          name,
+          email,
+          subject,
+          message,
+          from_name: name,
+          replyto: email,
+        }),
+      })
+    : await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(CONTACT_MAIL)}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          name,
+          email,
+          subject,
+          message,
+          _replyto: email,
+          _subject: subject,
+          _template: 'box',
+          _captcha: false,
+          _honey: '',
+        }),
+      })
+
+  const data = await response.json().catch(() => ({}))
+  const ok = data.success === true || data.success === 'true'
+  if (!response.ok || !ok) throw new Error(data.message || 'send failed')
 }
