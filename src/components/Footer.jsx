@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useLanguage } from '../context/LanguageContext'
 
-const socials = [
+export const socials = [
   {
     id: 'facebook',
     label: 'Facebook',
@@ -63,6 +63,7 @@ export default function Footer() {
         <p>{t.footer}</p>
         <Link to="/blog">{t.nav.blog}</Link>
         <Link to="/portfolio">{t.nav.portfolio}</Link>
+        <Link to="/accueil-2">{t.nav.home2}</Link>
       </div>
       <ul className="footer-socials">
         {socials.map((social) => (

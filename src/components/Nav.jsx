@@ -107,6 +107,7 @@ export default function Nav() {
   const closeTimer = useRef(0)
 
   const current = useMemo(() => {
+    if (pathname === '/accueil-2') return t.nav.home2
     if (pathname === '/logo') return t.nav.logo
     if (pathname.startsWith('/blog')) return t.nav.blog
     if (pathname.startsWith('/portfolio')) return t.nav.portfolio

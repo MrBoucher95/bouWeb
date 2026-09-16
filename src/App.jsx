@@ -9,6 +9,7 @@ import BlogPost from './pages/BlogPost'
 import Contact from './pages/Contact'
 import Estimate from './pages/Estimate'
 import Home from './pages/Home'
+import Home2 from './pages/Home2'
 import Logo from './pages/Logo'
 import NotFound from './pages/NotFound'
 import Portfolio from './pages/Portfolio'
@@ -26,6 +27,7 @@ const PAGE_BY_PATH = [
   ['/blog', 'blog'],
   ['/portfolio', 'portfolio'],
   ['/logo', 'logo'],
+  ['/accueil-2', 'home'],
   ['/', 'home'],
 ]
 
@@ -53,6 +55,7 @@ export default function App() {
       <Nav />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/accueil-2" element={<Home2 />} />
         <Route path="/a-propos" element={<About />} />
         <Route path="/services/:slug" element={<ServicePage />} />
         <Route path="/estimation" element={<Estimate />} />
@@ -63,7 +66,7 @@ export default function App() {
         <Route path="/logo" element={<Logo />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <Footer />
+      {pathname !== '/accueil-2' && <Footer />}
     </div>
   )
 }
