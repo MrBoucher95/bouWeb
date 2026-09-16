@@ -77,11 +77,11 @@ export default function Estimate() {
 
   return (
     <PageShell>
-      <p className="mb-news">
-        {t.nav.estimate}
-        <span>{t.estimate.title}</span>
-      </p>
       <header className="mb-hero">
+        <p className="mb-news">
+          {t.nav.estimate}
+          <span>{t.estimate.title}</span>
+        </p>
         <h1 className="mb-title">{t.estimate.title}</h1>
         <p className="mb-proof">{t.estimate.lead}</p>
       </header>

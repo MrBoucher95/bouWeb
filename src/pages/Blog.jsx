@@ -30,11 +30,11 @@ export default function Blog() {
 
   return (
     <PageShell>
-      <p className="mb-news">
-        {blog.eyebrow}
-        <span>{blog.title}</span>
-      </p>
       <header className="mb-hero">
+        <p className="mb-news">
+          {blog.eyebrow}
+          <span>{blog.title}</span>
+        </p>
         <h1 className="mb-title">{blog.title}</h1>
         <p className="mb-proof">{blog.lead}</p>
       </header>

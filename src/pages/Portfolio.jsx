@@ -21,11 +21,11 @@ export default function Portfolio() {
 
   return (
     <PageShell>
-      <p className="mb-news">
-        {portfolio.eyebrow}
-        <span>{portfolio.title}</span>
-      </p>
       <header className="mb-hero">
+        <p className="mb-news">
+          {portfolio.eyebrow}
+          <span>{portfolio.title}</span>
+        </p>
         <h1 className="mb-title">{portfolio.title}</h1>
         <p className="mb-proof">{portfolio.lead}</p>
       </header>

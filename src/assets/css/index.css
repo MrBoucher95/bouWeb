@@ -70,18 +70,6 @@ img {
   --nav-accent: var(--accent);
 }
 
-.app::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: var(--page-gutter);
-  width: 1px;
-  background: var(--line);
-  pointer-events: none;
-  z-index: 4;
-}
-
 .app[data-page='home'] {
   --accent: var(--tile-home-bg);
   --on-accent: var(--tile-home-fg);
@@ -604,12 +592,18 @@ h3 {
 
 .site-tools {
   position: fixed;
-  top: 16px;
-  right: calc(var(--button-closed) + 28px);
+  top: 12px;
+  right: 12px;
   z-index: 120;
   display: flex;
   gap: 0.5rem;
-  transition: opacity 0.25s ease;
+  transform: translateY(0);
+  transition: opacity 0.25s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.site-tools.nav-hide {
+  transform: translateY(calc(-100% - 20px));
+  pointer-events: none;
 }
 
 body.nav-open .site-tools {

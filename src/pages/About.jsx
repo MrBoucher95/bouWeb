@@ -7,11 +7,11 @@ export default function About() {
 
   return (
     <PageShell>
-      <p className="mb-news">
-        {about.eyebrow}
-        <span>{about.role}</span>
-      </p>
       <header className="mb-hero">
+        <p className="mb-news">
+          {about.eyebrow}
+          <span>{about.role}</span>
+        </p>
         <h1 className="mb-title">{about.name}</h1>
       </header>
       <div className="container pb-5">

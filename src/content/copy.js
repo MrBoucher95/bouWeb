@@ -137,11 +137,11 @@ export const copy = {
     home2: {
       badge: 'Proposition de design',
       kicker: 'Développeur & designer',
-      title: 'Le design.',
-      titleAccent: 'En mouvement.',
+      title: 'Web & apps.',
+      titleAccent: 'Design & print.',
       lead:
         'Du web et des apps à l’imprimé et au numérique — une pratique pour donner vie à vos projets et renforcer votre image.',
-      ctaPrimary: 'Essayer cette direction',
+      ctaPrimary: 'Voir les services',
       ctaSecondary: 'Me contacter',
       proof: 'Plus de 8 ans d’expérience — 25 entreprises accompagnées.',
       galleryEyebrow: 'Travail récent',
@@ -836,11 +836,11 @@ export const copy = {
     home2: {
       badge: 'Design proposal',
       kicker: 'Developer & designer',
-      title: 'Design.',
-      titleAccent: 'In motion.',
+      title: 'Web & apps.',
+      titleAccent: 'Design & print.',
       lead:
         'From web and apps to print and digital — one practice to bring your projects to life and strengthen your brand.',
-      ctaPrimary: 'Try this direction',
+      ctaPrimary: 'See services',
       ctaSecondary: 'Contact me',
       proof: '8 years of experience — 25 companies shipped with.',
       galleryEyebrow: 'Recent work',

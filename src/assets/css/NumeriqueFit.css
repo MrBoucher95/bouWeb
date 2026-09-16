@@ -69,26 +69,26 @@
 
 .mb-fit .sv-hi--media .sv-hi-stage,
 .mb-fit .sv-hi--media .sv-hi-stage-inner {
-  height: 20rem;
-  min-height: 20rem;
+  height: 26rem;
+  min-height: 26rem;
 }
 
 .mb-fit .sv-hi--media .sv-hi-stage {
-  margin-top: 0;
-  margin-bottom: 0.25rem;
+  margin-top: 0.4rem;
+  margin-bottom: 0.75rem;
 }
 
 .mb-fit .sv-hi--media .sv-hi-shot-video {
-  max-width: min(460px, 50vw);
+  max-width: min(520px, 54vw);
 }
 
 .mb-fit .sv-hi--media .sv-hi-shot-a,
 .mb-fit .sv-hi--media .sv-hi-shot-b {
-  max-width: 140px;
+  max-width: 160px;
 }
 
 .mb-fit .sv-hi--media .sv-hi-shot-c {
-  max-width: 210px;
+  max-width: 240px;
 }
 
 .mb-fit .sv-index,

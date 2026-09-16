@@ -28,11 +28,11 @@ export default function Contact() {
 
   return (
     <PageShell>
-      <p className="mb-news">
-        {contact.eyebrow}
-        <span>{t.nav.contact}</span>
-      </p>
       <header className="mb-hero">
+        <p className="mb-news">
+          {contact.eyebrow}
+          <span>{t.nav.contact}</span>
+        </p>
         <h1 className="mb-title">{contact.title}</h1>
       </header>
       <div className="container pb-5">

@@ -54,8 +54,9 @@ body.mb-on .brand-nav:not(.open) .nav-brand {
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.55rem;
-  margin: 0;
-  padding: 5.6rem 1.25rem 0;
+  width: 100%;
+  margin: 0 0 1rem;
+  padding: 0;
   color: var(--mb-muted);
   font-size: 0.82rem;
   line-height: 1.4;
@@ -70,7 +71,16 @@ body.mb-on .brand-nav:not(.open) .nav-brand {
   display: grid;
   justify-items: center;
   text-align: center;
-  padding: 4.5rem 1.25rem 2.8rem;
+  padding: 5.6rem 1.25rem 2.8rem;
+}
+
+.mb-hero .mb-news {
+  margin-bottom: 1rem;
+}
+
+.blog-article-head .mb-news {
+  justify-content: flex-start;
+  margin-bottom: 0.75rem;
 }
 
 .mb-title {
@@ -667,7 +677,7 @@ body.mb-on .brand-nav:not(.open) .nav-brand {
   }
 
   .mb-hero {
-    padding-top: 3.4rem;
+    padding-top: 4.4rem;
   }
 
   .mb-foot-cols {

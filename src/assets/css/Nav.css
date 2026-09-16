@@ -228,30 +228,50 @@ html[data-theme='light'] .brand-nav.open .nav-wrapper:not(.nav-wrapper-gridlines
   border-bottom-right-radius: var(--radius);
 }
 
-.brand-nav .menu {
+.brand-nav > .menu {
   position: fixed;
   z-index: 101;
   width: var(--button-size);
   height: var(--button-size);
   left: auto;
-  right: var(--nav-btn-inset);
+  right: max(0.75rem, calc((100vw - min(1180px, 100vw)) / 2 + var(--nav-btn-inset)));
   top: var(--nav-btn-inset);
   bottom: auto;
   display: flex;
   pointer-events: auto;
+  transition: transform 0.5s var(--nav-easing-swoop) 0.05s, opacity 0.7s cubic-bezier(0.4, 0, 0.1, 1);
 }
 
-.brand-nav.open .menu {
+.brand-nav.nav-hide:not(.open):not(.close) > .menu {
+  transform: translateY(calc(-100% - 24px));
+  pointer-events: none;
+}
+
+.brand-nav .nav-wrapper-gridlines .menu {
+  position: fixed;
+  z-index: 101;
+  width: var(--button-size);
+  height: var(--button-size);
+  left: auto;
+  right: max(0.75rem, calc((100vw - min(1180px, 100vw)) / 2 + var(--nav-btn-inset)));
+  top: var(--nav-btn-inset);
+  bottom: auto;
+  display: flex;
+  pointer-events: none;
+}
+
+.brand-nav.open > .menu,
+.brand-nav.open .nav-wrapper-gridlines .menu {
   transform: translate(
-    calc(-50vw + var(--button-size) / 2 + var(--nav-btn-inset)),
+    calc(-50vw + var(--button-size) / 2 + max(0.75rem, calc((100vw - min(1180px, 100vw)) / 2 + var(--nav-btn-inset)))),
     calc(50vh - var(--button-size) / 2 - var(--nav-btn-inset))
   );
   transition: transform 0.5s var(--nav-easing-swoop), opacity 0.7s cubic-bezier(0.4, 0, 0.1, 1);
 }
 
-.brand-nav:not(.open) .menu {
+.brand-nav:not(.open) > .menu,
+.brand-nav:not(.open) .nav-wrapper-gridlines .menu {
   transform: none;
-  transition: transform 0.5s var(--nav-easing-swoop) 0.05s, opacity 0.7s cubic-bezier(0.4, 0, 0.1, 1);
 }
 
 .brand-nav .nav-button {
@@ -275,6 +295,14 @@ html[data-theme='light'] .brand-nav.open .nav-wrapper:not(.nav-wrapper-gridlines
 
 .brand-nav.open:not(.warp) .nav-button {
   transform: scale(1);
+}
+
+.brand-nav.warp.open > .menu,
+.brand-nav.warp.open .nav-wrapper-gridlines .menu {
+  transform: translate(
+    calc(-50vw + var(--button-size) / 2 + max(0.75rem, calc((100vw - min(1180px, 100vw)) / 2 + var(--nav-btn-inset)))),
+    calc(50vh - var(--button-size) / 2 - var(--nav-btn-inset))
+  );
 }
 
 .brand-nav.warp.open .nav-button {
@@ -402,11 +430,25 @@ html[data-theme='light'] .brand-nav.open .nav-wrapper:not(.nav-wrapper-gridlines
   top: 0;
   left: 0;
   right: 0;
+  pointer-events: none;
+  transition: transform 0.35s var(--nav-easing-swoop, cubic-bezier(0.22, 1, 0.36, 1));
+}
+
+.brand-nav.nav-hide:not(.open):not(.close) .nav-bar {
+  transform: translateY(-110%);
+}
+
+.brand-nav .nav-bar-inner {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   height: 72px;
-  padding: 0 1.15rem;
-  pointer-events: none;
+}
+
+.brand-nav .nav-bar-spacer {
+  flex: none;
+  width: var(--button-closed);
+  height: var(--button-closed);
 }
 
 .brand-nav .nav-brand {
@@ -435,7 +477,8 @@ html[data-theme='light'] .brand-nav.open .nav-brand {
   color: var(--fg);
 }
 
-.brand-nav.close .menu {
+.brand-nav.close > .menu,
+.brand-nav.close .nav-wrapper-gridlines .menu {
   z-index: 100;
   transform: none !important;
   transition: transform 0.5s var(--nav-easing-swoop) 0.05s !important;
@@ -483,9 +526,8 @@ html[data-theme='light'] .brand-nav.open .nav-brand {
 }
 
 @media (max-width: 991px) {
-  .brand-nav .nav-bar {
+  .brand-nav .nav-bar-inner {
     height: 64px;
-    padding: 0 0.9rem;
   }
 
   .brand-nav .nav-brand {
@@ -493,7 +535,7 @@ html[data-theme='light'] .brand-nav.open .nav-brand {
     height: 26px;
   }
 
-  .brand-nav.close .menu {
+  .brand-nav.close > .menu {
     transform: none !important;
   }
 

@@ -25,12 +25,8 @@ export default function Home() {
 
   return (
     <PageShell>
-      <p className="mb-news">
-        {home2.badge}
-        <span>{home2.kicker}</span>
-      </p>
-
       <header className="mb-hero">
+        <p className="mb-news">{home2.kicker}</p>
         <h1 className="mb-title">
           {home2.title}
           <span>{home2.titleAccent}</span>

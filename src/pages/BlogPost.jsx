@@ -39,10 +39,6 @@ export default function BlogPost() {
   return (
     <PageShell>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <p className="mb-news">
-        {blog.eyebrow}
-        <span>{post.title}</span>
-      </p>
 
       <div className="container pb-5">
         <article className="blog-article">
@@ -57,6 +53,10 @@ export default function BlogPost() {
           </figure>
 
           <header className="blog-article-head">
+            <p className="mb-news">
+              {blog.eyebrow}
+              <span>{post.title}</span>
+            </p>
             <p className="blog-meta">
               <time dateTime={post.date}>{formatDate(post.date, lang)}</time>
               <span aria-hidden="true"> · </span>

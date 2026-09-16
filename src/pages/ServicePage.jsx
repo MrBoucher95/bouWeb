@@ -28,11 +28,11 @@ export default function ServicePage() {
 
   return (
     <PageShell className="mb-fit mb-fit-2">
-      <p className="mb-news">
-        {t.nav.services}
-        <span>{data.title}</span>
-      </p>
       <header className="mb-hero">
+        <p className="mb-news">
+          {t.nav.services}
+          <span>{data.title}</span>
+        </p>
         <h1 className="mb-title">
           {data.title}.
           <span>{data.titleAccent}</span>

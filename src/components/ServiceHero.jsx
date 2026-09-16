@@ -31,33 +31,33 @@ function mediaValues() {
   const width = window.innerWidth
   if (width <= 480) {
     return {
-      video: { xFrom: 0, xTo: 0, yFrom: 48, yTo: 0, scaleFrom: 0.9, scaleTo: 1.08 },
-      a: { xFrom: -72, xTo: 0, yFrom: -40, yTo: 0, scaleFrom: 0.82, scaleTo: 1.06 },
-      b: { xFrom: -56, xTo: 0, yFrom: 28, yTo: 0, scaleFrom: 0.84, scaleTo: 1.06 },
-      c: { xFrom: 72, xTo: 0, yFrom: 28, yTo: 0, scaleFrom: 0.8, scaleTo: 1.08 },
+      video: { xFrom: 0, xTo: 0, yFrom: 96, yTo: -12, scaleFrom: 0.76, scaleTo: 1.2 },
+      a: { xFrom: -140, xTo: 12, yFrom: -80, yTo: 8, scaleFrom: 0.64, scaleTo: 1.18 },
+      b: { xFrom: -110, xTo: 8, yFrom: 64, yTo: -8, scaleFrom: 0.66, scaleTo: 1.18 },
+      c: { xFrom: 140, xTo: -12, yFrom: 64, yTo: -8, scaleFrom: 0.62, scaleTo: 1.2 },
     }
   }
   if (width <= 768) {
     return {
-      video: { xFrom: 0, xTo: 0, yFrom: 72, yTo: 0, scaleFrom: 0.88, scaleTo: 1.1 },
-      a: { xFrom: -110, xTo: 0, yFrom: -56, yTo: 0, scaleFrom: 0.8, scaleTo: 1.08 },
-      b: { xFrom: -88, xTo: 0, yFrom: 36, yTo: 0, scaleFrom: 0.82, scaleTo: 1.08 },
-      c: { xFrom: 120, xTo: 0, yFrom: 40, yTo: 0, scaleFrom: 0.78, scaleTo: 1.1 },
+      video: { xFrom: 0, xTo: 0, yFrom: 140, yTo: -16, scaleFrom: 0.72, scaleTo: 1.26 },
+      a: { xFrom: -200, xTo: 18, yFrom: -110, yTo: 12, scaleFrom: 0.6, scaleTo: 1.22 },
+      b: { xFrom: -160, xTo: 14, yFrom: 80, yTo: -12, scaleFrom: 0.62, scaleTo: 1.22 },
+      c: { xFrom: 210, xTo: -18, yFrom: 88, yTo: -12, scaleFrom: 0.58, scaleTo: 1.24 },
     }
   }
   if (width <= 1440) {
     return {
-      video: { xFrom: 0, xTo: 0, yFrom: 72, yTo: 0, scaleFrom: 0.92, scaleTo: 1.1 },
-      a: { xFrom: -160, xTo: 0, yFrom: -80, yTo: 0, scaleFrom: 0.78, scaleTo: 1.08 },
-      b: { xFrom: -130, xTo: 0, yFrom: 40, yTo: 0, scaleFrom: 0.8, scaleTo: 1.08 },
-      c: { xFrom: 180, xTo: 0, yFrom: 50, yTo: 0, scaleFrom: 0.76, scaleTo: 1.1 },
+      video: { xFrom: 0, xTo: 0, yFrom: 160, yTo: -20, scaleFrom: 0.76, scaleTo: 1.28 },
+      a: { xFrom: -280, xTo: 24, yFrom: -150, yTo: 16, scaleFrom: 0.56, scaleTo: 1.24 },
+      b: { xFrom: -230, xTo: 20, yFrom: 90, yTo: -16, scaleFrom: 0.58, scaleTo: 1.24 },
+      c: { xFrom: 300, xTo: -24, yFrom: 100, yTo: -16, scaleFrom: 0.54, scaleTo: 1.26 },
     }
   }
   return {
-    video: { xFrom: 0, xTo: 0, yFrom: 110, yTo: 0, scaleFrom: 0.9, scaleTo: 1.14 },
-    a: { xFrom: -160, xTo: 0, yFrom: -80, yTo: 0, scaleFrom: 0.78, scaleTo: 1.1 },
-    b: { xFrom: -130, xTo: 0, yFrom: 40, yTo: 0, scaleFrom: 0.8, scaleTo: 1.1 },
-    c: { xFrom: 180, xTo: 0, yFrom: 50, yTo: 0, scaleFrom: 0.76, scaleTo: 1.12 },
+    video: { xFrom: 0, xTo: 0, yFrom: 200, yTo: -24, scaleFrom: 0.74, scaleTo: 1.32 },
+    a: { xFrom: -320, xTo: 28, yFrom: -170, yTo: 20, scaleFrom: 0.52, scaleTo: 1.26 },
+    b: { xFrom: -260, xTo: 24, yFrom: 100, yTo: -20, scaleFrom: 0.54, scaleTo: 1.26 },
+    c: { xFrom: 340, xTo: -28, yFrom: 110, yTo: -20, scaleFrom: 0.5, scaleTo: 1.28 },
   }
 }
 

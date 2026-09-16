@@ -7,11 +7,11 @@ export default function NotFound() {
 
   return (
     <PageShell>
-      <p className="mb-news">
-        {t.notFound.code}
-        <span>{t.nav.home}</span>
-      </p>
       <header className="mb-hero">
+        <p className="mb-news">
+          {t.notFound.code}
+          <span>{t.nav.home}</span>
+        </p>
         <h1 className="mb-title">{t.notFound.title}</h1>
         <p className="mb-proof">{t.notFound.text}</p>
         <div className="mb-actions">
