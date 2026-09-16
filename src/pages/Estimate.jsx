@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
+import PageShell from '../components/PageShell'
 import { estimatorConfig } from '../content/copy'
 import { useLanguage } from '../context/LanguageContext'
 
@@ -75,15 +76,18 @@ export default function Estimate() {
   }
 
   return (
-    <main className="page" style={{ paddingTop: '7rem' }}>
-      <div className="page-inner">
-        <p className="tag eyebrow">{t.nav.estimate}</p>
-        <h1>{t.estimate.title}</h1>
-        <p className="lead" style={{ marginTop: '1rem' }}>
-          {t.estimate.lead}
-        </p>
+    <PageShell>
+      <p className="mb-news">
+        {t.nav.estimate}
+        <span>{t.estimate.title}</span>
+      </p>
+      <header className="mb-hero">
+        <h1 className="mb-title">{t.estimate.title}</h1>
+        <p className="mb-proof">{t.estimate.lead}</p>
+      </header>
 
-        <div className="estimator section">
+      <div className="container pb-5">
+        <div className="estimator">
           {!service ? (
             <>
               <h2>{t.estimate.which}</h2>
@@ -106,7 +110,7 @@ export default function Estimate() {
               <p className="eyebrow">{t.estimate.yours}</p>
               <p className="total">{money(total, lang)}</p>
               <p className="lead">{t.estimate.disclaimer}</p>
-              <div className="btn-row" style={{ marginTop: '1.6rem' }}>
+              <div className="btn-row mt-4">
                 <Link className="btn btn-fill" to="/contact">
                   {t.estimate.discuss}
                 </Link>
@@ -163,6 +167,6 @@ export default function Estimate() {
           )}
         </div>
       </div>
-    </main>
+    </PageShell>
   )
 }

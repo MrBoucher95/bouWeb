@@ -198,7 +198,15 @@ function HeroAction({ action }) {
   )
 }
 
-export default function ServiceHero({ title, subtitle, intro, actions = [], banner, mediaOnly = false }) {
+export default function ServiceHero({
+  title,
+  subtitle,
+  intro,
+  actions = [],
+  banner,
+  mediaOnly = false,
+  showBanner = true,
+}) {
   const curveId = `svHiCurve${useId().replace(/:/g, '')}`
   const pathRef = useRef(null)
   const mediaRefs = useRef([])
@@ -228,19 +236,21 @@ export default function ServiceHero({ title, subtitle, intro, actions = [], bann
         </div>
       )}
 
-      <div className="sv-hi-banner" aria-hidden="true">
-        <svg className="sv-hi-svg" viewBox="0 0 1600 500" preserveAspectRatio="xMidYMid meet">
-          <defs>
-            <path id={curveId} d="M -360,330 C 406,65 1194,595 1960,330" />
-          </defs>
-          <use href={`#${curveId}`} className="sv-hi-ribbon" />
-          <text className="sv-hi-banner-text">
-            <textPath ref={pathRef} className="sv-hi-textpath" href={`#${curveId}`} startOffset="0">
-              {bannerText}
-            </textPath>
-          </text>
-        </svg>
-      </div>
+      {showBanner ? (
+        <div className="sv-hi-banner" aria-hidden="true">
+          <svg className="sv-hi-svg" viewBox="0 0 1600 500" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <path id={curveId} d="M -360,330 C 406,65 1194,595 1960,330" />
+            </defs>
+            <use href={`#${curveId}`} className="sv-hi-ribbon" />
+            <text className="sv-hi-banner-text">
+              <textPath ref={pathRef} className="sv-hi-textpath" href={`#${curveId}`} startOffset="0">
+                {bannerText}
+              </textPath>
+            </text>
+          </svg>
+        </div>
+      ) : null}
 
       {mediaOnly ? (
         <div className="sv-hi-stage">

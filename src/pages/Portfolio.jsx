@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import PageShell from '../components/PageShell'
 import ProjectGrid from '../components/ProjectGrid'
 import { useLanguage } from '../context/LanguageContext'
 import '../assets/css/Portfolio.css'
@@ -19,13 +20,18 @@ export default function Portfolio() {
   }, [portfolio.metaTitle, portfolio.metaDescription, t.meta.title, t.meta.description])
 
   return (
-    <main className="page" style={{ paddingTop: '7rem' }}>
-      <div className="page-inner">
-        <p className="tag eyebrow">{portfolio.eyebrow}</p>
-        <h1>{portfolio.title}</h1>
-        <p className="lead portfolio-lead">{portfolio.lead}</p>
+    <PageShell>
+      <p className="mb-news">
+        {portfolio.eyebrow}
+        <span>{portfolio.title}</span>
+      </p>
+      <header className="mb-hero">
+        <h1 className="mb-title">{portfolio.title}</h1>
+        <p className="mb-proof">{portfolio.lead}</p>
+      </header>
 
-        <section className="section folio-section">
+      <div className="container pb-5">
+        <section className="folio-section">
           <ProjectGrid projects={home.projects} />
         </section>
 
@@ -39,6 +45,6 @@ export default function Portfolio() {
           </div>
         </section>
       </div>
-    </main>
+    </PageShell>
   )
 }

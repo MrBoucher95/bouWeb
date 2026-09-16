@@ -2,14 +2,7 @@
   overflow-x: clip;
 }
 
-.sv-page .page {
-  padding-top: 4rem;
-}
-
 .sv-split {
-  display: grid;
-  grid-template-columns: 0.9fr 1.4fr;
-  gap: 1.5rem 2.5rem;
   align-items: start;
 }
 
@@ -146,10 +139,6 @@
 }
 
 @media (max-width: 991px) {
-  .sv-split {
-    grid-template-columns: 1fr;
-  }
-
   .sv-nav {
     position: static;
   }

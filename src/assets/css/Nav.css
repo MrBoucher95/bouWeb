@@ -1,5 +1,6 @@
 .brand-nav {
   --highest-tile-yeet: calc((max(100vw, 100vh) - var(--button)) / -4);
+  --nav-btn-inset: calc(16px - (var(--button-size) - var(--button-closed)) / 2);
 }
 
 @media (max-width: 991px) {
@@ -232,19 +233,24 @@ html[data-theme='light'] .brand-nav.open .nav-wrapper:not(.nav-wrapper-gridlines
   z-index: 101;
   width: var(--button-size);
   height: var(--button-size);
-  left: calc(var(--button-size) / -6);
-  bottom: 50%;
+  left: auto;
+  right: var(--nav-btn-inset);
+  top: var(--nav-btn-inset);
+  bottom: auto;
   display: flex;
   pointer-events: auto;
 }
 
 .brand-nav.open .menu {
-  transform: translate(calc(50vw - var(--button-size) / 3), 50%);
+  transform: translate(
+    calc(-50vw + var(--button-size) / 2 + var(--nav-btn-inset)),
+    calc(50vh - var(--button-size) / 2 - var(--nav-btn-inset))
+  );
   transition: transform 0.5s var(--nav-easing-swoop), opacity 0.7s cubic-bezier(0.4, 0, 0.1, 1);
 }
 
 .brand-nav:not(.open) .menu {
-  transform: translate(0, 50%);
+  transform: none;
   transition: transform 0.5s var(--nav-easing-swoop) 0.05s, opacity 0.7s cubic-bezier(0.4, 0, 0.1, 1);
 }
 
@@ -390,17 +396,28 @@ html[data-theme='light'] .brand-nav.open .nav-wrapper:not(.nav-wrapper-gridlines
   bottom: 0;
 }
 
-.brand-nav .nav-brand {
+.brand-nav .nav-bar {
   position: fixed;
   z-index: 99;
-  top: 16px;
-  left: 16px;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  height: 72px;
+  padding: 0 1.15rem;
+  pointer-events: none;
+}
+
+.brand-nav .nav-brand {
+  position: relative;
+  z-index: 99;
   display: grid;
   place-items: center;
-  width: 42px;
-  height: 26px;
-  margin-bottom: 2rem;
+  width: 52px;
+  height: 32px;
   color: var(--fg);
+  pointer-events: auto;
 }
 
 .brand-nav .nav-brand svg {
@@ -410,25 +427,17 @@ html[data-theme='light'] .brand-nav.open .nav-wrapper:not(.nav-wrapper-gridlines
   fill: currentColor;
 }
 
-.brand-nav .nav-page-title {
-  position: fixed;
-  z-index: 99;
-  top: 52px;
-  left: 20px;
+.brand-nav.open .nav-brand {
   color: var(--white);
-  mix-blend-mode: difference;
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  font-family: var(--display);
-  font-weight: var(--fw-display);
-  font-size: 15px;
-  letter-spacing: 0.02em;
-  pointer-events: none;
+}
+
+html[data-theme='light'] .brand-nav.open .nav-brand {
+  color: var(--fg);
 }
 
 .brand-nav.close .menu {
   z-index: 100;
-  transform: translate(0, 50%) !important;
+  transform: none !important;
   transition: transform 0.5s var(--nav-easing-swoop) 0.05s !important;
 }
 
@@ -474,30 +483,18 @@ html[data-theme='light'] .brand-nav.open .nav-wrapper:not(.nav-wrapper-gridlines
 }
 
 @media (max-width: 991px) {
-  .brand-nav .menu {
-    left: 50%;
-    bottom: calc(var(--button-size) / -8);
+  .brand-nav .nav-bar {
+    height: 64px;
+    padding: 0 0.9rem;
   }
 
-  .brand-nav.open .menu {
-    transform: translate(-50%, calc(-50dvh - var(--button-size) * 3 / -8));
+  .brand-nav .nav-brand {
+    width: 44px;
+    height: 26px;
   }
 
-  .brand-nav:not(.open) .menu {
-    transform: translate(-50%, 0);
-  }
-
-  .brand-nav:not(.open) .nav-button,
-  .brand-nav.warp:not(.open) .nav-button {
-    transform: scale(0.75);
-    animation: none;
-    transition: transform 0.3s var(--nav-easing);
-  }
-
-  .brand-nav.warp.open .nav-button {
-    animation: none;
-    transform: scale(1);
-    transition: transform 0.5s var(--nav-easing-swoop) 0.1s;
+  .brand-nav.close .menu {
+    transform: none !important;
   }
 
   .brand-nav .nav-tile-1 {
@@ -587,27 +584,8 @@ html[data-theme='light'] .brand-nav.open .nav-wrapper:not(.nav-wrapper-gridlines
     transform: scale(2) translate(calc(var(--highest-tile-yeet) * -2), calc(var(--highest-tile-yeet) * -3));
   }
 
-  .brand-nav.close .menu {
-    transform: translate(-50%, 0) !important;
-  }
-
-  .brand-nav.close .nav-button {
-    transform: scale(0.75);
-  }
-
   .brand-nav.close .nav-tile.enlarge .tile-title {
     transform: translateY(-50%) scale(2.5);
-  }
-
-  .brand-nav .nav-page-title {
-    display: none;
-  }
-
-  .brand-nav .nav-brand {
-    top: 14px;
-    left: 14px;
-    width: 36px;
-    height: 22px;
   }
 
   .brand-nav .nav-button-svg {

@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import PageShell from '../components/PageShell'
 import { blogPosts } from '../content/blog'
 import { useLanguage } from '../context/LanguageContext'
 import '../assets/css/Blog.css'
@@ -28,13 +29,18 @@ export default function Blog() {
   }, [blog.metaTitle, blog.metaDescription, t.meta.title, t.meta.description])
 
   return (
-    <main className="page" style={{ paddingTop: '7rem' }}>
-      <div className="page-inner">
-        <p className="tag eyebrow">{blog.eyebrow}</p>
-        <h1>{blog.title}</h1>
-        <p className="lead blog-lead">{blog.lead}</p>
+    <PageShell>
+      <p className="mb-news">
+        {blog.eyebrow}
+        <span>{blog.title}</span>
+      </p>
+      <header className="mb-hero">
+        <h1 className="mb-title">{blog.title}</h1>
+        <p className="mb-proof">{blog.lead}</p>
+      </header>
 
-        <section className="section blog-index">
+      <div className="container pb-5">
+        <section className="blog-index">
           <ul className="blog-list">
             {posts.map((post) => (
               <li key={post.slug}>
@@ -64,6 +70,6 @@ export default function Blog() {
           </ul>
         </section>
       </div>
-    </main>
+    </PageShell>
   )
 }

@@ -1,7 +1,6 @@
 import { useLayoutEffect } from 'react'
-import { Route, Routes, useLocation } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import Cursor from './components/Cursor'
-import Footer from './components/Footer'
 import Nav from './components/Nav'
 import About from './pages/About'
 import Blog from './pages/Blog'
@@ -9,7 +8,6 @@ import BlogPost from './pages/BlogPost'
 import Contact from './pages/Contact'
 import Estimate from './pages/Estimate'
 import Home from './pages/Home'
-import Home2 from './pages/Home2'
 import Logo from './pages/Logo'
 import NotFound from './pages/NotFound'
 import Portfolio from './pages/Portfolio'
@@ -55,7 +53,10 @@ export default function App() {
       <Nav />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/accueil-2" element={<Home2 />} />
+        <Route path="/oldHome" element={<Navigate to="/" replace />} />
+        <Route path="/accueil-2" element={<Navigate to="/" replace />} />
+        <Route path="/preview/numerique/:variant" element={<Navigate to="/services/numerique" replace />} />
+        <Route path="/preview/numerique" element={<Navigate to="/services/numerique" replace />} />
         <Route path="/a-propos" element={<About />} />
         <Route path="/services/:slug" element={<ServicePage />} />
         <Route path="/estimation" element={<Estimate />} />
@@ -66,7 +67,6 @@ export default function App() {
         <Route path="/logo" element={<Logo />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      {pathname !== '/accueil-2' && <Footer />}
     </div>
   )
 }

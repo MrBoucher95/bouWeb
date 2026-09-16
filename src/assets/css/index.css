@@ -142,21 +142,6 @@ img {
   --on-accent: var(--tile-web-fg);
 }
 
-.page {
-  position: relative;
-  z-index: 2;
-  padding: 0 0 8rem var(--page-gutter);
-  background: var(--bg);
-}
-
-.page-inner {
-  position: relative;
-  width: 100%;
-  max-width: none;
-  margin: 0;
-  padding-inline: var(--page-rule);
-}
-
 .eyebrow,
 .mono {
   font-family: var(--mono);
@@ -608,12 +593,6 @@ h3 {
   margin: 0.4rem 0 1rem;
 }
 
-.contact-grid {
-  display: grid;
-  grid-template-columns: 0.8fr 1.2fr;
-  gap: 2rem;
-}
-
 .info-card {
   min-height: auto;
   gap: 1.4rem;
@@ -623,79 +602,19 @@ h3 {
   color: var(--gold);
 }
 
-.site-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 1rem calc(var(--page-gutter) + var(--page-rule)) 1.25rem calc(var(--page-gutter) + var(--page-rule));
-  color: var(--muted);
-  border-top: 1px solid var(--line);
-  font-size: 0.8rem;
-}
-
-.site-footer p {
-  margin: 0;
-}
-
-.footer-copy {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.85rem 1.25rem;
-}
-
-.footer-copy a {
-  color: var(--fg);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-size: var(--fs-ui);
-  font-weight: 500;
-}
-
-.footer-copy a:hover {
-  color: var(--accent);
-}
-
-.footer-socials {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 0.35rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.footer-socials a {
-  display: grid;
-  place-items: center;
-  width: 36px;
-  height: 36px;
-  color: var(--muted);
-  border-radius: 50%;
-  transition: color 0.25s var(--ease), background-color 0.25s var(--ease);
-}
-
-.footer-socials svg {
-  width: 16px;
-  height: 16px;
-  fill: currentColor;
-}
-
-.footer-socials a:hover {
-  color: var(--fg);
-  background: color-mix(in srgb, var(--fg) 8%, transparent);
-}
-
 .site-tools {
   position: fixed;
-  top: 18px;
-  right: 18px;
+  top: 16px;
+  right: calc(var(--button-closed) + 28px);
   z-index: 120;
   display: flex;
   gap: 0.5rem;
+  transition: opacity 0.25s ease;
+}
+
+body.nav-open .site-tools {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .lang-switch,
@@ -750,22 +669,13 @@ h3 {
 }
 
 @media (max-width: 991px) {
-  .page {
-    padding: 0 0 7rem var(--page-pad);
-  }
-
-  .site-footer {
-    padding-bottom: 5rem;
-  }
-
   .hero {
     padding: 7rem var(--page-pad) 4rem;
   }
 
   .service-grid,
   .quote-grid,
-  .group-grid,
-  .contact-grid {
+  .group-grid {
     grid-template-columns: 1fr;
   }
 

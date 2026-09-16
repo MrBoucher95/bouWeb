@@ -1,3 +1,4 @@
+import PageShell from '../components/PageShell'
 import { useLanguage } from '../context/LanguageContext'
 
 export default function About() {
@@ -5,20 +6,24 @@ export default function About() {
   const { about } = t
 
   return (
-    <main className="page" style={{ paddingTop: '7rem' }}>
-      <div className="page-inner">
-        <p className="tag eyebrow">{about.eyebrow}</p>
-        <p className="hero-kicker">{about.role}</p>
-        <h1>{about.name}</h1>
-        <section className="section">
+    <PageShell>
+      <p className="mb-news">
+        {about.eyebrow}
+        <span>{about.role}</span>
+      </p>
+      <header className="mb-hero">
+        <h1 className="mb-title">{about.name}</h1>
+      </header>
+      <div className="container pb-5">
+        <section className="mb-content">
           <h2>{about.title}</h2>
-          <p className="about-values">{about.values}</p>
-          <div className="about-copy">
+          <p className="mb-proof about-values">{about.values}</p>
+          <div className="about-copy mb-copy">
             <p>{about.p1}</p>
             <p>{about.p2}</p>
           </div>
         </section>
       </div>
-    </main>
+    </PageShell>
   )
 }

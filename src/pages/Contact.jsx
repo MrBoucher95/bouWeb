@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import PageShell from '../components/PageShell'
 import { useLanguage } from '../context/LanguageContext'
 
 const fields = ['name', 'email', 'subject', 'message']
@@ -26,13 +27,17 @@ export default function Contact() {
   }
 
   return (
-    <main className="page" style={{ paddingTop: '7rem' }}>
-      <div className="page-inner">
-        <p className="tag eyebrow">{contact.eyebrow}</p>
-        <h1>{contact.title}</h1>
-
-        <div className="contact-grid section">
-          <aside className="info-card">
+    <PageShell>
+      <p className="mb-news">
+        {contact.eyebrow}
+        <span>{t.nav.contact}</span>
+      </p>
+      <header className="mb-hero">
+        <h1 className="mb-title">{contact.title}</h1>
+      </header>
+      <div className="container pb-5">
+        <div className="row g-4 contact-grid">
+          <aside className="info-card col-md-5">
             <div>
               <p className="eyebrow">{contact.addressLabel}</p>
               <p>{contact.address}</p>
@@ -48,7 +53,7 @@ export default function Contact() {
             </div>
           </aside>
 
-          <form className="form" onSubmit={submit}>
+          <form className="form col-md-7" onSubmit={submit}>
             <p className="step-label eyebrow">
               {t.estimate.step} {step + 1} / {fields.length}
             </p>
@@ -90,6 +95,6 @@ export default function Contact() {
           </form>
         </div>
       </div>
-    </main>
+    </PageShell>
   )
 }

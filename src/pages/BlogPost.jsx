@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
+import PageShell from '../components/PageShell'
 import { blogJsonLd, blogNeighbors, blogPost } from '../content/blog'
 import { useLanguage } from '../context/LanguageContext'
 import '../assets/css/Blog.css'
@@ -36,11 +37,14 @@ export default function BlogPost() {
   const jsonLd = blogJsonLd(post, lang)
 
   return (
-    <main className="page" style={{ paddingTop: '7rem' }}>
+    <PageShell>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <div className="page-inner">
-        <p className="tag eyebrow">{blog.eyebrow}</p>
+      <p className="mb-news">
+        {blog.eyebrow}
+        <span>{post.title}</span>
+      </p>
 
+      <div className="container pb-5">
         <article className="blog-article">
           <figure className="blog-cover">
             {post.image ? (
@@ -127,6 +131,6 @@ export default function BlogPost() {
           </div>
         </section>
       </div>
-    </main>
+    </PageShell>
   )
 }

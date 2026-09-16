@@ -4,7 +4,10 @@ import { BrowserRouter } from 'react-router-dom'
 import App from './App.jsx'
 import { LanguageProvider } from './context/LanguageContext.jsx'
 import { ThemeProvider } from './context/ThemeContext.jsx'
+import 'bootstrap/dist/css/bootstrap-grid.min.css'
+import 'bootstrap/dist/css/bootstrap-utilities.min.css'
 import './assets/css/variables.css'
+import './assets/css/bootstrap-bridge.css'
 import './assets/css/index.css'
 
 createRoot(document.getElementById('root')).render(

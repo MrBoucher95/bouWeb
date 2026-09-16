@@ -1,0 +1,243 @@
+.mb-fit-switch {
+  position: sticky;
+  top: 0;
+  z-index: 8;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  padding: 0.7rem 1.25rem;
+  background: color-mix(in srgb, var(--mb-bg) 88%, transparent);
+  border-bottom: 1px solid var(--mb-line);
+  backdrop-filter: blur(10px);
+}
+
+.mb-fit-switch a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 0.85rem;
+  border: 1px solid var(--mb-line);
+  border-radius: 999px;
+  color: var(--mb-muted);
+  font-size: 0.82rem;
+}
+
+.mb-fit-switch a.is-on,
+.mb-fit-switch a:hover {
+  color: var(--mb-btn-fg);
+  background: var(--mb-btn);
+  border-color: var(--mb-btn);
+}
+
+.mb-fit .sv-hi h1 {
+  font-weight: 800;
+  letter-spacing: -0.055em;
+  color: var(--mb-fg);
+}
+
+.mb-fit .sv-hi-sub {
+  color: var(--mb-muted);
+}
+
+.mb-fit .sv-hi-lead {
+  color: var(--mb-muted);
+}
+
+.mb-fit .sv-hi .btn,
+.mb-fit .sv-hi .btn-fill {
+  min-height: 44px;
+  border-radius: 999px;
+  font-family: var(--sans);
+  font-weight: 500;
+}
+
+.mb-fit .sv-hi .btn {
+  border-color: var(--mb-line);
+  color: var(--mb-fg);
+  background: transparent;
+}
+
+.mb-fit .sv-hi .btn-fill {
+  background: var(--mb-btn);
+  border-color: var(--mb-btn);
+  color: var(--mb-btn-fg);
+}
+
+.mb-fit .mb-hero {
+  padding-bottom: 0.6rem;
+}
+
+.mb-fit .sv-hi--media .sv-hi-stage,
+.mb-fit .sv-hi--media .sv-hi-stage-inner {
+  height: 20rem;
+  min-height: 20rem;
+}
+
+.mb-fit .sv-hi--media .sv-hi-stage {
+  margin-top: 0;
+  margin-bottom: 0.25rem;
+}
+
+.mb-fit .sv-hi--media .sv-hi-shot-video {
+  max-width: min(460px, 50vw);
+}
+
+.mb-fit .sv-hi--media .sv-hi-shot-a,
+.mb-fit .sv-hi--media .sv-hi-shot-b {
+  max-width: 140px;
+}
+
+.mb-fit .sv-hi--media .sv-hi-shot-c {
+  max-width: 210px;
+}
+
+.mb-fit .sv-index,
+.mb-fit .mb-fit-cta {
+  margin-top: 3.5rem;
+}
+
+.mb-fit .sv-nav button {
+  font-family: var(--sans);
+  color: var(--mb-muted);
+}
+
+.mb-fit .sv-nav button span {
+  color: var(--mb-muted);
+}
+
+.mb-fit .sv-nav button.is-on {
+  background: var(--mb-card);
+  color: var(--mb-fg);
+}
+
+.mb-fit .sv-panel {
+  background: var(--mb-card);
+  color: var(--mb-fg);
+  border: 1px solid var(--mb-line);
+  box-shadow: none;
+}
+
+.mb-fit .sv-panel h2 {
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.mb-fit .sv-text {
+  color: var(--mb-muted);
+}
+
+.mb-fit .sv-plain li::before {
+  background: var(--mb-fg);
+}
+
+.mb-fit .sv-index h2,
+.mb-fit .mb-fit-cta h2 {
+  color: var(--mb-fg);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+}
+
+.mb-fit .sv-index-list {
+  color: var(--mb-muted);
+}
+
+.mb-fit .sv-index-list li {
+  border-bottom-color: var(--mb-line);
+}
+
+.mb-fit .sv-index-list li:hover {
+  color: var(--mb-fg);
+}
+
+.mb-fit .sv-index-list li::after {
+  background: var(--mb-fg);
+}
+
+.mb-fit-cta {
+  max-width: 22rem;
+  margin-top: 4.5rem;
+}
+
+.mb-fit-cta h2 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  line-height: 0.98;
+}
+
+.mb-fit-cta p {
+  margin: 1rem 0 1.3rem;
+}
+
+.mb-fit-cta .mb-btn {
+  width: fit-content;
+}
+
+.mb-fit-sheet .sv-nav button.is-on {
+  background: #f4f4f4;
+  color: #111;
+}
+
+.mb-fit-sheet .sv-panel {
+  background: #f4f4f4;
+  border-color: #e6e6e6;
+  color: #111;
+}
+
+.mb-fit-sheet .sv-text,
+.mb-fit-sheet .sv-index-list,
+.mb-fit-sheet .mb-fit-cta p {
+  color: #6b6b6b;
+}
+
+.mb-fit-sheet .sv-panel h2,
+.mb-fit-sheet .sv-index h2,
+.mb-fit-sheet .mb-fit-cta h2,
+.mb-fit-sheet .sv-plain li,
+.mb-fit-sheet .sv-nav button.is-on {
+  color: #111;
+}
+
+.mb-fit-sheet .sv-plain li::before,
+.mb-fit-sheet .sv-index-list li::after {
+  background: #111;
+}
+
+.mb-fit-sheet .sv-index-list li {
+  border-bottom-color: #e6e6e6;
+}
+
+.mb-fit-sheet .sv-index-list li:hover {
+  color: #111;
+}
+
+.mb-fit-sheet .mb-btn-fill {
+  background: #111;
+  border-color: #111;
+  color: #fff;
+}
+
+html[data-theme='light'] .mb-fit-sheet {
+  background: #111;
+  color: #8c8c8c;
+}
+
+html[data-theme='light'] .mb-fit-sheet .sv-nav button.is-on,
+html[data-theme='light'] .mb-fit-sheet .sv-panel {
+  background: #1a1a1a;
+  border-color: #222;
+  color: #f4f4f4;
+}
+
+html[data-theme='light'] .mb-fit-sheet .sv-panel h2,
+html[data-theme='light'] .mb-fit-sheet .sv-index h2,
+html[data-theme='light'] .mb-fit-sheet .mb-fit-cta h2,
+html[data-theme='light'] .mb-fit-sheet .sv-plain li {
+  color: #f4f4f4;
+}
+
+html[data-theme='light'] .mb-fit-sheet .mb-btn-fill {
+  background: #fff;
+  border-color: #fff;
+  color: #111;
+}

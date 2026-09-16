@@ -1,5 +1,7 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useLanguage } from '../context/LanguageContext'
+import taping from '../assets/video/taping.mp4'
 
 export const socials = [
   {
@@ -56,24 +58,170 @@ export const socials = [
 
 export default function Footer() {
   const { t } = useLanguage()
+  const { nav, home2 } = t
+  const [status, setStatus] = useState('')
+  const [email, setEmail] = useState('')
+
+  const columns = [
+    {
+      title: home2.colServices,
+      href: '/services/web',
+      links: [
+        { label: nav.web, to: '/services/web' },
+        { label: nav.apps, to: '/services/applications' },
+        { label: nav.print, to: '/services/imprime' },
+        { label: nav.digital, to: '/services/numerique' },
+        { label: nav.drone, to: '/services/drone' },
+      ],
+    },
+    {
+      title: home2.colWork,
+      href: '/portfolio',
+      links: [
+        { label: nav.portfolio, to: '/portfolio' },
+        { label: nav.logo, to: '/logo' },
+        { label: nav.home, to: '/' },
+      ],
+    },
+    {
+      title: home2.colResources,
+      links: [
+        { label: nav.estimate, to: '/estimation' },
+        { label: nav.blog, to: '/blog' },
+        { label: nav.contact, to: '/contact' },
+      ],
+    },
+    {
+      title: home2.colStudio,
+      links: [
+        { label: nav.about, to: '/a-propos' },
+        { label: nav.contact, to: '/contact' },
+        { label: nav.blog, to: '/blog' },
+      ],
+    },
+    {
+      title: home2.colConnect,
+      links: [
+        { label: nav.contact, to: '/contact' },
+        { label: nav.estimate, to: '/estimation' },
+      ],
+    },
+  ]
+
+  function onSubmit(event) {
+    event.preventDefault()
+    const value = email.trim()
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+      setStatus('error')
+      return
+    }
+    setStatus('pending')
+    window.setTimeout(() => {
+      setStatus('success')
+      setEmail('')
+    }, 700)
+  }
 
   return (
-    <footer className="site-footer">
-      <div className="footer-copy">
-        <p>{t.footer}</p>
-        <Link to="/blog">{t.nav.blog}</Link>
-        <Link to="/portfolio">{t.nav.portfolio}</Link>
-        <Link to="/accueil-2">{t.nav.home2}</Link>
+    <footer className="mb-foot">
+      <div className="mb-foot-inner">
+        <div className="container">
+          <div className="mb-foot-top">
+            <h2>{home2.footerTitle}</h2>
+            <p>{home2.footerText}</p>
+            <div className="mb-foot-cta">
+              <Link className="mb-btn mb-btn-fill" to="/estimation">
+                {home2.footerCta}
+              </Link>
+            </div>
+          </div>
+
+          <div className="mb-foot-cols">
+            {columns.map((column) => (
+              <div key={column.title} className="mb-foot-col">
+                <h3>
+                  {column.href ? <Link to={column.href}>{column.title}</Link> : column.title}
+                </h3>
+                <ul>
+                  {column.links.map((link) => (
+                    <li key={`${column.title}-${link.label}`}>
+                      {link.external ? (
+                        <a href={link.href} target="_blank" rel="noopener noreferrer">
+                          <span>{link.label}</span>
+                          <span className="mb-foot-arrow" aria-hidden="true">
+                            ↗︎
+                          </span>
+                        </a>
+                      ) : (
+                        <Link to={link.to}>{link.label}</Link>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          <div className="mb-foot-bar">
+            <p>{t.footer}</p>
+            <div className="mb-foot-socials">
+              {socials.map((social) => (
+                <a
+                  key={social.id}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
+                >
+                  {social.icon}
+                </a>
+              ))}
+            </div>
+          </div>
+          <p className="mb-foot-notice">{home2.notice}</p>
+        </div>
       </div>
-      <ul className="footer-socials">
-        {socials.map((social) => (
-          <li key={social.id}>
-            <a href={social.href} target="_blank" rel="noreferrer" aria-label={social.label}>
-              {social.icon}
-            </a>
-          </li>
-        ))}
-      </ul>
+
+      <div className="mb-newslet">
+        <div className="container">
+          <figure className="mb-newslet-sticker" aria-hidden="true">
+            <video src={taping} autoPlay loop muted playsInline />
+          </figure>
+          <form className="mb-newslet-form" onSubmit={onSubmit} noValidate aria-label={home2.newsTitle}>
+            <h2>{home2.newsTitle}</h2>
+            <div className="mb-newslet-row" role="group">
+              <label htmlFor="mb-news-email" className="sr-only">
+                {home2.newsLabel}
+              </label>
+              <input
+                id="mb-news-email"
+                type="email"
+                name="email"
+                placeholder={home2.newsPlaceholder}
+                value={email}
+                onChange={(event) => {
+                  setEmail(event.target.value)
+                  if (status === 'error') setStatus('')
+                }}
+                aria-invalid={status === 'error'}
+                autoComplete="email"
+              />
+              <button className="mb-newslet-submit" type="submit" aria-label={home2.newsSubmit}>
+                {home2.newsSubmit}
+              </button>
+            </div>
+            <p className={`mb-newslet-msg${status === 'error' ? ' is-on' : ''}`} role="alert">
+              {status === 'error' ? home2.newsError : ''}
+            </p>
+            <p className={`mb-newslet-msg is-ok${status === 'success' ? ' is-on' : ''}`} role="status">
+              {home2.newsSuccess}
+            </p>
+            <p className={`mb-newslet-msg${status === 'pending' ? ' is-on' : ''}`} role="status">
+              {status === 'pending' ? home2.newsPending : ''}
+            </p>
+          </form>
+        </div>
+      </div>
     </footer>
   )
 }

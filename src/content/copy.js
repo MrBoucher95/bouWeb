@@ -197,6 +197,7 @@ export const copy = {
       imprime: {
         eyebrow: 'Services',
         title: 'Imprime',
+        titleAccent: 'Hors écran.',
         subtitle: 'Solutions d’impression professionnelles pour valoriser votre image',
         banner:
           'IMPRIMÉ • CARTES DE VISITE • FLYERS • AFFICHES • PACKAGING • SIGNALÉTIQUE • GRAND FORMAT • PAPETERIE • ',
@@ -270,6 +271,7 @@ export const copy = {
       numerique: {
         eyebrow: 'Services',
         title: 'Numérique',
+        titleAccent: 'En image.',
         subtitle: 'Des solutions numériques innovantes pour propulser votre entreprise',
         banner:
           'NUMÉRIQUE • IDENTITÉ VISUELLE • MOTION DESIGN • RÉSEAUX SOCIAUX • STRATÉGIE DIGITALE • ILLUSTRATION • ',
@@ -352,6 +354,7 @@ export const copy = {
       web: {
         eyebrow: 'Services',
         title: 'Web',
+        titleAccent: 'En ligne.',
         subtitle: 'Développement web moderne et sur mesure pour votre présence en ligne',
         banner:
           'WEB • WORDPRESS • E-COMMERCE • REACT • SEO • SITES VITRINES • PERFORMANCE • MAINTENANCE • ',
@@ -426,6 +429,7 @@ export const copy = {
       applications: {
         eyebrow: 'Services',
         title: 'Applications',
+        titleAccent: 'Sur mesure.',
         subtitle: 'Applications React et React Native modernes sur mesure',
         banner:
           'APPLICATIONS • REACT • REACT NATIVE • ANDROID • NEXT.JS • TYPESCRIPT • API • ',
@@ -510,6 +514,7 @@ export const copy = {
       drone: {
         eyebrow: 'Services',
         title: 'Drone',
+        titleAccent: 'En vol.',
         subtitle: 'Services de photographie et vidéographie aériennes professionnelles',
         banner:
           'DRONE • PHOTO AÉRIENNE • VIDÉO AÉRIENNE • INSPECTION • CARTOGRAPHIE 3D • IMMOBILIER • ',
@@ -891,6 +896,7 @@ export const copy = {
       imprime: {
         eyebrow: 'Services',
         title: 'Print',
+        titleAccent: 'Off screen.',
         subtitle: 'Professional print solutions to elevate your image',
         banner:
           'PRINT • BUSINESS CARDS • FLYERS • POSTERS • PACKAGING • SIGNAGE • LARGE FORMAT • STATIONERY • ',
@@ -962,6 +968,7 @@ export const copy = {
       numerique: {
         eyebrow: 'Services',
         title: 'Numeric',
+        titleAccent: 'In image.',
         subtitle: 'Innovative digital solutions to propel your business',
         banner:
           'DIGITAL • VISUAL IDENTITY • MOTION DESIGN • SOCIAL MEDIA • DIGITAL STRATEGY • ILLUSTRATION • ',
@@ -1043,6 +1050,7 @@ export const copy = {
       web: {
         eyebrow: 'Services',
         title: 'Web',
+        titleAccent: 'Online.',
         subtitle: 'Modern, custom web development for your online presence',
         banner:
           'WEB • WORDPRESS • E-COMMERCE • REACT • SEO • LANDING PAGES • PERFORMANCE • MAINTENANCE • ',
@@ -1117,6 +1125,7 @@ export const copy = {
       applications: {
         eyebrow: 'Services',
         title: 'Applications',
+        titleAccent: 'Custom-built.',
         subtitle: 'Modern custom React and React Native apps',
         banner:
           'APPS • REACT • REACT NATIVE • ANDROID • NEXT.JS • TYPESCRIPT • API • ',
@@ -1200,6 +1209,7 @@ export const copy = {
       drone: {
         eyebrow: 'Services',
         title: 'Drone',
+        titleAccent: 'In flight.',
         subtitle: 'Professional aerial photography and videography services',
         banner:
           'DRONE • AERIAL PHOTO • AERIAL VIDEO • INSPECTION • 3D MAPPING • REAL ESTATE • ',
