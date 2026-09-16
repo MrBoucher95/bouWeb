@@ -1,0 +1,150 @@
+.contact-hero {
+  padding-bottom: 1.4rem;
+}
+
+.contact-stage {
+  display: grid;
+  gap: 1rem;
+}
+
+.contact-map {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 24px;
+  background: var(--mb-card);
+  min-height: 320px;
+}
+
+.contact-map iframe {
+  display: block;
+  width: 100%;
+  height: 460px;
+  border: 0;
+  filter: grayscale(1) contrast(1.05);
+}
+
+.contact-map-open {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 1;
+  padding: 0.45rem 0.8rem;
+  color: #111;
+  background: #fff;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.contact-card {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.8fr) minmax(0, 1.2fr);
+  gap: 2rem;
+  padding: clamp(1.6rem, 4vw, 2.6rem);
+  background: #fff;
+  color: #111;
+  border-radius: 24px;
+}
+
+.contact-card p {
+  margin: 0.35rem 0 0;
+}
+
+.contact-card a {
+  color: inherit;
+}
+
+.contact-card a:hover {
+  color: var(--accent);
+}
+
+.contact-meta {
+  display: grid;
+  gap: 1.25rem;
+  align-content: start;
+}
+
+.contact-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.contact-step,
+.contact-sent {
+  margin: 0;
+  color: #6b6b6b;
+}
+
+.contact-field {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.contact-field span {
+  color: #6b6b6b;
+  font-size: 0.82rem;
+}
+
+.contact-field input,
+.contact-field textarea {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  color: #111;
+  background: #f4f4f4;
+  border: 0;
+  border-radius: 16px;
+  outline: none;
+}
+
+.contact-field textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.contact-field input:focus,
+.contact-field textarea:focus {
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.contact-card .tag {
+  background: #f4f4f4;
+}
+
+.contact-card .mb-btn {
+  color: #111;
+  border-color: #111;
+}
+
+.contact-card .mb-btn-fill {
+  background: #111;
+  border-color: #111;
+  color: #fff;
+}
+
+.contact-card .mb-btn:hover,
+.contact-card .mb-btn-fill:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+}
+
+html[data-theme='light'] .contact-map iframe {
+  filter: none;
+}
+
+@media (max-width: 900px) {
+  .contact-card {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-map iframe {
+    height: 320px;
+  }
+}

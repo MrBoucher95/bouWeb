@@ -148,9 +148,10 @@ img {
   display: inline-flex;
   align-items: center;
   padding: 0.35rem 0.7rem;
-  border: 1px solid var(--line);
+  border: 0;
   border-radius: var(--radius-btn);
-  color: var(--gold);
+  color: #111;
+  background: var(--mb-card);
   margin-bottom: 1.25rem;
 }
 

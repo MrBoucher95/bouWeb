@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useLanguage } from '../context/LanguageContext'
+import { sendMailto } from '../lib/mail'
 import taping from '../assets/video/taping.mp4'
 
 export const socials = [
@@ -56,11 +57,28 @@ export const socials = [
   },
 ]
 
+const footFields = ['name', 'email', 'subject', 'message']
+
 export default function Footer() {
   const { t } = useLanguage()
-  const { nav, home2 } = t
+  const { nav, home2, contact } = t
   const [status, setStatus] = useState('')
-  const [email, setEmail] = useState('')
+  const [step, setStep] = useState(0)
+  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
+  const field = footFields[step]
+  const labels = [contact.name, contact.emailField, contact.subject, contact.message]
+  const placeholders = [contact.namePh, contact.emailPh, contact.subjectPh, contact.messagePh]
+
+  const update = (key, value) => {
+    setForm((current) => ({ ...current, [key]: value }))
+    if (status === 'error') setStatus('')
+  }
+
+  const valid = (key, value) => {
+    const trimmed = value.trim()
+    if (key === 'email') return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)
+    return trimmed.length > 0
+  }
 
   const columns = [
     {
@@ -110,16 +128,19 @@ export default function Footer() {
 
   function onSubmit(event) {
     event.preventDefault()
-    const value = email.trim()
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+    if (!valid(field, form[field])) {
       setStatus('error')
       return
     }
-    setStatus('pending')
-    window.setTimeout(() => {
-      setStatus('success')
-      setEmail('')
-    }, 700)
+    if (step < footFields.length - 1) {
+      setStep((value) => value + 1)
+      setStatus('')
+      return
+    }
+    sendMailto(form)
+    setStatus('success')
+    setForm({ name: '', email: '', subject: '', message: '' })
+    setStep(0)
   }
 
   return (
@@ -177,38 +198,61 @@ export default function Footer() {
           <figure className="mb-newslet-sticker" aria-hidden="true">
             <video src={taping} autoPlay loop muted playsInline />
           </figure>
-          <form className="mb-newslet-form" onSubmit={onSubmit} noValidate aria-label={home2.newsTitle}>
-            <h2>{home2.newsTitle}</h2>
-            <div className="mb-newslet-row" role="group">
-              <label htmlFor="mb-news-email" className="sr-only">
-                {home2.newsLabel}
-              </label>
-              <input
-                id="mb-news-email"
-                type="email"
-                name="email"
-                placeholder={home2.newsPlaceholder}
-                value={email}
-                onChange={(event) => {
-                  setEmail(event.target.value)
-                  if (status === 'error') setStatus('')
-                }}
-                aria-invalid={status === 'error'}
-                autoComplete="email"
-              />
-              <button className="mb-newslet-submit" type="submit" aria-label={home2.newsSubmit}>
-                {home2.newsSubmit}
-              </button>
-            </div>
-            <p className={`mb-newslet-msg${status === 'error' ? ' is-on' : ''}`} role="alert">
-              {status === 'error' ? home2.newsError : ''}
-            </p>
-            <p className={`mb-newslet-msg is-ok${status === 'success' ? ' is-on' : ''}`} role="status">
-              {home2.newsSuccess}
-            </p>
-            <p className={`mb-newslet-msg${status === 'pending' ? ' is-on' : ''}`} role="status">
-              {status === 'pending' ? home2.newsPending : ''}
-            </p>
+          <form className="mb-newslet-form" onSubmit={onSubmit} noValidate aria-label={home2.formTitle}>
+            <h2>{home2.formTitle}</h2>
+            {status === 'success' ? (
+              <p className="mb-newslet-msg is-ok is-on" role="status">
+                {contact.sent}
+              </p>
+            ) : (
+              <>
+                <p className="mb-newslet-step">
+                  {t.estimate.step} {step + 1} / {footFields.length}
+                </p>
+                <label className="mb-newslet-field">
+                  <span>{labels[step]}</span>
+                  {field === 'message' ? (
+                    <textarea
+                      name="message"
+                      rows={4}
+                      required
+                      placeholder={placeholders[step]}
+                      value={form.message}
+                      onChange={(event) => update('message', event.target.value)}
+                      aria-invalid={status === 'error'}
+                    />
+                  ) : (
+                    <input
+                      type={field === 'email' ? 'email' : 'text'}
+                      name={field}
+                      autoComplete={field === 'name' ? 'name' : field === 'email' ? 'email' : 'off'}
+                      required
+                      placeholder={placeholders[step]}
+                      value={form[field]}
+                      onChange={(event) => update(field, event.target.value)}
+                      aria-invalid={status === 'error'}
+                    />
+                  )}
+                </label>
+                <div className="mb-newslet-actions">
+                  {step > 0 ? (
+                    <button type="button" className="mb-newslet-prev" onClick={() => setStep((value) => value - 1)}>
+                      {contact.prev}
+                    </button>
+                  ) : null}
+                  <button className="mb-newslet-submit" type="submit">
+                    {status === 'pending'
+                      ? home2.formPending
+                      : step === footFields.length - 1
+                        ? contact.send
+                        : contact.next}
+                  </button>
+                </div>
+                <p className={`mb-newslet-msg${status === 'error' ? ' is-on' : ''}`} role="alert">
+                  {status === 'error' ? home2.formError : ''}
+                </p>
+              </>
+            )}
           </form>
         </div>
       </div>

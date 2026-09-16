@@ -1,8 +1,14 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import PageShell from '../components/PageShell'
 import { useLanguage } from '../context/LanguageContext'
+import { sendMailto } from '../lib/mail'
+import '../assets/css/Contact.css'
 
 const fields = ['name', 'email', 'subject', 'message']
+const MAP_CENTER = '46.0561,-71.9601'
+const MAP_EMBED = `https://maps.google.com/maps?ll=${MAP_CENTER}&z=12&hl=fr&t=m&output=embed`
+const MAP_LINK = `https://www.google.com/maps/@${MAP_CENTER},12z`
 
 export default function Contact() {
   const { t } = useLanguage()
@@ -14,8 +20,9 @@ export default function Contact() {
   const labels = [contact.name, contact.emailField, contact.subject, contact.message]
   const placeholders = [contact.namePh, contact.emailPh, contact.subjectPh, contact.messagePh]
   const field = fields[step]
+  const phoneHref = `tel:${contact.phone.replace(/\s/g, '')}`
 
-  const update = (value) => setForm((current) => ({ ...current, [field]: value }))
+  const update = (key, value) => setForm((current) => ({ ...current, [key]: value }))
 
   const submit = (event) => {
     event.preventDefault()
@@ -23,78 +30,106 @@ export default function Contact() {
       setStep((value) => value + 1)
       return
     }
+    sendMailto(form)
     setSent(true)
   }
 
   return (
     <PageShell>
-      <header className="mb-hero">
+      <header className="mb-hero contact-hero">
         <p className="mb-news">
           {contact.eyebrow}
-          <span>{t.nav.contact}</span>
+          <span>{contact.mapLabel}</span>
         </p>
         <h1 className="mb-title">{contact.title}</h1>
       </header>
       <div className="container pb-5">
-        <div className="row g-4 contact-grid">
-          <aside className="info-card col-md-5">
-            <div>
-              <p className="eyebrow">{contact.addressLabel}</p>
-              <p>{contact.address}</p>
-              <p>{contact.postal}</p>
+        <div className="contact-stage">
+          <figure className="contact-map">
+            <iframe
+              title={contact.mapLabel}
+              src={MAP_EMBED}
+              loading="eager"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+            <a className="contact-map-open" href={MAP_LINK} target="_blank" rel="noopener noreferrer">
+              {contact.mapOpen}
+            </a>
+          </figure>
+          <div className="contact-card">
+            <div className="contact-meta">
+              <div>
+                <p className="tag">{contact.addressLabel}</p>
+                <p>{contact.address}</p>
+                <p>{contact.postal}</p>
+              </div>
+              <div>
+                <p className="tag">{contact.phoneLabel}</p>
+                <a href={phoneHref}>{contact.phone}</a>
+              </div>
+              <div>
+                <p className="tag">{contact.emailLabel}</p>
+                <a href={`mailto:${contact.email}`}>{contact.email}</a>
+              </div>
             </div>
-            <div>
-              <p className="eyebrow">{contact.phoneLabel}</p>
-              <a href={`tel:${contact.phone.replace(/\s/g, '')}`}>{contact.phone}</a>
-            </div>
-            <div>
-              <p className="eyebrow">{contact.emailLabel}</p>
-              <a href={`mailto:${contact.email}`}>{contact.email}</a>
-            </div>
-          </aside>
-
-          <form className="form col-md-7" onSubmit={submit}>
-            <p className="step-label eyebrow">
-              {t.estimate.step} {step + 1} / {fields.length}
-            </p>
-            {sent ? (
-              <p className="lead">{contact.sent}</p>
-            ) : (
-              <>
-                <label className="field">
-                  <span className="eyebrow">{labels[step]}</span>
-                  {field === 'message' ? (
-                    <textarea
-                      required
-                      value={form.message}
-                      placeholder={placeholders[step]}
-                      onChange={(event) => update(event.target.value)}
-                    />
-                  ) : (
-                    <input
-                      required
-                      type={field === 'email' ? 'email' : 'text'}
-                      value={form[field]}
-                      placeholder={placeholders[step]}
-                      onChange={(event) => update(event.target.value)}
-                    />
-                  )}
-                </label>
-                <div className="btn-row">
-                  {step > 0 ? (
-                    <button type="button" className="btn" onClick={() => setStep((value) => value - 1)}>
-                      {contact.prev}
+            <form className="contact-form" onSubmit={submit}>
+              <p className="contact-step">
+                {t.estimate.step} {step + 1} / {fields.length}
+              </p>
+              {sent ? (
+                <p className="contact-sent">{contact.sent}</p>
+              ) : (
+                <>
+                  <label className="contact-field">
+                    <span>{labels[step]}</span>
+                    {field === 'message' ? (
+                      <textarea
+                        required
+                        value={form.message}
+                        placeholder={placeholders[step]}
+                        onChange={(event) => update('message', event.target.value)}
+                      />
+                    ) : (
+                      <input
+                        required
+                        type={field === 'email' ? 'email' : 'text'}
+                        value={form[field]}
+                        placeholder={placeholders[step]}
+                        onChange={(event) => update(field, event.target.value)}
+                      />
+                    )}
+                  </label>
+                  <div className="contact-actions">
+                    {step > 0 ? (
+                      <button type="button" className="mb-btn" onClick={() => setStep((value) => value - 1)}>
+                        {contact.prev}
+                      </button>
+                    ) : null}
+                    <button type="submit" className="mb-btn mb-btn-fill">
+                      {step === fields.length - 1 ? contact.send : contact.next}
                     </button>
-                  ) : null}
-                  <button type="submit" className="btn btn-fill">
-                    {step === fields.length - 1 ? contact.send : contact.next}
-                  </button>
-                </div>
-              </>
-            )}
-          </form>
+                  </div>
+                </>
+              )}
+            </form>
+          </div>
         </div>
       </div>
+
+      <section className="mb-invite" aria-labelledby="mb-invite-title">
+        <div className="container">
+          <div className="mb-invite-card">
+            <h2 id="mb-invite-title">{contact.ctaTitle}</h2>
+            <p>{contact.ctaText}</p>
+            <div className="mb-invite-cta">
+              <Link className="mb-btn mb-btn-fill" to="/estimation">
+                {contact.ctaEstimate}
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
     </PageShell>
   )
 }

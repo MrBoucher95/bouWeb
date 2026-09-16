@@ -1,3 +1,11 @@
+.blog-article {
+  margin-top: 5.6rem;
+}
+
+.blog-body section {
+  scroll-margin-top: 5.6rem;
+}
+
 .blog-lead {
   margin-top: 1.25rem;
 }
@@ -197,6 +205,16 @@
 .blog-pager-link:hover {
   border-color: var(--accent);
   background: var(--bg-raised);
+}
+
+@media (max-width: 900px) {
+  .blog-article {
+    margin-top: 4.4rem;
+  }
+
+  .blog-body section {
+    scroll-margin-top: 4.4rem;
+  }
 }
 
 @media (max-width: 800px) {

@@ -64,7 +64,7 @@ export default function Home() {
 
       <section className="mb-pitch">
         <div className="container">
-          <p className="mb-label">{home2.pitchEyebrow}</p>
+          <p className="tag">{home2.pitchEyebrow}</p>
           <h2>{home2.pitchTitle}</h2>
           <p className="mb-copy">{home2.pitchLead}</p>
           <div className="row g-3 mt-4 text-start">
@@ -82,7 +82,7 @@ export default function Home() {
 
       <section id="mb-services" className="mb-services">
         <div className="container">
-          <p className="mb-label">{home.servicesEyebrow}</p>
+          <p className="tag">{home.servicesEyebrow}</p>
           <h2>{home2.servicesTitle}</h2>
           <div className="row g-3 mt-4 text-start">
             {home.services.map((service) => (

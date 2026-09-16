@@ -9,7 +9,7 @@ export default function QuoteSwiper({ quotes, title, eyebrow, prevLabel, nextLab
   return (
     <section className="quote-band" aria-labelledby="quotes-title">
       <div className="quote-band-head">
-        <p className="tag eyebrow">{eyebrow}</p>
+        <p className="tag">{eyebrow}</p>
         <h2 id="quotes-title">{title}</h2>
       </div>
 
