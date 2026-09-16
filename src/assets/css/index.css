@@ -115,6 +115,11 @@ img {
   --on-accent: var(--tile-drone-fg);
 }
 
+.app[data-page='video'] {
+  --accent: var(--tile-video-bg);
+  --on-accent: var(--tile-video-fg);
+}
+
 .app[data-page='blog'] {
   --accent: var(--tile-blog-bg);
   --on-accent: var(--tile-blog-fg);
@@ -556,6 +561,16 @@ h3 {
   color: var(--fg);
   background: var(--bg-raised);
   transition: background 0.2s var(--ease), border-color 0.2s var(--ease), color 0.2s var(--ease);
+}
+
+.option:hover {
+  border-color: var(--accent);
+  color: var(--on-accent);
+  background: var(--accent);
+}
+
+.option:hover small {
+  color: var(--on-accent);
 }
 
 .option.active {

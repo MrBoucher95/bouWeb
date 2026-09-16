@@ -27,10 +27,8 @@ export default function Home() {
     <PageShell>
       <header className="mb-hero">
         <p className="mb-news">{home2.kicker}</p>
-        <h1 className="mb-title">
-          {home2.title}
-          <span>{home2.titleAccent}</span>
-        </h1>
+        <h1 className="mb-title">{home.name}</h1>
+        <p className="mb-lead">{home2.lead}</p>
         <div className="mb-actions">
           <a className="mb-btn mb-btn-fill" href="#mb-services">
             {home2.ctaPrimary}
@@ -89,7 +87,7 @@ export default function Home() {
           <div className="row g-3 mt-4 text-start">
             {home.services.map((service) => (
               <div key={service.slug} className="col-md-6">
-                <Link className="mb-service" to={`/services/${service.slug}`}>
+                <Link className={`mb-service mb-service--${service.slug}`} to={`/services/${service.slug}`}>
                   <h3>{service.title}</h3>
                   <p>{service.text}</p>
                   <span>{service.cta} →</span>
@@ -107,6 +105,20 @@ export default function Home() {
         prevLabel={home.quotesPrev}
         nextLabel={home.quotesNext}
       />
+
+      <section className="mb-invite" aria-labelledby="mb-invite-title">
+        <div className="container">
+          <div className="mb-invite-card">
+            <h2 id="mb-invite-title">{home2.footerTitle}</h2>
+            <p>{home2.footerText}</p>
+            <div className="mb-invite-cta">
+              <Link className="mb-btn mb-btn-fill" to="/estimation">
+                {home2.footerCta}
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
     </PageShell>
   )
 }

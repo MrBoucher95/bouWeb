@@ -71,6 +71,8 @@
   --tile-contact-fg: var(--on-mint);
   --tile-drone-bg: color-mix(in srgb, var(--accent-blue) 42%, var(--accent-teal));
   --tile-drone-fg: var(--black);
+  --tile-video-bg: color-mix(in srgb, var(--accent-pink) 55%, var(--accent-orange));
+  --tile-video-fg: var(--white);
   --tile-blog-bg: color-mix(in srgb, var(--accent-pink) 42%, var(--accent-purple));
   --tile-blog-fg: var(--white);
   --tile-portfolio-bg: color-mix(in srgb, var(--accent-orange) 42%, var(--accent-yellow));

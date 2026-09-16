@@ -34,17 +34,21 @@ export default function Portfolio() {
         <section className="folio-section">
           <ProjectGrid projects={home.projects} />
         </section>
-
-        <section className="cta-band">
-          <h2>{portfolio.ctaTitle}</h2>
-          <p className="lead">{portfolio.ctaText}</p>
-          <div className="btn-row">
-            <Link className="btn btn-fill" to="/contact">
-              {home.ctaContact}
-            </Link>
-          </div>
-        </section>
       </div>
+
+      <section className="mb-invite" aria-labelledby="mb-invite-title">
+        <div className="container">
+          <div className="mb-invite-card">
+            <h2 id="mb-invite-title">{portfolio.ctaTitle}</h2>
+            <p>{portfolio.ctaText}</p>
+            <div className="mb-invite-cta">
+              <Link className="mb-btn mb-btn-fill" to="/contact">
+                {home.ctaContact}
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
     </PageShell>
   )
 }

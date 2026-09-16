@@ -20,6 +20,7 @@ const PAGE_BY_PATH = [
   ['/services/web', 'web'],
   ['/services/applications', 'apps'],
   ['/services/drone', 'drone'],
+  ['/services/video', 'video'],
   ['/estimation', 'estimate'],
   ['/contact', 'contact'],
   ['/blog', 'blog'],
@@ -58,6 +59,7 @@ export default function App() {
         <Route path="/preview/numerique/:variant" element={<Navigate to="/services/numerique" replace />} />
         <Route path="/preview/numerique" element={<Navigate to="/services/numerique" replace />} />
         <Route path="/a-propos" element={<About />} />
+        <Route path="/services/drone" element={<Navigate to="/" replace />} />
         <Route path="/services/:slug" element={<ServicePage />} />
         <Route path="/estimation" element={<Estimate />} />
         <Route path="/contact" element={<Contact />} />

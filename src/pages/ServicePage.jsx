@@ -79,15 +79,21 @@ export default function ServicePage() {
             ))}
           </ul>
         </section>
-
-        <section className="mb-fit-cta">
-          <h2>{data.ctaTitle}</h2>
-          <p>{data.ctaText}</p>
-          <Link className="mb-btn mb-btn-fill" to="/contact">
-            {contactLabel}
-          </Link>
-        </section>
       </div>
+
+      <section className="mb-invite" aria-labelledby="mb-invite-title">
+        <div className="container">
+          <div className="mb-invite-card">
+            <h2 id="mb-invite-title">{data.ctaTitle}</h2>
+            <p>{data.ctaText}</p>
+            <div className="mb-invite-cta">
+              <Link className="mb-btn mb-btn-fill" to="/contact">
+                {contactLabel}
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
     </PageShell>
   )
 }

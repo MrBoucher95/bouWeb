@@ -117,20 +117,21 @@ export default function BlogPost() {
             <span />
           )}
         </nav>
-
-        <section className="cta-band">
-          <h2>{blog.ctaTitle}</h2>
-          <p className="lead">{blog.ctaText}</p>
-          <div className="btn-row">
-            <Link className="btn" to="/blog">
-              {blog.back}
-            </Link>
-            <Link className="btn btn-fill" to="/contact">
-              {t.home.ctaContact}
-            </Link>
-          </div>
-        </section>
       </div>
+
+      <section className="mb-invite" aria-labelledby="mb-invite-title">
+        <div className="container">
+          <div className="mb-invite-card">
+            <h2 id="mb-invite-title">{blog.ctaTitle}</h2>
+            <p>{blog.ctaText}</p>
+            <div className="mb-invite-cta">
+              <Link className="mb-btn mb-btn-fill" to="/contact">
+                {t.home.ctaContact}
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
     </PageShell>
   )
 }

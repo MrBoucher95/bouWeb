@@ -71,7 +71,7 @@ export default function Footer() {
         { label: nav.apps, to: '/services/applications' },
         { label: nav.print, to: '/services/imprime' },
         { label: nav.digital, to: '/services/numerique' },
-        { label: nav.drone, to: '/services/drone' },
+        { label: nav.video, to: '/services/video' },
       ],
     },
     {
@@ -126,16 +126,6 @@ export default function Footer() {
     <footer className="mb-foot">
       <div className="mb-foot-inner">
         <div className="container">
-          <div className="mb-foot-top">
-            <h2>{home2.footerTitle}</h2>
-            <p>{home2.footerText}</p>
-            <div className="mb-foot-cta">
-              <Link className="mb-btn mb-btn-fill" to="/estimation">
-                {home2.footerCta}
-              </Link>
-            </div>
-          </div>
-
           <div className="mb-foot-cols">
             {columns.map((column) => (
               <div key={column.title} className="mb-foot-col">

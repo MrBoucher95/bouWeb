@@ -24,9 +24,9 @@
 
 .mb-fit-switch a.is-on,
 .mb-fit-switch a:hover {
-  color: var(--mb-btn-fg);
-  background: var(--mb-btn);
-  border-color: var(--mb-btn);
+  color: var(--on-accent);
+  background: var(--accent);
+  border-color: var(--accent);
 }
 
 .mb-fit .sv-hi h1 {
@@ -102,12 +102,16 @@
 }
 
 .mb-fit .sv-nav button span {
-  color: var(--mb-muted);
+  color: var(--accent);
 }
 
 .mb-fit .sv-nav button.is-on {
   background: var(--mb-card);
   color: var(--mb-fg);
+}
+
+.mb-fit .sv-nav button.is-on span {
+  color: var(--accent);
 }
 
 .mb-fit .sv-panel {
@@ -128,7 +132,7 @@
 }
 
 .mb-fit .sv-plain li::before {
-  background: var(--mb-fg);
+  background: var(--accent);
 }
 
 .mb-fit .sv-index h2,
@@ -147,11 +151,11 @@
 }
 
 .mb-fit .sv-index-list li:hover {
-  color: var(--mb-fg);
+  color: var(--accent);
 }
 
 .mb-fit .sv-index-list li::after {
-  background: var(--mb-fg);
+  background: var(--accent);
 }
 
 .mb-fit-cta {
@@ -200,7 +204,7 @@
 
 .mb-fit-sheet .sv-plain li::before,
 .mb-fit-sheet .sv-index-list li::after {
-  background: #111;
+  background: var(--accent);
 }
 
 .mb-fit-sheet .sv-index-list li {
@@ -208,13 +212,23 @@
 }
 
 .mb-fit-sheet .sv-index-list li:hover {
-  color: #111;
+  color: var(--accent);
 }
 
 .mb-fit-sheet .mb-btn-fill {
   background: #111;
   border-color: #111;
   color: #fff;
+}
+
+.mb-fit-sheet .sv-nav button span {
+  color: var(--accent);
+}
+
+.mb-fit-sheet .mb-btn-fill:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
 }
 
 html[data-theme='light'] .mb-fit-sheet {
@@ -240,4 +254,20 @@ html[data-theme='light'] .mb-fit-sheet .mb-btn-fill {
   background: #fff;
   border-color: #fff;
   color: #111;
+}
+
+html[data-theme='light'] .mb-fit-sheet .sv-plain li::before,
+html[data-theme='light'] .mb-fit-sheet .sv-index-list li::after {
+  background: var(--accent);
+}
+
+html[data-theme='light'] .mb-fit-sheet .sv-index-list li:hover,
+html[data-theme='light'] .mb-fit-sheet .sv-nav button span {
+  color: var(--accent);
+}
+
+html[data-theme='light'] .mb-fit-sheet .mb-btn-fill:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
 }
