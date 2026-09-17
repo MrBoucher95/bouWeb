@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import PageShell from '../components/PageShell'
+import PitchSection from '../components/PitchSection'
 import QuoteSwiper from '../components/QuoteSwiper'
 import { useLanguage } from '../context/LanguageContext'
 
@@ -62,23 +63,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mb-pitch">
-        <div className="container">
-          <p className="tag">{home2.pitchEyebrow}</p>
-          <h2>{home2.pitchTitle}</h2>
-          <p className="mb-copy">{home2.pitchLead}</p>
-          <div className="row g-3 mt-4 text-start">
-            {home2.pillars.map((pillar) => (
-              <div key={pillar.title} className="col-md-4">
-                <article className="mb-pillar">
-                  <h3>{pillar.title}</h3>
-                  <p>{pillar.text}</p>
-                </article>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <PitchSection />
 
       <section id="mb-services" className="mb-services">
         <div className="container">

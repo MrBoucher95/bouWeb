@@ -85,7 +85,6 @@ export default function Footer() {
   const columns = [
     {
       title: home2.colServices,
-      href: '/services/web',
       links: [
         { label: nav.web, to: '/services/web' },
         { label: nav.apps, to: '/services/applications' },
@@ -96,10 +95,8 @@ export default function Footer() {
     },
     {
       title: home2.colWork,
-      href: '/portfolio',
       links: [
         { label: nav.portfolio, to: '/portfolio' },
-        { label: nav.logo, to: '/logo' },
         { label: nav.home, to: '/' },
       ],
     },
@@ -108,7 +105,6 @@ export default function Footer() {
       links: [
         { label: nav.estimate, to: '/estimation' },
         { label: nav.blog, to: '/blog' },
-        { label: nav.contact, to: '/contact' },
       ],
     },
     {
@@ -116,14 +112,6 @@ export default function Footer() {
       links: [
         { label: nav.about, to: '/a-propos' },
         { label: nav.contact, to: '/contact' },
-        { label: nav.blog, to: '/blog' },
-      ],
-    },
-    {
-      title: home2.colConnect,
-      links: [
-        { label: nav.contact, to: '/contact' },
-        { label: nav.estimate, to: '/estimation' },
       ],
     },
   ]

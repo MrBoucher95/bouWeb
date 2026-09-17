@@ -130,11 +130,6 @@ img {
   --on-accent: var(--tile-portfolio-fg);
 }
 
-.app[data-page='logo'] {
-  --accent: var(--tile-web-bg);
-  --on-accent: var(--tile-web-fg);
-}
-
 .eyebrow,
 .mono {
   font-family: var(--mono);

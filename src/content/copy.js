@@ -1,7 +1,30 @@
-const STARTED = 2018
-const years = Math.max(1, new Date().getFullYear() - STARTED)
-const yearsFr = years <= 1 ? '1 an' : `${years} ans`
-const yearsEn = years <= 1 ? '1 year' : `${years} years`
+export const EXPERIENCE_START = 2017
+
+export function yearsOfExperience(date = new Date()) {
+  return Math.max(1, date.getFullYear() - EXPERIENCE_START)
+}
+
+function yearsLabel(lang, date = new Date()) {
+  const years = yearsOfExperience(date)
+  if (lang === 'fr') return years <= 1 ? '1 an' : `${years} ans`
+  return years <= 1 ? '1 year' : `${years} years`
+}
+
+export function getCopy(lang, date = new Date()) {
+  const label = yearsLabel(lang, date)
+  const base = copy[lang]
+  return {
+    ...base,
+    home2: {
+      ...base.home2,
+      proof: base.home2.proof.replaceAll('{years}', label),
+    },
+    about: {
+      ...base.about,
+      p1: base.about.p1.replaceAll('{years}', label),
+    },
+  }
+}
 
 export const copy = {
   fr: {
@@ -23,7 +46,6 @@ export const copy = {
       estimate: 'Estimation',
       contact: 'Contact',
       blog: 'Blog',
-      logo: 'Logo',
       portfolio: 'Portfolio',
       home2: 'Accueil 2',
       open: 'Ouvrir le menu',
@@ -155,7 +177,7 @@ export const copy = {
         'Du développement web et des applications mobiles à l’imprimé et au numérique, je propose une gamme complète de services pour donner vie à vos projets et renforcer votre image, en ligne comme hors ligne.',
       ctaPrimary: 'Voir les services',
       ctaSecondary: 'Me contacter',
-      proof: `Plus de ${yearsFr} d’expérience — 25 entreprises accompagnées.`,
+      proof: 'Plus de {years} d’expérience — 25 entreprises accompagnées.',
       galleryEyebrow: 'Travail récent',
       pitchEyebrow: 'Une pratique complète',
       pitchTitle: 'De l’idée au livrable.',
@@ -198,7 +220,7 @@ export const copy = {
       role: 'Développeur & designer',
       title: 'Qui suis-je?',
       values: 'Créativité – Passion – Authenticité',
-      p1: `Développeur & designer web freelance passionné, je cumule plus de ${yearsFr} d’expérience en agence et en entreprise. Spécialisé en React et React Native, je crée des solutions web et mobiles sur mesure qui transforment vos idées en expériences digitales exceptionnelles.`,
+      p1: 'Développeur & designer web freelance passionné, je cumule plus de {years} d’expérience en agence et en entreprise. Spécialisé en React et React Native, je crée des solutions web et mobiles sur mesure qui transforment vos idées en expériences digitales exceptionnelles.',
       p2: 'Entrepreneur dans l’âme, j’ai fondé ma propre agence à 20 ans et accompagné plus de 25 entreprises canadiennes vers le succès digital. Mon approche unique allie créativité, expertise technique et vision stratégique pour livrer des projets qui dépassent vos attentes et marquent durablement vos utilisateurs.',
     },
     services: {
@@ -970,28 +992,6 @@ export const copy = {
       ctaTitle: 'Un projet en tête ?',
       ctaText: 'Parlons de ce dont vous avez besoin. Logo, site, identité.',
     },
-    logo: {
-      metaTitle: 'Logo — Mathieu Boucher',
-      title: 'Logo',
-      lead: 'Le logo est le symbole le plus immédiatement reconnaissable de la marque.',
-      systemEyebrow: 'Système',
-      systemTitle: 'Le monogramme a une expression — la vague en S.',
-      systemText:
-        'Deux vagues s’emboîtent pour former le signe MB. Le geste est le même à l’écran et sur papier : un mouvement, pas un pictogramme figé.',
-      versionEyebrow: 'Le signe',
-      versionTitle: 'Construit, pas décoré',
-      versionText:
-        'Le monogramme tient dans un cadre de construction. Il a besoin d’air, de proportion, et d’un fond assez sombre pour que le blanc porte.',
-      useEyebrow: 'Usage',
-      useTitle: 'Charcoal & black',
-      useText:
-        'Blanc sur charcoal. Jamais étiré, jamais recadré, jamais recoloré hors de la palette. Sur fond clair, le signe passe en charcoal — pas en gris.',
-      rules: [
-        'Garder les proportions du fichier source.',
-        'Laisser un dégagement au moins égal à la hauteur d’une vague.',
-        'Ne pas ajouter d’ombre, de contour ou d’effet.',
-      ],
-    },
     notFound: {
       code: '404',
       title: 'Page non trouvée',
@@ -1018,7 +1018,6 @@ export const copy = {
       estimate: 'Estimate',
       contact: 'Contact',
       blog: 'Blog',
-      logo: 'Logo',
       portfolio: 'Portfolio',
       home2: 'Home 2',
       open: 'Open menu',
@@ -1150,7 +1149,7 @@ export const copy = {
         'From web development and mobile apps to print and digital, I offer a full range of services to bring your projects to life and strengthen your brand — online and offline.',
       ctaPrimary: 'See services',
       ctaSecondary: 'Contact me',
-      proof: `${yearsEn} of experience — 25 companies shipped with.`,
+      proof: '{years} of experience — 25 companies shipped with.',
       galleryEyebrow: 'Recent work',
       pitchEyebrow: 'A complete practice',
       pitchTitle: 'From idea to delivery.',
@@ -1193,7 +1192,7 @@ export const copy = {
       role: 'Developer & designer',
       title: 'Who am I?',
       values: 'Creativity – Passion – Authenticity',
-      p1: `Passionate freelance web developer & designer with over ${yearsEn} of experience in agencies and companies. Specialized in React and React Native, I create custom web and mobile solutions that transform your ideas into exceptional digital experiences.`,
+      p1: 'Passionate freelance web developer & designer with over {years} of experience in agencies and companies. Specialized in React and React Native, I create custom web and mobile solutions that transform your ideas into exceptional digital experiences.',
       p2: 'Entrepreneur at heart, I founded my own agency at 20 and guided over 25 Canadian companies to digital success. My unique approach combines creativity, technical expertise, and strategic vision to deliver projects that exceed expectations and leave a lasting mark on your users.',
     },
     services: {
@@ -1958,28 +1957,6 @@ export const copy = {
         'Portfolio of Mathieu Boucher: websites, visual identity and digital work for businesses in Quebec.',
       ctaTitle: 'A project in mind?',
       ctaText: 'Let’s talk about what you need. Logo, site, identity.',
-    },
-    logo: {
-      metaTitle: 'Logo — Mathieu Boucher',
-      title: 'Logo',
-      lead: 'The logo is the most instantly recognizable symbol of the brand.',
-      systemEyebrow: 'System',
-      systemTitle: 'The monogram has one expression — the S-wave.',
-      systemText:
-        'Two waves lock together to form the MB mark. The gesture is the same on screen and on paper: motion, not a frozen pictogram.',
-      versionEyebrow: 'The mark',
-      versionTitle: 'Built, not decorated',
-      versionText:
-        'The monogram lives inside a construction frame. It needs air, proportion, and a dark enough ground for the white to carry.',
-      useEyebrow: 'Usage',
-      useTitle: 'Charcoal & black',
-      useText:
-        'White on charcoal. Never stretched, cropped, or recolored outside the palette. On a light ground, the mark flips to charcoal — never gray.',
-      rules: [
-        'Keep the source file proportions.',
-        'Leave clearance at least equal to the height of one wave.',
-        'Do not add a drop shadow, outline, or effect.',
-      ],
     },
     notFound: {
       code: '404',

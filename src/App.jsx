@@ -8,7 +8,6 @@ import BlogPost from './pages/BlogPost'
 import Contact from './pages/Contact'
 import Estimate from './pages/Estimate'
 import Home from './pages/Home'
-import Logo from './pages/Logo'
 import NotFound from './pages/NotFound'
 import Portfolio from './pages/Portfolio'
 import ServicePage from './pages/ServicePage'
@@ -25,7 +24,6 @@ const PAGE_BY_PATH = [
   ['/contact', 'contact'],
   ['/blog', 'blog'],
   ['/portfolio', 'portfolio'],
-  ['/logo', 'logo'],
   ['/accueil-2', 'home'],
   ['/', 'home'],
 ]
@@ -66,7 +64,7 @@ export default function App() {
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/portfolio" element={<Portfolio />} />
-        <Route path="/logo" element={<Logo />} />
+        <Route path="/logo" element={<Navigate to="/" replace />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
