@@ -1,0 +1,114 @@
+.mb-svc-index {
+  margin: 0 0 0.45rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.mb-svc--applications {
+  --svc-bg: var(--tile-apps-bg);
+  --svc-fg: var(--white);
+}
+
+.mb-svc--web {
+  --svc-bg: var(--tile-web-bg);
+  --svc-fg: var(--tile-web-fg);
+}
+
+.mb-svc--imprime {
+  --svc-bg: var(--tile-print-bg);
+  --svc-fg: var(--tile-print-fg);
+}
+
+.mb-svc--numerique {
+  --svc-bg: var(--tile-digital-bg);
+  --svc-fg: var(--tile-digital-fg);
+}
+
+.mb-svc--video {
+  --svc-bg: var(--tile-video-bg);
+  --svc-fg: var(--tile-video-fg);
+}
+
+.mb-svc-bento-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 0.75rem;
+  width: min(100%, 1080px);
+  margin-top: 2.8rem;
+  text-align: left;
+}
+
+.mb-svc-bento-main,
+.mb-svc-bento-side .mb-svc {
+  display: grid;
+  align-content: start;
+  padding: 1.6rem 1.5rem 1.7rem;
+  border-radius: 22px;
+  background: var(--mb-card);
+  color: var(--mb-fg);
+}
+
+.mb-svc-bento-main {
+  align-content: end;
+  min-height: 100%;
+  background: var(--svc-bg);
+  color: var(--svc-fg);
+}
+
+.mb-svc-bento-side {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.mb-svc-bento h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.mb-svc-bento p {
+  margin: 0;
+  color: var(--mb-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.mb-svc-bento-main p,
+.mb-svc-bento-main .mb-svc-index {
+  color: color-mix(in srgb, var(--svc-fg) 78%, transparent);
+}
+
+.mb-svc-bento-main h3 {
+  color: var(--svc-fg);
+}
+
+.mb-svc-bento span {
+  margin-top: 1.1rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.mb-svc-bento-side .mb-svc:hover {
+  background: var(--svc-bg);
+  color: var(--svc-fg);
+}
+
+.mb-svc-bento-side .mb-svc:hover p,
+.mb-svc-bento-side .mb-svc:hover .mb-svc-index {
+  color: color-mix(in srgb, var(--svc-fg) 78%, transparent);
+}
+
+@media (max-width: 900px) {
+  .mb-svc-bento-grid,
+  .mb-svc-bento-side {
+    grid-template-columns: 1fr;
+  }
+
+  .mb-svc-bento-main {
+    min-height: 220px;
+  }
+}

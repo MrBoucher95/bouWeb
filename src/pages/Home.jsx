@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import PageShell from '../components/PageShell'
 import PitchSection from '../components/PitchSection'
 import QuoteSwiper from '../components/QuoteSwiper'
+import ServicesSection from '../components/ServicesSection'
 import { useLanguage } from '../context/LanguageContext'
 
 const IMAGE_MAP = import.meta.glob('../assets/img/project/*.{png,jpg,jpeg,webp}', {
@@ -65,23 +66,7 @@ export default function Home() {
 
       <PitchSection />
 
-      <section id="mb-services" className="mb-services">
-        <div className="container">
-          <p className="tag">{home.servicesEyebrow}</p>
-          <h2>{home2.servicesTitle}</h2>
-          <div className="row g-3 mt-4 text-start">
-            {home.services.map((service) => (
-              <div key={service.slug} className="col-md-6">
-                <Link className={`mb-service mb-service--${service.slug}`} to={`/services/${service.slug}`}>
-                  <h3>{service.title}</h3>
-                  <p>{service.text}</p>
-                  <span>{service.cta} →</span>
-                </Link>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ServicesSection />
 
       <QuoteSwiper
         quotes={home.quotes}

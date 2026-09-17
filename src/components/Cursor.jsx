@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import '../assets/css/Cursor.css'
 
-const HOVER = 'a, button, [role="button"], .folio-card, .sv-hi-shot, .mb-shot, .mb-service, .mb-btn'
+const HOVER = 'a, button, [role="button"], .folio-card, .sv-hi-shot, .mb-shot, .mb-service, .mb-svc, .mb-btn'
 
 export default function Cursor() {
   const dotRef = useRef(null)
