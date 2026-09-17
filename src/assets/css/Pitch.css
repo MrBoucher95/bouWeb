@@ -9,8 +9,10 @@
 .mb-pitch-bento-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.9fr);
+  grid-template-rows: 1fr 1fr;
   gap: 0.75rem;
   width: min(100%, 1080px);
+  min-height: 22.5rem;
   margin-top: 2.8rem;
   text-align: left;
   opacity: 0;
@@ -23,34 +25,95 @@
   transform: none;
 }
 
-.mb-pitch-bento-main,
-.mb-pitch-bento-side article {
+.mb-pitch-card {
+  position: relative;
+  display: grid;
+  align-content: start;
+  min-width: 0;
+  min-height: 0;
   padding: 2rem 1.7rem 2.1rem;
+  overflow: hidden;
+  border: 0;
   border-radius: 22px;
   background: var(--mb-card);
   color: var(--mb-fg);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background-color 0.55s var(--ease),
+    color 0.55s var(--ease);
 }
 
-.mb-pitch-bento-main {
-  display: grid;
+.mb-pitch-card:not(.is-active) {
+  grid-column: 2;
+}
+
+.mb-pitch-card.is-active {
+  grid-column: 1;
+  grid-row: 1 / span 2;
   align-content: end;
-  min-height: 100%;
   background: var(--mb-fg);
   color: var(--mb-bg);
+  cursor: default;
 }
 
-.mb-pitch-bento-main .mb-pitch-index,
-.mb-pitch-bento-main p:last-child {
+.mb-pitch-card:not(.is-active):hover,
+.mb-pitch-card:not(.is-active):focus-visible {
+  background: var(--mb-hover);
+}
+
+.mb-pitch-card:focus-visible {
+  outline: 2px solid var(--mb-fg);
+  outline-offset: 3px;
+}
+
+.mb-pitch-card-body {
+  display: grid;
+  align-content: inherit;
+  min-height: 0;
+  height: 100%;
+}
+
+.mb-pitch-card.is-active .mb-pitch-index,
+.mb-pitch-card.is-active p:last-child {
   color: color-mix(in srgb, var(--mb-bg) 70%, transparent);
 }
 
-.mb-pitch-bento-main h3 {
+.mb-pitch-card.is-active h3 {
   color: var(--mb-bg);
 }
 
-.mb-pitch-bento-side {
-  display: grid;
-  gap: 0.75rem;
+.mb-pitch-progress {
+  display: none;
+  width: 100%;
+  height: 4px;
+  margin-top: 1.35rem;
+  overflow: hidden;
+  border-radius: 99px;
+  background: color-mix(in srgb, currentColor 22%, transparent);
+  pointer-events: none;
+}
+
+.mb-pitch-card.is-active .mb-pitch-progress {
+  display: block;
+}
+
+.mb-pitch-progress span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+.mb-pitch-card.is-active .mb-pitch-progress span {
+  animation: mb-pitch-progress 6s linear forwards;
+}
+
+.mb-pitch-bento-grid:not(.is-playing) .mb-pitch-card.is-active .mb-pitch-progress span {
+  animation-play-state: paused;
 }
 
 .mb-pitch-bento h3 {
@@ -68,12 +131,27 @@
   line-height: 1.55;
 }
 
+@keyframes mb-pitch-progress {
+  to {
+    transform: scaleX(1);
+  }
+}
+
 @media (max-width: 900px) {
   .mb-pitch-bento-grid {
     grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    min-height: 0;
   }
 
-  .mb-pitch-bento-main {
+  .mb-pitch-card:not(.is-active),
+  .mb-pitch-card.is-active {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .mb-pitch-card.is-active {
+    order: -1;
     min-height: 220px;
   }
 }
@@ -83,5 +161,9 @@
     opacity: 1;
     transform: none;
     transition: none;
+  }
+
+  .mb-pitch-progress {
+    display: none;
   }
 }
