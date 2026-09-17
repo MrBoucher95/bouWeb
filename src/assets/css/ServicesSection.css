@@ -30,26 +30,71 @@
   --svc-fg: var(--tile-video-fg);
 }
 
+.mb-services.mb-svc-bento {
+  --assemble: 0;
+  padding: 0;
+}
+
+.mb-svc-explode {
+  height: 250vh;
+}
+
+.mb-svc-explode-stage {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  min-height: 100svh;
+  padding: 5.5rem 0 4.5rem;
+  overflow: visible;
+}
+
+.mb-svc-bento .tag,
+.mb-svc-bento h2 {
+  opacity: calc(0.55 + var(--assemble) * 0.45);
+  transform: translateY(calc((1 - var(--assemble)) * 14px));
+}
+
 .mb-svc-bento-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
   gap: 0.75rem;
   width: min(100%, 1080px);
   margin-top: 2.8rem;
+  overflow: visible;
+  isolation: isolate;
   text-align: left;
+}
+
+.mb-svc-bento:not(.is-ready) .mb-svc-bento-grid {
+  opacity: 0;
 }
 
 .mb-svc-bento-main,
 .mb-svc-bento-side .mb-svc {
+  position: relative;
   display: grid;
   align-content: start;
   padding: 1.6rem 1.5rem 1.7rem;
   border-radius: 22px;
   background: var(--mb-card);
   color: var(--mb-fg);
+  transform-origin: center center;
+  will-change: transform, opacity;
+}
+
+.mb-svc-bento:not(.is-placed) .mb-svc-bento-main,
+.mb-svc-bento:not(.is-placed) .mb-svc-bento-side .mb-svc {
+  pointer-events: none;
+}
+
+.mb-svc-bento.is-placed .mb-svc-bento-main,
+.mb-svc-bento.is-placed .mb-svc-bento-side .mb-svc {
+  will-change: auto;
 }
 
 .mb-svc-bento-main {
+  z-index: 5;
   align-content: end;
   min-height: 100%;
   background: var(--svc-bg);
@@ -60,6 +105,23 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.75rem;
+  overflow: visible;
+}
+
+.mb-svc-bento-side .mb-svc:nth-child(1) {
+  z-index: 4;
+}
+
+.mb-svc-bento-side .mb-svc:nth-child(2) {
+  z-index: 3;
+}
+
+.mb-svc-bento-side .mb-svc:nth-child(3) {
+  z-index: 2;
+}
+
+.mb-svc-bento-side .mb-svc:nth-child(4) {
+  z-index: 1;
 }
 
 .mb-svc-bento h3 {
@@ -103,6 +165,16 @@
 }
 
 @media (max-width: 900px) {
+  .mb-svc-explode {
+    height: auto;
+  }
+
+  .mb-svc-explode-stage {
+    position: relative;
+    min-height: 0;
+    padding: 4.5rem 0;
+  }
+
   .mb-svc-bento-grid,
   .mb-svc-bento-side {
     grid-template-columns: 1fr;
@@ -110,5 +182,29 @@
 
   .mb-svc-bento-main {
     min-height: 220px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mb-svc-explode {
+    height: auto;
+  }
+
+  .mb-svc-explode-stage {
+    position: static;
+    min-height: 0;
+    padding: 5.5rem 0;
+  }
+
+  .mb-svc-bento .tag,
+  .mb-svc-bento h2,
+  .mb-svc-bento-main,
+  .mb-svc-bento-side .mb-svc {
+    opacity: 1;
+    transform: none;
+  }
+
+  .mb-svc-bento:not(.is-ready) .mb-svc-bento-grid {
+    opacity: 1;
   }
 }
