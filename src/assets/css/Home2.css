@@ -691,6 +691,11 @@ html:has(body.mb-on):not([data-theme='light']) .mb-news {
   font-size: 0.88rem;
 }
 
+.mb-foot-bar strong {
+  font-weight: 700;
+  color: var(--mb-fg);
+}
+
 .mb-foot-socials {
   display: flex;
   flex-wrap: wrap;

@@ -7,6 +7,7 @@ import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
 import Contact from './pages/Contact'
 import Estimate from './pages/Estimate'
+import Faq from './pages/Faq'
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
 import Portfolio from './pages/Portfolio'
@@ -22,6 +23,7 @@ const PAGE_BY_PATH = [
   ['/services/video', 'video'],
   ['/estimation', 'estimate'],
   ['/contact', 'contact'],
+  ['/faq', 'faq'],
   ['/blog', 'blog'],
   ['/portfolio', 'portfolio'],
   ['/accueil-2', 'home'],
@@ -61,6 +63,7 @@ export default function App() {
         <Route path="/services/:slug" element={<ServicePage />} />
         <Route path="/estimation" element={<Estimate />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/faq" element={<Faq />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/portfolio" element={<Portfolio />} />

@@ -105,7 +105,7 @@ export default function ServicePage() {
           </nav>
           <article className="sv-panel col-lg-8">
             <h2>{group.title}</h2>
-            <p className="sv-text">{group.text}</p>
+            {group.text ? <p className="sv-text">{group.text}</p> : null}
             <ul className="sv-plain">
               {group.items.map((item) => (
                 <li key={item}>{item}</li>
@@ -114,14 +114,16 @@ export default function ServicePage() {
           </article>
         </section>
 
-        <section className="sv-index">
-          <h2>{data.listTitle}</h2>
-          <ul className="sv-index-list">
-            {data.list.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </section>
+        {data.list?.length ? (
+          <section className="sv-index">
+            <h2>{data.listTitle}</h2>
+            <ul className="sv-index-list">
+              {data.list.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
 
         {data.process?.length ? (
           <section className="sv-article sv-process">
