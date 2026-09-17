@@ -1,0 +1,67 @@
+.mb-gallery--film {
+  overflow: hidden;
+  padding: 6.5rem 0 8.5rem;
+}
+
+.mb-film-stage {
+  padding: 2.5rem 0;
+  transform: rotate(-6.5deg) scale(1.06);
+  transform-origin: 50% 50%;
+}
+
+.mb-film-track {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  width: max-content;
+  animation: mb-scroll 46s linear infinite;
+}
+
+.mb-gallery--film:hover .mb-film-track {
+  animation-play-state: paused;
+}
+
+.mb-gallery--film .mb-shot {
+  flex: 0 0 230px;
+  aspect-ratio: 3 / 4;
+  border-radius: 8px;
+}
+
+.mb-gallery--film .mb-shot:nth-child(3n) {
+  flex-basis: 360px;
+  aspect-ratio: 16 / 10;
+  align-self: center;
+}
+
+.mb-gallery--film .mb-shot span {
+  padding: 2rem 0.85rem 0.8rem;
+  font-size: 0.74rem;
+}
+
+.mb-gallery--film .mb-shot-index {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.8rem;
+  color: #fff;
+  font-style: normal;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-shadow: 0 1px 8px rgb(0 0 0 / 0.45);
+}
+
+@media (max-width: 900px) {
+  .mb-gallery--film .mb-shot {
+    flex-basis: 180px;
+  }
+
+  .mb-gallery--film .mb-shot:nth-child(3n) {
+    flex-basis: 260px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mb-film-track {
+    animation: none;
+  }
+}

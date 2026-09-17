@@ -4,6 +4,7 @@ import PageShell from '../components/PageShell'
 import PitchSection from '../components/PitchSection'
 import QuoteSwiper from '../components/QuoteSwiper'
 import ServicesSection from '../components/ServicesSection'
+import WorkGallery from '../components/WorkGallery'
 import { useLanguage } from '../context/LanguageContext'
 
 const IMAGE_MAP = import.meta.glob('../assets/img/project/*.{png,jpg,jpeg,webp}', {
@@ -18,8 +19,6 @@ const IMAGES = Object.entries(IMAGE_MAP)
 export default function Home() {
   const { t } = useLanguage()
   const { home, home2 } = t
-  const rowA = [...IMAGES, ...IMAGES]
-  const rowB = [...IMAGES.slice().reverse(), ...IMAGES.slice().reverse()]
 
   useEffect(() => {
     document.title = t.meta.title
@@ -39,30 +38,7 @@ export default function Home() {
         <p className="mb-proof">{home2.proof}</p>
       </header>
 
-      <section className="mb-marquee" aria-label={home2.galleryEyebrow}>
-        <div className="mb-track mb-track-a">
-          {rowA.map((src, index) => (
-            <Link key={`a-${src}-${index}`} className="mb-shot" to="/portfolio">
-              <img src={src} alt="" />
-              <span>
-                <strong>{home.projects[index % home.projects.length]}</strong>
-                {home.name}
-              </span>
-            </Link>
-          ))}
-        </div>
-        <div className="mb-track mb-track-b">
-          {rowB.map((src, index) => (
-            <Link key={`b-${src}-${index}`} className="mb-shot" to="/portfolio">
-              <img src={src} alt="" />
-              <span>
-                <strong>{home.projects[index % home.projects.length]}</strong>
-                {home.name}
-              </span>
-            </Link>
-          ))}
-        </div>
-      </section>
+      <WorkGallery images={IMAGES} />
 
       <PitchSection />
 

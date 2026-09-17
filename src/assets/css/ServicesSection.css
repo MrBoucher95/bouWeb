@@ -83,11 +83,6 @@
   will-change: transform, opacity;
 }
 
-.mb-svc-bento:not(.is-placed) .mb-svc-bento-main,
-.mb-svc-bento:not(.is-placed) .mb-svc-bento-side .mb-svc {
-  pointer-events: none;
-}
-
 .mb-svc-bento.is-placed .mb-svc-bento-main,
 .mb-svc-bento.is-placed .mb-svc-bento-side .mb-svc {
   will-change: auto;
