@@ -7,7 +7,7 @@ function initialTheme() {
   if (attr === 'light' || attr === 'dark') return attr
   const stored = localStorage.getItem('boo-theme')
   if (stored === 'light' || stored === 'dark') return stored
-  return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+  return 'light'
 }
 
 export function ThemeProvider({ children }) {
