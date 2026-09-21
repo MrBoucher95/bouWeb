@@ -1,5 +1,6 @@
 .folio-section {
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: visible;
 }
 
 .section-head.folio-head {
@@ -23,20 +24,30 @@
 
 .folio-grid {
   --folio-p: 0;
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  gap: 16px;
+  position: relative;
   width: 100%;
   margin: 0 auto;
-  padding: 2rem 0 0;
+  padding: 2rem 0 4rem;
+}
+
+.folio-sizer,
+.folio-item {
+  width: 32%;
+}
+
+.folio-gutter {
+  width: 2%;
+}
+
+.folio-item {
+  margin-bottom: 16px;
 }
 
 .folio-card {
   position: relative;
-  min-height: clamp(180px, 18vw, 400px);
-  display: flex;
-  align-items: flex-end;
-  padding: 16px;
+  display: block;
+  width: 100%;
+  padding: 0;
   overflow: hidden;
   border: 0;
   outline: none;
@@ -45,10 +56,9 @@
   -webkit-tap-highlight-color: transparent;
   border-radius: 12px;
   color: var(--white);
-  background: transparent;
+  background: var(--mb-card);
   font: inherit;
   text-align: left;
-  width: 100%;
   cursor: pointer;
   transform-origin: center center;
   transform: translate(
@@ -58,7 +68,7 @@
     rotate(calc((1 - var(--folio-p)) * var(--rot)))
     scale(calc(0.9 + var(--folio-p) * 0.1));
   opacity: calc(0.8 + var(--folio-p) * 0.2);
-  transition: transform 0.3s var(--ease);
+  transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
 }
 
 .folio-card:hover,
@@ -71,23 +81,23 @@
 }
 
 .folio-image {
-  position: absolute;
-  inset: -2px;
-  width: calc(100% + 4px);
-  height: calc(100% + 4px);
-  object-fit: cover;
   display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
   transform: scale(1);
   transition: transform 0.45s var(--swoop);
 }
 
 .folio-card:hover .folio-image {
-  transform: scale(1.06);
+  transform: scale(1.04);
 }
 
 .folio-title {
-  position: relative;
+  position: absolute;
   z-index: 1;
+  left: 12px;
+  bottom: 12px;
   padding: 6px 12px;
   border-radius: 8px;
   background: rgb(0 0 0 / 0.4);
@@ -95,14 +105,6 @@
   font-weight: 500;
   font-size: 1rem;
   color: var(--white);
-}
-
-.folio-span-3 {
-  grid-column: span 3;
-}
-
-.folio-span-6 {
-  grid-column: span 4;
 }
 
 .folio-cta {
@@ -206,6 +208,37 @@
   transform: translateY(-50%);
 }
 
+@media (max-width: 900px) {
+  .folio-sizer,
+  .folio-item {
+    width: 49%;
+  }
+
+  .folio-gutter {
+    width: 2%;
+  }
+
+  .folio-title {
+    padding: 4px 8px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .folio-sizer,
+  .folio-item {
+    width: 100%;
+  }
+
+  .folio-gutter {
+    width: 0;
+  }
+
+  .folio-item {
+    margin-bottom: 12px;
+  }
+}
+
 @media (max-width: 768px) {
   .folio-lightbox-image {
     max-width: 94vw;
@@ -224,86 +257,6 @@
 
   .folio-lightbox-next {
     right: 0.6rem;
-  }
-}
-
-@media (max-width: 1200px) {
-  .folio-grid {
-    grid-template-columns: repeat(8, 1fr);
-    gap: 12px;
-  }
-
-  .folio-span-3,
-  .folio-span-6 {
-    grid-column: span 4;
-  }
-}
-
-@media (max-width: 768px) {
-  .folio-grid {
-    grid-template-columns: repeat(6, 1fr);
-    gap: 8px;
-    padding: 1rem 0 0;
-  }
-
-  .folio-span-3 {
-    grid-column: span 3;
-  }
-
-  .folio-span-6 {
-    grid-column: span 6;
-  }
-
-  .folio-card {
-    min-height: 120px;
-    padding: 12px;
-  }
-
-  .folio-title {
-    padding: 4px 8px;
-    font-size: 0.8rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .folio-grid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 6px;
-  }
-
-  .folio-span-3 {
-    grid-column: span 2;
-  }
-
-  .folio-span-6 {
-    grid-column: span 4;
-  }
-
-  .folio-card {
-    min-height: 100px;
-    padding: 8px;
-  }
-}
-
-@media (max-width: 360px) {
-  .folio-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 4px;
-  }
-
-  .folio-span-3,
-  .folio-span-6 {
-    grid-column: span 2;
-  }
-
-  .folio-card {
-    min-height: 80px;
-    padding: 6px;
-  }
-
-  .folio-title {
-    padding: 2px 6px;
-    font-size: 0.7rem;
   }
 }
 

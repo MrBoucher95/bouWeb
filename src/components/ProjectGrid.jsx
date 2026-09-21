@@ -1,29 +1,24 @@
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import Masonry from 'masonry-layout'
 import { useLanguage } from '../context/LanguageContext'
-const IMAGE_MAP = import.meta.glob('../assets/img/project/*.{png,jpg,jpeg,webp}', {
-  eager: true,
-  import: 'default',
-})
+import { PROJECT_IMAGES } from '../lib/projectImages'
 
-const IMAGES = Object.entries(IMAGE_MAP)
-  .sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }))
-  .map(([, src]) => src)
-
-const LAYOUT = [
-  { span: 3, dx: -50, dy: -40, rot: -8 },
-  { span: 3, dx: 50, dy: 40, rot: 8 },
-  { span: 6, dx: -50, dy: 40, rot: -8 },
-  { span: 6, dx: 50, dy: -40, rot: 8 },
-  { span: 3, dx: -50, dy: 40, rot: -8 },
-  { span: 3, dx: 50, dy: 40, rot: 8 },
-  { span: 3, dx: -50, dy: -40, rot: -8 },
-  { span: 3, dx: 50, dy: 40, rot: 8 },
-  { span: 6, dx: -50, dy: 40, rot: -8 },
+const MOTION = [
+  { dx: -50, dy: -40, rot: -8 },
+  { dx: 50, dy: 40, rot: 8 },
+  { dx: -50, dy: 40, rot: -8 },
+  { dx: 50, dy: -40, rot: 8 },
 ]
 
 function clamp(value, min = 0, max = 1) {
   return Math.min(max, Math.max(min, value))
+}
+
+function projectLabel(projects, index) {
+  if (projects[index]) return projects[index]
+  const sample = projects[0] || ''
+  return sample.replace(/\d+/, String(index + 1)) || String(index + 1).padStart(2, '0')
 }
 
 export default function ProjectGrid({ projects }) {
@@ -31,16 +26,44 @@ export default function ProjectGrid({ projects }) {
   const dialogRef = useRef(null)
   const { t } = useLanguage()
   const [active, setActive] = useState(null)
-  const count = projects.length
+  const count = PROJECT_IMAGES.length
 
   useEffect(() => {
     const grid = gridRef.current
-    if (!grid) return
+    if (!grid) return undefined
 
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reduced) {
+    const masonry = new Masonry(grid, {
+      itemSelector: '.folio-item',
+      columnWidth: '.folio-sizer',
+      gutter: '.folio-gutter',
+      percentPosition: true,
+      transitionDuration: '0.35s',
+    })
+
+    const relayout = () => masonry.layout()
+    const images = [...grid.querySelectorAll('.folio-image')]
+    images.forEach((img) => {
+      if (img.complete) return
+      img.addEventListener('load', relayout)
+      img.addEventListener('error', relayout)
+    })
+    relayout()
+
+    return () => {
+      images.forEach((img) => {
+        img.removeEventListener('load', relayout)
+        img.removeEventListener('error', relayout)
+      })
+      masonry.destroy()
+    }
+  }, [])
+
+  useEffect(() => {
+    const grid = gridRef.current
+    if (!grid) return undefined
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       grid.style.setProperty('--folio-p', '1')
-      return
+      return undefined
     }
 
     const update = () => {
@@ -90,31 +113,32 @@ export default function ProjectGrid({ projects }) {
   const close = () => setActive(null)
   const prev = () => setActive((index) => (index - 1 + count) % count)
   const next = () => setActive((index) => (index + 1) % count)
-  const current = active != null ? projects[active] : ''
-  const currentSrc = active != null ? IMAGES[active] : ''
+  const current = active != null ? projectLabel(projects, active) : ''
+  const currentSrc = active != null ? PROJECT_IMAGES[active] : ''
 
   return (
     <>
       <div className="folio-grid" ref={gridRef}>
-        {projects.map((project, index) => {
-          const layout = LAYOUT[index % LAYOUT.length]
+        <div className="folio-sizer" />
+        <div className="folio-gutter" />
+        {PROJECT_IMAGES.map((src, index) => {
+          const motion = MOTION[index % MOTION.length]
           return (
-            <button
-              key={`${project}-${index}`}
-              type="button"
-              className={`folio-card folio-span-${layout.span}`}
-              style={{
-                '--dx': `${layout.dx}px`,
-                '--dy': `${layout.dy}px`,
-                '--rot': `${layout.rot}deg`,
-              }}
-              onClick={() => setActive(index)}
-            >
-              {IMAGES[index] ? (
-                <img className="folio-image" src={IMAGES[index]} alt="" />
-              ) : null}
-              <span className="folio-title">{project}</span>
-            </button>
+            <div className="folio-item" key={`${src}-${index}`}>
+              <button
+                type="button"
+                className="folio-card"
+                style={{
+                  '--dx': `${motion.dx}px`,
+                  '--dy': `${motion.dy}px`,
+                  '--rot': `${motion.rot}deg`,
+                }}
+                onClick={() => setActive(index)}
+              >
+                <img className="folio-image" src={src} alt="" />
+                <span className="folio-title">{projectLabel(projects, index)}</span>
+              </button>
+            </div>
           )
         })}
       </div>

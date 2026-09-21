@@ -1,9 +1,11 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useLanguage } from '../context/LanguageContext'
+import website01 from '../assets/video/website01.mp4'
 import '../assets/css/Pitch.css'
 
 const FLIP_MS = 720
 const FLIP_EASE = 'cubic-bezier(0.22, 1, 0.36, 1)'
+const VIDEO_PILLAR_INDEX = 1
 
 function prefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -55,6 +57,9 @@ export default function PitchSection() {
   )
 
   const playing = inView && !paused && !hidden
+  const videoRef = useRef(null)
+  const [flipping, setFlipping] = useState(false)
+  const videoActive = activeIndex === VIDEO_PILLAR_INDEX && inView && !hidden && !flipping
 
   useEffect(() => {
     const node = root.current
@@ -83,14 +88,37 @@ export default function PitchSection() {
   useLayoutEffect(() => {
     const snapshots = pendingFlip.current
     pendingFlip.current = null
-    if (!snapshots || prefersReducedMotion()) return
+    if (!snapshots || prefersReducedMotion()) {
+      grid.current?.classList.remove('is-flipping')
+      setFlipping(false)
+      return
+    }
     playFlip(snapshots)
+    const timer = window.setTimeout(() => {
+      grid.current?.classList.remove('is-flipping')
+      setFlipping(false)
+    }, FLIP_MS)
+    return () => window.clearTimeout(timer)
   }, [activeIndex])
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+    if (videoActive) {
+      video.play().catch(() => {})
+      return undefined
+    }
+    video.pause()
+    return undefined
+  }, [videoActive])
 
   const goTo = (index) => {
     if (index === activeIndex) return
+    videoRef.current?.pause()
     if (grid.current && !prefersReducedMotion()) {
       pendingFlip.current = readSnapshots(grid.current)
+      grid.current.classList.add('is-flipping')
+      setFlipping(true)
     }
     setActiveIndex(index)
   }
@@ -103,7 +131,7 @@ export default function PitchSection() {
         <p className="mb-copy">{home2.pitchLead}</p>
         <div
           ref={grid}
-          className={`mb-pitch-bento-grid${playing ? ' is-playing' : ''}`}
+          className={`mb-pitch-bento-grid${playing ? ' is-playing' : ''}${flipping ? ' is-flipping' : ''}`}
           onPointerEnter={() => setPaused(true)}
           onPointerLeave={() => setPaused(false)}
           onFocusCapture={() => setPaused(true)}
@@ -117,10 +145,11 @@ export default function PitchSection() {
         >
           {home2.pillars.map((pillar, index) => {
             const active = index === activeIndex
+            const hasVideo = index === VIDEO_PILLAR_INDEX
             return (
               <article
                 key={pillar.title}
-                className={`mb-pitch-card${active ? ' is-active' : ''}`}
+                className={`mb-pitch-card${active ? ' is-active' : ''}${hasVideo ? ' has-video' : ''}`}
                 aria-current={active ? 'true' : undefined}
                 tabIndex={0}
                 onClick={() => goTo(index)}
@@ -131,6 +160,18 @@ export default function PitchSection() {
                   }
                 }}
               >
+                {hasVideo ? (
+                  <video
+                    ref={videoRef}
+                    className="mb-pitch-card-video"
+                    src={website01}
+                    loop
+                    muted
+                    playsInline
+                    preload="auto"
+                    aria-hidden="true"
+                  />
+                ) : null}
                 <div className="mb-pitch-card-body">
                   <p className="mb-pitch-index">{String(index + 1).padStart(2, '0')}</p>
                   <h3>{pillar.title}</h3>

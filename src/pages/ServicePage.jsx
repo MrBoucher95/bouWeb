@@ -70,11 +70,6 @@ export default function ServicePage() {
           {data.title}.
           <span>{data.titleAccent}</span>
         </h1>
-        <div className="mb-actions">
-          <a className="mb-btn mb-btn-fill" href="#mb-fit-split">
-            {data.sectionTitle}
-          </a>
-        </div>
         <p className="mb-proof">{data.subtitle}</p>
       </header>
       <ServiceHero mediaOnly showBanner={false} />

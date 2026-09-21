@@ -22,15 +22,18 @@
 }
 
 .mb-gallery--film .mb-shot {
-  flex: 0 0 230px;
-  aspect-ratio: 3 / 4;
+  --shot-h: 280px;
+  flex: 0 0 auto;
+  height: var(--shot-h);
+  width: auto;
+  aspect-ratio: unset;
   border-radius: 8px;
 }
 
-.mb-gallery--film .mb-shot:nth-child(3n) {
-  flex-basis: 360px;
-  aspect-ratio: 16 / 10;
-  align-self: center;
+.mb-gallery--film .mb-shot img {
+  width: auto;
+  height: var(--shot-h);
+  object-fit: contain;
 }
 
 .mb-gallery--film .mb-shot span {
@@ -52,11 +55,7 @@
 
 @media (max-width: 900px) {
   .mb-gallery--film .mb-shot {
-    flex-basis: 180px;
-  }
-
-  .mb-gallery--film .mb-shot:nth-child(3n) {
-    flex-basis: 260px;
+    --shot-h: 200px;
   }
 }
 

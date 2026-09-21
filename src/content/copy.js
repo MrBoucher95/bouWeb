@@ -117,6 +117,11 @@ export const copy = {
         'Projet 7',
         'Projet 8',
         'Projet 9',
+        'Projet 10',
+        'Projet 11',
+        'Projet 12',
+        'Projet 13',
+        'Projet 14',
       ],
       ctaTitle: 'Prêt à démarrer votre projet ?',
       ctaText:
@@ -860,6 +865,11 @@ export const copy = {
         'Project 7',
         'Project 8',
         'Project 9',
+        'Project 10',
+        'Project 11',
+        'Project 12',
+        'Project 13',
+        'Project 14',
       ],
       ctaTitle: 'Ready to Start Your Project?',
       ctaText:

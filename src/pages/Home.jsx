@@ -6,15 +6,7 @@ import QuoteSwiper from '../components/QuoteSwiper'
 import ServicesSection from '../components/ServicesSection'
 import WorkGallery from '../components/WorkGallery'
 import { useLanguage } from '../context/LanguageContext'
-
-const IMAGE_MAP = import.meta.glob('../assets/img/project/*.{png,jpg,jpeg,webp}', {
-  eager: true,
-  import: 'default',
-})
-
-const IMAGES = Object.entries(IMAGE_MAP)
-  .sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }))
-  .map(([, src]) => src)
+import { PROJECT_IMAGES } from '../lib/projectImages'
 
 export default function Home() {
   const { t } = useLanguage()
@@ -38,7 +30,7 @@ export default function Home() {
         <p className="mb-proof">{home2.proof}</p>
       </header>
 
-      <WorkGallery images={IMAGES} />
+      <WorkGallery images={PROJECT_IMAGES} />
 
       <PitchSection />
 
