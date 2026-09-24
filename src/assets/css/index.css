@@ -130,6 +130,11 @@ img {
   --on-accent: var(--tile-portfolio-fg);
 }
 
+.app[data-page='faq'] {
+  --accent: var(--tile-faq-bg);
+  --on-accent: var(--tile-faq-fg);
+}
+
 .eyebrow,
 .mono {
   font-family: var(--mono);

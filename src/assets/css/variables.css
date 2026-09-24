@@ -77,6 +77,8 @@
   --tile-blog-fg: var(--white);
   --tile-portfolio-bg: color-mix(in srgb, var(--accent-orange) 42%, var(--accent-yellow));
   --tile-portfolio-fg: var(--black);
+  --tile-faq-bg: color-mix(in srgb, var(--accent-purple) 40%, var(--accent-blue));
+  --tile-faq-fg: var(--white);
 
   /* Semantic roles — default to Accueil; each page overrides on .app */
   --accent: var(--tile-home-bg);

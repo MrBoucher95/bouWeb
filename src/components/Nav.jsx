@@ -11,8 +11,12 @@ const tiles = [
   { id: 4, to: '/services/numerique', key: 'digital', kind: 'digital', mark: 'nodes' },
   { id: 5, to: '/services/web', key: 'web', kind: 'web', mark: 'frame' },
   { id: 6, to: '/services/applications', key: 'apps', kind: 'apps', mark: 'phone' },
-  { id: 7, to: '/estimation', key: 'estimate', kind: 'estimate', mark: 'slider' },
-  { id: 8, to: '/contact', key: 'contact', kind: 'contact', mark: 'mail' },
+  { id: 7, to: '/services/video', key: 'video', kind: 'video', mark: 'play' },
+  { id: 8, to: '/blog', key: 'blog', kind: 'blog', mark: 'page' },
+  { id: 9, to: '/portfolio', key: 'portfolio', kind: 'portfolio', mark: 'grid' },
+  { id: 10, to: '/faq', key: 'faq', kind: 'faq', mark: 'ask' },
+  { id: 11, to: '/estimation', key: 'estimate', kind: 'estimate', mark: 'slider' },
+  { id: 12, to: '/contact', key: 'contact', kind: 'contact', mark: 'mail' },
 ]
 
 function Mark({ type }) {
@@ -72,6 +76,41 @@ function Mark({ type }) {
         <path d="M12 28h56M12 52h56" stroke="currentColor" strokeWidth="4" />
         <circle cx="32" cy="28" r="7" fill="currentColor" />
         <circle cx="50" cy="52" r="7" fill="currentColor" />
+      </svg>
+    )
+  }
+  if (type === 'play') {
+    return (
+      <svg viewBox="0 0 80 80" fill="none" aria-hidden="true">
+        <rect x="10" y="18" width="60" height="44" rx="4" stroke="currentColor" strokeWidth="4" />
+        <path d="M34 30l18 10-18 10V30Z" fill="currentColor" />
+      </svg>
+    )
+  }
+  if (type === 'grid') {
+    return (
+      <svg viewBox="0 0 80 80" fill="none" aria-hidden="true">
+        <rect x="14" y="14" width="22" height="22" rx="3" stroke="currentColor" strokeWidth="4" />
+        <rect x="44" y="14" width="22" height="22" rx="3" stroke="currentColor" strokeWidth="4" />
+        <rect x="14" y="44" width="22" height="22" rx="3" stroke="currentColor" strokeWidth="4" />
+        <rect x="44" y="44" width="22" height="22" rx="3" stroke="currentColor" strokeWidth="4" />
+      </svg>
+    )
+  }
+  if (type === 'page') {
+    return (
+      <svg viewBox="0 0 80 80" fill="none" aria-hidden="true">
+        <rect x="18" y="10" width="44" height="60" rx="4" stroke="currentColor" strokeWidth="4" />
+        <path d="M28 28h24M28 40h24M28 52h16" stroke="currentColor" strokeWidth="4" />
+      </svg>
+    )
+  }
+  if (type === 'ask') {
+    return (
+      <svg viewBox="0 0 80 80" fill="none" aria-hidden="true">
+        <circle cx="40" cy="40" r="26" stroke="currentColor" strokeWidth="4" />
+        <path d="M32 32c0-6 16-8 16 2 0 6-8 6-8 12" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+        <circle cx="40" cy="54" r="2.5" fill="currentColor" />
       </svg>
     )
   }
