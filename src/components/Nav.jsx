@@ -144,6 +144,7 @@ export default function Nav() {
   const [enlarged, setEnlarged] = useState(null)
   const [settle, setSettle] = useState(false)
   const [hidden, setHidden] = useState(false)
+  const [scrolled, setScrolled] = useState(() => window.scrollY > 0)
   const closeTimer = useRef(0)
   const lastY = useRef(0)
 
@@ -155,6 +156,7 @@ export default function Nav() {
   useEffect(() => {
     lastY.current = window.scrollY
     setHidden(false)
+    setScrolled(window.scrollY > 0)
   }, [pathname])
 
   useEffect(() => {
@@ -170,6 +172,7 @@ export default function Nav() {
       window.requestAnimationFrame(() => {
         const y = window.scrollY
         const delta = y - lastY.current
+        setScrolled(y > 0)
         if (y < 24) {
           setHidden(false)
         } else if (delta > 6) {
@@ -235,44 +238,6 @@ export default function Nav() {
 
   return (
     <>
-      <div className={`site-tools${hidden ? ' nav-hide' : ''}`}>
-        <button
-          type="button"
-          className="lang-switch"
-          onClick={() => setLang(lang === 'fr' ? 'en' : 'fr')}
-          aria-label={lang === 'fr' ? t.nav.langEn : t.nav.langFr}
-        >
-          {lang === 'fr' ? 'FR' : 'EN'}
-        </button>
-        <button
-          type="button"
-          className="theme-switch"
-          onClick={toggleTheme}
-          aria-label={theme === 'dark' ? t.nav.themeLight : t.nav.themeDark}
-        >
-          {theme === 'dark' ? (
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.7" />
-              <path
-                d="M12 3v2M12 19v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M3 12h2M19 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"
-                stroke="currentColor"
-                strokeWidth="1.7"
-                strokeLinecap="round"
-              />
-            </svg>
-          ) : (
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path
-                d="M15.2 4.1A7.6 7.6 0 1 0 19.9 15 6.2 6.2 0 0 1 15.2 4.1Z"
-                stroke="currentColor"
-                strokeWidth="1.7"
-                strokeLinejoin="round"
-              />
-            </svg>
-          )}
-        </button>
-      </div>
-
       <div className={classes}>
         <div className="nav">
           <div className="nav-wrapper">
@@ -310,7 +275,7 @@ export default function Nav() {
           </div>
         </div>
 
-        <header className="nav-bar">
+        <header className={`nav-bar${scrolled ? ' nav-scrolled' : ''}`}>
           <div className="container nav-bar-inner">
             <Link className="nav-brand" to="/" aria-label={t.nav.home}>
               <svg viewBox="0 0 4558 2658" aria-hidden="true">
@@ -318,6 +283,43 @@ export default function Nav() {
                 <path d="M4557.53,1886.13c-0,-0 -690.341,407.958 -843.325,484.9c-152.985,76.942 -400.351,123.548 -609.869,-53.321c31.732,-50.762 149.085,-187.337 149.085,-187.337c-0,-0 -430.574,342.804 -548.655,446.995c-118.081,104.19 -447.208,117.077 -603.428,-21.126c-156.22,-138.202 -745.345,-670.111 -745.345,-670.111l836.448,-0l225.342,216.741l-70.714,83.863l369.411,-300.604l702.249,-0l78.594,67.743l112.082,-67.743l948.125,-0Z" />
               </svg>
             </Link>
+            <div className="site-tools">
+              <button
+                type="button"
+                className="lang-switch"
+                onClick={() => setLang(lang === 'fr' ? 'en' : 'fr')}
+                aria-label={lang === 'fr' ? t.nav.langEn : t.nav.langFr}
+              >
+                {lang === 'fr' ? 'FR' : 'EN'}
+              </button>
+              <button
+                type="button"
+                className="theme-switch"
+                onClick={toggleTheme}
+                aria-label={theme === 'dark' ? t.nav.themeLight : t.nav.themeDark}
+              >
+                {theme === 'dark' ? (
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.7" />
+                    <path
+                      d="M12 3v2M12 19v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M3 12h2M19 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"
+                      stroke="currentColor"
+                      strokeWidth="1.7"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                ) : (
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path
+                      d="M15.2 4.1A7.6 7.6 0 1 0 19.9 15 6.2 6.2 0 0 1 15.2 4.1Z"
+                      stroke="currentColor"
+                      strokeWidth="1.7"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                )}
+              </button>
+            </div>
             <div className="nav-bar-spacer" aria-hidden="true" />
           </div>
         </header>

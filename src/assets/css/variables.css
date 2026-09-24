@@ -107,6 +107,7 @@
   --button: 90px;
   --button-size: var(--button);
   --button-closed: calc(var(--button) * 2 / 3);
+  --nav-btn-inset: calc(16px - (var(--button-size) - var(--button-closed)) / 2);
   --gap: 10px;
   --nav-tile-gap: var(--gap);
   --page-pad: var(--page-gutter);

@@ -1,6 +1,8 @@
 .brand-nav {
   --highest-tile-yeet: calc((max(100vw, 100vh) - var(--button)) / -4);
   --nav-btn-inset: calc(16px - (var(--button-size) - var(--button-closed)) / 2);
+  --nav-bar-height: 72px;
+  --nav-btn-top: calc(1rem + (var(--nav-bar-height) - var(--button-size)) / 2);
 }
 
 @media (max-width: 991px) {
@@ -325,7 +327,7 @@ html[data-theme='light'] .brand-nav.open .nav-wrapper:not(.nav-wrapper-gridlines
   height: var(--button-size);
   left: auto;
   right: max(0.75rem, calc((100vw - min(1180px, 100vw)) / 2 + var(--nav-btn-inset)));
-  top: var(--nav-btn-inset);
+  top: var(--nav-btn-top);
   bottom: auto;
   display: flex;
   pointer-events: auto;
@@ -344,7 +346,7 @@ html[data-theme='light'] .brand-nav.open .nav-wrapper:not(.nav-wrapper-gridlines
   height: var(--button-size);
   left: auto;
   right: max(0.75rem, calc((100vw - min(1180px, 100vw)) / 2 + var(--nav-btn-inset)));
-  top: var(--nav-btn-inset);
+  top: var(--nav-btn-top);
   bottom: auto;
   display: flex;
   pointer-events: none;
@@ -353,7 +355,7 @@ html[data-theme='light'] .brand-nav.open .nav-wrapper:not(.nav-wrapper-gridlines
 .brand-nav.open>.menu,
 .brand-nav.open .nav-wrapper-gridlines .menu {
   transform: translate(calc(-50vw + var(--button-size) / 2 + max(0.75rem, calc((100vw - min(1180px, 100vw)) / 2 + var(--nav-btn-inset)))),
-      calc(50vh - var(--button-size) / 2 - var(--nav-btn-inset)));
+      calc(50vh - var(--button-size) / 2 - var(--nav-btn-top)));
   transition: transform 0.5s var(--nav-easing-swoop), opacity 0.7s cubic-bezier(0.4, 0, 0.1, 1);
 }
 
@@ -388,7 +390,7 @@ html[data-theme='light'] .brand-nav.open .nav-wrapper:not(.nav-wrapper-gridlines
 .brand-nav.warp.open>.menu,
 .brand-nav.warp.open .nav-wrapper-gridlines .menu {
   transform: translate(calc(-50vw + var(--button-size) / 2 + max(0.75rem, calc((100vw - min(1180px, 100vw)) / 2 + var(--nav-btn-inset)))),
-      calc(50vh - var(--button-size) / 2 - var(--nav-btn-inset)));
+      calc(50vh - var(--button-size) / 2 - var(--nav-btn-top)));
 }
 
 .brand-nav.warp.open .nav-button {
@@ -543,6 +545,12 @@ html[data-theme='light'] .brand-nav.open .nav-wrapper:not(.nav-wrapper-gridlines
   background-color: #fff;
   border-radius: 12px;
   margin-top: 1rem;
+  box-shadow: none;
+  transition: box-shadow 0.35s var(--nav-easing);
+}
+
+.brand-nav .nav-bar.nav-scrolled .nav-bar-inner {
+  box-shadow: 0 10px 28px rgb(0 0 0 / 0.14);
 }
 
 .brand-nav .nav-bar-spacer {
@@ -649,10 +657,11 @@ html[data-theme='light'] .brand-nav.open .nav-brand {
   .brand-nav.warp.open>.menu,
   .brand-nav.warp.open .nav-wrapper-gridlines .menu {
     transform: translate(calc(-50vw + var(--button-size) / 2 + max(0.75rem, calc((100vw - min(1180px, 100vw)) / 2 + var(--nav-btn-inset)))),
-        calc(50dvh - var(--button-size) / 2 - var(--nav-btn-inset)));
+        calc(50dvh - var(--button-size) / 2 - var(--nav-btn-top)));
   }
 
   .brand-nav {
+    --nav-bar-height: 64px;
     --nav-narrow: calc(50% - var(--button-size) / 2 - var(--nav-tile-gap) * 2);
     --nav-wide: calc(50% + var(--button-size) / 2 - var(--nav-tile-gap));
     --nav-above: calc(50% - var(--button-size) / 2 - var(--nav-tile-gap) * 3);
