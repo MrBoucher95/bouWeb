@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useLanguage } from '../context/LanguageContext'
-import website01 from '../assets/video/website01.mp4'
+import website01 from '../assets/video/website01-bg.mp4'
 import '../assets/css/Pitch.css'
 
 const FLIP_MS = 720
@@ -168,7 +168,7 @@ export default function PitchSection() {
                     loop
                     muted
                     playsInline
-                    preload="auto"
+                    preload="metadata"
                     aria-hidden="true"
                   />
                 ) : null}

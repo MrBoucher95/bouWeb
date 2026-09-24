@@ -115,8 +115,8 @@ export default function Footer() {
       setStatus('success')
       setForm({ name: '', email: '', subject: '', message: '' })
       setStep(0)
-    } catch {
-      setStatus('send-error')
+    } catch (error) {
+      setStatus(error?.code === 'activate' ? 'activate' : 'send-error')
     }
   }
 
@@ -221,8 +221,6 @@ export default function Footer() {
                       data-form-type="other"
                       spellCheck={false}
                       required
-                      readOnly
-                      onFocus={(event) => event.currentTarget.removeAttribute('readonly')}
                       placeholder={placeholders[step]}
                       value={form[field]}
                       onChange={(event) => update(field, event.target.value)}
@@ -245,8 +243,17 @@ export default function Footer() {
                         : contact.next}
                   </button>
                 </div>
-                <p className={`mb-newslet-msg${status === 'error' || status === 'send-error' ? ' is-on' : ''}`} role="alert">
-                  {status === 'error' ? home2.formError : status === 'send-error' ? contact.sendError : ''}
+                <p
+                  className={`mb-newslet-msg${status === 'error' || status === 'send-error' || status === 'activate' ? ' is-on' : ''}`}
+                  role="alert"
+                >
+                  {status === 'error'
+                    ? home2.formError
+                    : status === 'activate'
+                      ? contact.activate
+                      : status === 'send-error'
+                        ? contact.sendError
+                        : ''}
                 </p>
               </>
             )}

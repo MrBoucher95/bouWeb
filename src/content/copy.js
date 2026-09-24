@@ -631,6 +631,8 @@ export const copy = {
       send: 'Envoyer',
       sent: 'Merci. Votre message a été envoyé — je vous répondrai rapidement.',
       sendError: 'L’envoi a échoué. Réessayez dans un instant.',
+      activate:
+        'Ouvrez le courriel « Activate Form » envoyé à mrboucher95@gmail.com (vérifiez les indésirables), cliquez le lien, puis renvoyez votre message.',
       mapLabel: 'Victoriaville',
       mapOpen: 'Ouvrir dans Google Maps',
       ctaTitle: 'Un projet en tête ?',
@@ -1377,6 +1379,8 @@ export const copy = {
       send: 'Send',
       sent: 'Thank you. Your message was sent — I will get back to you shortly.',
       sendError: 'Sending failed. Please try again in a moment.',
+      activate:
+        'Open the “Activate Form” email sent to mrboucher95@gmail.com (check spam), click the link, then send your message again.',
       mapLabel: 'Victoriaville',
       mapOpen: 'Open in Google Maps',
       ctaTitle: 'A project in mind?',

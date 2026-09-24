@@ -40,8 +40,8 @@ export default function Contact() {
     try {
       await sendMessage(form)
       setStatus('sent')
-    } catch {
-      setStatus('error')
+    } catch (error) {
+      setStatus(error?.code === 'activate' ? 'activate' : 'error')
     }
   }
 
@@ -131,7 +131,9 @@ export default function Contact() {
                       {status === 'pending' ? t.home2.formPending : step === fields.length - 1 ? contact.send : contact.next}
                     </button>
                   </div>
-                  {status === 'error' ? <p className="contact-sent is-err">{contact.sendError}</p> : null}
+                  {status === 'error' || status === 'activate' ? (
+                    <p className="contact-sent is-err">{status === 'activate' ? contact.activate : contact.sendError}</p>
+                  ) : null}
                 </>
               )}
             </form>
