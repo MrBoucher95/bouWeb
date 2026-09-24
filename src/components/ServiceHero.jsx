@@ -154,7 +154,13 @@ function useServiceHero(pathRef, mediaRefs, lockMedia = false) {
   }, [pathRef, mediaRefs, lockMedia])
 }
 
-function HeroShot({ mediaRefs, index, className, src, image }) {
+function HeroShot({ mediaRefs, index, className, src, image, loopAt }) {
+  const restart = (event) => {
+    const video = event.currentTarget
+    if (loopAt == null || video.currentTime < loopAt) return
+    video.currentTime = 0
+  }
+
   return (
     <div
       ref={(node) => {
@@ -163,7 +169,23 @@ function HeroShot({ mediaRefs, index, className, src, image }) {
       className={`sv-hi-shot ${className}`}
     >
       {src ? (
-        <video className="sv-hi-shot-face" src={src} autoPlay loop muted playsInline />
+        <video
+          className="sv-hi-shot-face"
+          src={src}
+          autoPlay
+          loop={loopAt == null}
+          muted
+          playsInline
+          onTimeUpdate={loopAt == null ? undefined : restart}
+          onEnded={
+            loopAt == null
+              ? undefined
+              : (event) => {
+                  event.currentTarget.currentTime = 0
+                  event.currentTarget.play()
+                }
+          }
+        />
       ) : (
         <div className="sv-hi-shot-face" style={{ backgroundImage: `url(${image})` }} />
       )}
@@ -171,13 +193,13 @@ function HeroShot({ mediaRefs, index, className, src, image }) {
   )
 }
 
-function HeroStage({ mediaRefs }) {
+function HeroStage({ mediaRefs, video = taping, loopAt, shotC = watch }) {
   return (
     <div className="sv-hi-stage-inner">
-      <HeroShot mediaRefs={mediaRefs} index={0} className="sv-hi-shot-video" src={taping} />
+      <HeroShot mediaRefs={mediaRefs} index={0} className="sv-hi-shot-video" src={video} loopAt={loopAt} />
       <HeroShot mediaRefs={mediaRefs} index={1} className="sv-hi-shot-a" image={beforeAfter} />
       <HeroShot mediaRefs={mediaRefs} index={2} className="sv-hi-shot-b" image={essence} />
-      <HeroShot mediaRefs={mediaRefs} index={3} className="sv-hi-shot-c" image={watch} />
+      <HeroShot mediaRefs={mediaRefs} index={3} className="sv-hi-shot-c" image={shotC} />
     </div>
   )
 }
@@ -206,6 +228,9 @@ export default function ServiceHero({
   banner,
   mediaOnly = false,
   showBanner = true,
+  video = taping,
+  loopAt,
+  shotC,
 }) {
   const curveId = `svHiCurve${useId().replace(/:/g, '')}`
   const pathRef = useRef(null)
@@ -231,7 +256,7 @@ export default function ServiceHero({
             </div>
           </div>
           <div className="sv-hi-visual">
-            <HeroStage mediaRefs={mediaRefs} />
+            <HeroStage mediaRefs={mediaRefs} video={video} loopAt={loopAt} shotC={shotC} />
           </div>
         </div>
       )}
@@ -254,7 +279,7 @@ export default function ServiceHero({
 
       {mediaOnly ? (
         <div className="sv-hi-stage">
-          <HeroStage mediaRefs={mediaRefs} />
+          <HeroStage mediaRefs={mediaRefs} video={video} loopAt={loopAt} shotC={shotC} />
         </div>
       ) : null}
     </section>

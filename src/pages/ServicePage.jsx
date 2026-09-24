@@ -2,9 +2,19 @@ import { useEffect, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import PageShell from '../components/PageShell'
 import ServiceHero from '../components/ServiceHero'
+import appVideo from '../assets/video/app.mp4'
+import printVideo from '../assets/video/print.mp4'
+import numeriqueVideo from '../assets/video/numerique.mp4'
+import printStill from '../assets/img/print01.jpg'
 import { useLanguage } from '../context/LanguageContext'
 import '../assets/css/Service.css'
 import '../assets/css/NumeriqueFit.css'
+
+const PAGE_VIDEO = {
+  applications: appVideo,
+  imprime: printVideo,
+  numerique: numeriqueVideo,
+}
 
 export default function ServicePage() {
   const { slug } = useParams()
@@ -72,7 +82,13 @@ export default function ServicePage() {
         </h1>
         <p className="mb-proof">{data.subtitle}</p>
       </header>
-      <ServiceHero mediaOnly showBanner={false} />
+      <ServiceHero
+        mediaOnly
+        showBanner={false}
+        video={PAGE_VIDEO[slug]}
+        loopAt={PAGE_VIDEO[slug] ? 15 : undefined}
+        shotC={slug === 'imprime' ? printStill : undefined}
+      />
       <div className="container py-5">
         {data.intro || data.body?.length ? (
           <section className="sv-article" aria-labelledby="sv-article-title">
