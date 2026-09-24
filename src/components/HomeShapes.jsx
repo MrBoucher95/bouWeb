@@ -47,7 +47,8 @@ export default function HomeShapes() {
         const kind = node.dataset.para
         const depth = DEPTH[node.dataset.depth] || 1
         const scroll = SCROLL[kind]
-        let tx = scrolled * scroll.x * depth
+        const roam = window.innerWidth <= 640 ? 0.22 : 1
+        let tx = scrolled * scroll.x * depth * roam
         let ty = scrolled * scroll.y * depth
         let rot = Number(node.dataset.tilt) + scrolled * scroll.r
         if (kind === 'para01') {

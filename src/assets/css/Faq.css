@@ -24,7 +24,8 @@
 .faq-item::details-content {
   height: 0;
   overflow: clip;
-  transition: height 0.35s ease, content-visibility 0.35s ease allow-discrete;
+  content-visibility: visible;
+  transition: height 0.35s ease;
 }
 
 .faq-item[open]::details-content {

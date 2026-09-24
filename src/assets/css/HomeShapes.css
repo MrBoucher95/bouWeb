@@ -142,6 +142,12 @@
   }
 }
 
+@media (max-width: 640px) {
+  .mb-shape {
+    --fit: 0.42;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .mb-shape {
     opacity: var(--fade);
