@@ -91,7 +91,6 @@
   max-width: 340px;
 }
 
-.mb-fit .sv-index,
 .mb-fit .mb-fit-cta {
   margin-top: 3.5rem;
 }
@@ -122,7 +121,7 @@
 }
 
 .mb-fit .sv-panel h2 {
-  margin: 0;
+  margin: 0 0 1.15rem;
   font-weight: 800;
   letter-spacing: -0.04em;
 }

@@ -130,16 +130,27 @@ export default function ServicePage() {
               </button>
             ))}
           </nav>
-          <article className="sv-panel col-lg-8">
-            <h2>{group.title}</h2>
-            {group.text ? <p className="sv-text">{group.text}</p> : null}
-            <ul className="sv-plain">
-              {group.items.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </article>
+          <div className="col-lg-8">
+            <article className="sv-panel">
+              <h2>{group.title}</h2>
+              {group.text ? <p className="sv-text">{group.text}</p> : null}
+              <ul className="sv-plain">
+                {group.items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </article>
+          </div>
         </section>
+
+        {data.process?.length ? (
+          <section className="sv-article sv-process">
+            <h2>{data.processTitle}</h2>
+            {data.process.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </section>
+        ) : null}
 
         {data.list?.length ? (
           <section className="sv-index">
@@ -149,15 +160,6 @@ export default function ServicePage() {
                 <li key={item}>{item}</li>
               ))}
             </ul>
-          </section>
-        ) : null}
-
-        {data.process?.length ? (
-          <section className="sv-article sv-process">
-            <h2>{data.processTitle}</h2>
-            {data.process.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
           </section>
         ) : null}
 
