@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronLeft, faChevronRight, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { createPortal } from 'react-dom'
 import Masonry from 'masonry-layout'
 import { useLanguage } from '../context/LanguageContext'
@@ -159,19 +161,13 @@ export default function ProjectGrid({ projects }) {
             </>
           ) : null}
           <button type="button" className="folio-lightbox-close" onClick={close} aria-label={t.home.lightboxClose}>
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M6 6l12 12M18 6L6 18" />
-            </svg>
+            <FontAwesomeIcon icon={faXmark} />
           </button>
           <button type="button" className="folio-lightbox-nav folio-lightbox-prev" onClick={prev} aria-label={t.home.lightboxPrev}>
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M15 5l-7 7 7 7" />
-            </svg>
+            <FontAwesomeIcon icon={faChevronLeft} />
           </button>
           <button type="button" className="folio-lightbox-nav folio-lightbox-next" onClick={next} aria-label={t.home.lightboxNext}>
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M9 5l7 7-7 7" />
-            </svg>
+            <FontAwesomeIcon icon={faChevronRight} />
           </button>
         </dialog>,
         document.body,

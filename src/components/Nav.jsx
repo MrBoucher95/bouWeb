@@ -1,4 +1,23 @@
 import { useEffect, useRef, useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  faBars,
+  faCircleQuestion,
+  faDisplay,
+  faEnvelope,
+  faGrip,
+  faHouse,
+  faMobileScreen,
+  faMoon,
+  faNewspaper,
+  faPrint,
+  faShareNodes,
+  faSliders,
+  faSun,
+  faUser,
+  faVideo,
+  faXmark,
+} from '@fortawesome/free-solid-svg-icons'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useLanguage } from '../context/LanguageContext'
 import { useTheme } from '../context/ThemeContext'
@@ -19,107 +38,23 @@ const tiles = [
   { id: 12, to: '/contact', key: 'contact', kind: 'contact', mark: 'mail' },
 ]
 
+const marks = {
+  wave: faHouse,
+  dot: faUser,
+  stack: faPrint,
+  nodes: faShareNodes,
+  frame: faDisplay,
+  phone: faMobileScreen,
+  slider: faSliders,
+  play: faVideo,
+  grid: faGrip,
+  page: faNewspaper,
+  ask: faCircleQuestion,
+  mail: faEnvelope,
+}
+
 function Mark({ type }) {
-  if (type === 'wave') {
-    return (
-      <svg viewBox="0 0 120 64" fill="none" aria-hidden="true">
-        <path d="M4 40c18-28 28 28 48 0s30 28 48 0" stroke="currentColor" strokeWidth="6" />
-      </svg>
-    )
-  }
-  if (type === 'dot') {
-    return (
-      <svg viewBox="0 0 80 80" aria-hidden="true">
-        <circle cx="40" cy="28" r="14" fill="currentColor" />
-        <rect x="18" y="50" width="44" height="18" rx="9" fill="currentColor" />
-      </svg>
-    )
-  }
-  if (type === 'stack') {
-    return (
-      <svg viewBox="0 0 80 80" fill="none" aria-hidden="true">
-        <rect x="14" y="18" width="52" height="14" stroke="currentColor" strokeWidth="4" />
-        <rect x="10" y="34" width="52" height="14" stroke="currentColor" strokeWidth="4" />
-        <rect x="18" y="50" width="52" height="14" stroke="currentColor" strokeWidth="4" />
-      </svg>
-    )
-  }
-  if (type === 'nodes') {
-    return (
-      <svg viewBox="0 0 80 80" aria-hidden="true">
-        <circle cx="20" cy="22" r="6" fill="currentColor" />
-        <circle cx="60" cy="28" r="6" fill="currentColor" />
-        <circle cx="36" cy="58" r="6" fill="currentColor" />
-        <path d="M24 26l32 4M24 26L36 52M58 32L40 54" stroke="currentColor" strokeWidth="4" fill="none" />
-      </svg>
-    )
-  }
-  if (type === 'frame') {
-    return (
-      <svg viewBox="0 0 80 80" fill="none" aria-hidden="true">
-        <rect x="10" y="16" width="60" height="48" rx="4" stroke="currentColor" strokeWidth="4" />
-        <path d="M10 28h60" stroke="currentColor" strokeWidth="4" />
-      </svg>
-    )
-  }
-  if (type === 'phone') {
-    return (
-      <svg viewBox="0 0 80 80" fill="none" aria-hidden="true">
-        <rect x="26" y="8" width="28" height="64" rx="6" stroke="currentColor" strokeWidth="4" />
-        <circle cx="40" cy="62" r="3" fill="currentColor" />
-      </svg>
-    )
-  }
-  if (type === 'slider') {
-    return (
-      <svg viewBox="0 0 80 80" fill="none" aria-hidden="true">
-        <path d="M12 28h56M12 52h56" stroke="currentColor" strokeWidth="4" />
-        <circle cx="32" cy="28" r="7" fill="currentColor" />
-        <circle cx="50" cy="52" r="7" fill="currentColor" />
-      </svg>
-    )
-  }
-  if (type === 'play') {
-    return (
-      <svg viewBox="0 0 80 80" fill="none" aria-hidden="true">
-        <rect x="10" y="18" width="60" height="44" rx="4" stroke="currentColor" strokeWidth="4" />
-        <path d="M34 30l18 10-18 10V30Z" fill="currentColor" />
-      </svg>
-    )
-  }
-  if (type === 'grid') {
-    return (
-      <svg viewBox="0 0 80 80" fill="none" aria-hidden="true">
-        <rect x="14" y="14" width="22" height="22" rx="3" stroke="currentColor" strokeWidth="4" />
-        <rect x="44" y="14" width="22" height="22" rx="3" stroke="currentColor" strokeWidth="4" />
-        <rect x="14" y="44" width="22" height="22" rx="3" stroke="currentColor" strokeWidth="4" />
-        <rect x="44" y="44" width="22" height="22" rx="3" stroke="currentColor" strokeWidth="4" />
-      </svg>
-    )
-  }
-  if (type === 'page') {
-    return (
-      <svg viewBox="0 0 80 80" fill="none" aria-hidden="true">
-        <rect x="18" y="10" width="44" height="60" rx="4" stroke="currentColor" strokeWidth="4" />
-        <path d="M28 28h24M28 40h24M28 52h16" stroke="currentColor" strokeWidth="4" />
-      </svg>
-    )
-  }
-  if (type === 'ask') {
-    return (
-      <svg viewBox="0 0 80 80" fill="none" aria-hidden="true">
-        <circle cx="40" cy="40" r="26" stroke="currentColor" strokeWidth="4" />
-        <path d="M32 32c0-6 16-8 16 2 0 6-8 6-8 12" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
-        <circle cx="40" cy="54" r="2.5" fill="currentColor" />
-      </svg>
-    )
-  }
-  return (
-    <svg viewBox="0 0 80 80" fill="none" aria-hidden="true">
-      <rect x="14" y="22" width="52" height="36" rx="4" stroke="currentColor" strokeWidth="4" />
-      <path d="M14 28l26 18 26-18" stroke="currentColor" strokeWidth="4" />
-    </svg>
-  )
+  return <FontAwesomeIcon icon={marks[type] || faEnvelope} />
 }
 
 function TileLines() {
@@ -298,26 +233,7 @@ export default function Nav() {
                 onClick={toggleTheme}
                 aria-label={theme === 'dark' ? t.nav.themeLight : t.nav.themeDark}
               >
-                {theme === 'dark' ? (
-                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.7" />
-                    <path
-                      d="M12 3v2M12 19v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M3 12h2M19 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"
-                      stroke="currentColor"
-                      strokeWidth="1.7"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                ) : (
-                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path
-                      d="M15.2 4.1A7.6 7.6 0 1 0 19.9 15 6.2 6.2 0 0 1 15.2 4.1Z"
-                      stroke="currentColor"
-                      strokeWidth="1.7"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                )}
+                <FontAwesomeIcon icon={theme === 'dark' ? faSun : faMoon} />
               </button>
             </div>
             <div className="nav-bar-spacer" aria-hidden="true" />
@@ -334,20 +250,7 @@ export default function Nav() {
             onClick={toggle}
           >
             <div className="nav-button-highlight" />
-            {open ? (
-              <svg className="nav-button-svg" viewBox="0 0 41 41" fill="currentColor" aria-hidden="true">
-                <path
-                  fillRule="evenodd"
-                  d="M22.311 20.5001L30.8009 28.9899L28.9889 30.8019L20.4991 22.312L12.0092 30.8019L10.1973 28.9899L18.6871 20.5001L10.1973 12.0102L12.0092 10.1982L20.4991 18.6881L28.9889 10.1982L30.8009 12.0102L22.311 20.5001Z"
-                />
-              </svg>
-            ) : (
-              <svg className="nav-button-svg" viewBox="0 0 41 41" fill="currentColor" aria-hidden="true">
-                <path d="M32.6719 19.2188H8.32812V21.7812H32.6719V19.2188Z" />
-                <path d="M32.6719 9.96875H8.32812V12.5312H32.6719V9.96875Z" />
-                <path d="M32.6719 29.1094H8.32812V31.6719H32.6719V29.1094Z" />
-              </svg>
-            )}
+            <FontAwesomeIcon className="nav-button-svg" icon={open ? faXmark : faBars} />
           </button>
         </div>
       </div>

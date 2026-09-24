@@ -1,4 +1,6 @@
 import { useEffect, useLayoutEffect, useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFacebook, faFacebookMessenger, faLinkedin } from '@fortawesome/free-brands-svg-icons'
 import { Link } from 'react-router-dom'
 import { useLanguage } from '../context/LanguageContext'
 import { sendMessage, plainText } from '../lib/mail'
@@ -9,31 +11,19 @@ export const socials = [
     id: 'facebook',
     label: 'Facebook',
     href: 'https://www.facebook.com/',
-    icon: (
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M14 8.2h2.7V4.8H14c-2.6 0-4.4 1.7-4.4 4.7v1.9H7.2V15h2.4v8.2h3.5V15h2.9l.6-3.6h-3.5v-1.5c0-1.1.5-1.7 1.9-1.7Z" />
-      </svg>
-    ),
+    icon: <FontAwesomeIcon icon={faFacebook} />,
   },
   {
     id: 'messenger',
     label: 'Messenger',
     href: 'https://www.messenger.com/',
-    icon: (
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M12 2C6.5 2 2 6.2 2 11.4c0 2.9 1.4 5.5 3.7 7.2V22l3.4-1.9c.9.2 1.9.4 2.9.4 5.5 0 10-4.2 10-9.1S17.5 2 12 2Zm1.1 12.2-2.4-2.6-4.7 2.6 5.2-5.6 2.4 2.6 4.7-2.6-5.2 5.6Z" />
-      </svg>
-    ),
+    icon: <FontAwesomeIcon icon={faFacebookMessenger} />,
   },
   {
     id: 'linkedin',
     label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/math-boucher',
-    icon: (
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M6.5 9.5H3.7V20h2.8V9.5ZM5.1 4a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2ZM20.3 20h-2.8v-5.6c0-1.8-.8-2.4-1.8-2.4s-2 .9-2 2.5V20h-2.8V9.5h2.7v1.4c.5-.9 1.8-1.7 3.4-1.7 2.2 0 3.3 1.2 3.3 3.9V20Z" />
-      </svg>
-    ),
+    href: 'https://www.linkedin.com/in/math-boucher/',
+    icon: <FontAwesomeIcon icon={faLinkedin} />,
   },
 ]
 

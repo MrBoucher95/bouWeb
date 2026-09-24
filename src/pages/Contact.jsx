@@ -1,11 +1,12 @@
 import { useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEnvelope, faLocationDot, faPhone } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
 import PageShell from '../components/PageShell'
 import { useLanguage } from '../context/LanguageContext'
 import { sendMessage, plainText } from '../lib/mail'
 import '../assets/css/Contact.css'
 
-const fields = ['name', 'email', 'subject', 'message']
 const MAP_CENTER = '46.0561,-71.9601'
 const MAP_EMBED = `https://maps.google.com/maps?ll=${MAP_CENTER}&z=12&hl=fr&t=m&output=embed`
 const MAP_LINK = `https://www.google.com/maps/@${MAP_CENTER},12z`
@@ -13,13 +14,16 @@ const MAP_LINK = `https://www.google.com/maps/@${MAP_CENTER},12z`
 export default function Contact() {
   const { t } = useLanguage()
   const { contact } = t
-  const [step, setStep] = useState(0)
   const [status, setStatus] = useState('')
-  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    company: '',
+    subject: '',
+    message: '',
+  })
 
-  const labels = [contact.name, contact.emailField, contact.subject, contact.message]
-  const placeholders = [contact.namePh, contact.emailPh, contact.subjectPh, contact.messagePh]
-  const field = fields[step]
   const phoneHref = `tel:${contact.phone.replace(/\s/g, '')}`
 
   const update = (key, value) => {
@@ -32,13 +36,16 @@ export default function Contact() {
   const submit = async (event) => {
     event.preventDefault()
     if (status === 'pending') return
-    if (step < fields.length - 1) {
-      setStep((value) => value + 1)
-      return
-    }
+    const notes = [
+      form.phone.trim() && `${contact.phoneField}: ${form.phone.trim()}`,
+      form.company.trim() && `${contact.company}: ${form.company.trim()}`,
+    ].filter(Boolean)
     setStatus('pending')
     try {
-      await sendMessage(form)
+      await sendMessage({
+        ...form,
+        message: notes.length ? `${form.message.trim()}\n\n${notes.join('\n')}` : form.message,
+      })
       setStatus('sent')
     } catch (error) {
       setStatus(error?.code === 'activate' ? 'activate' : 'error')
@@ -68,67 +75,130 @@ export default function Contact() {
               {contact.mapOpen}
             </a>
           </figure>
-          <div className="contact-card">
-            <div className="contact-meta">
+          <div className="contact-meta">
+            <div>
+              <FontAwesomeIcon icon={faLocationDot} />
               <div>
-                <p className="tag">{contact.addressLabel}</p>
+                <p className="sr-only">{contact.addressLabel}</p>
                 <p>{contact.address}</p>
                 <p>{contact.postal}</p>
               </div>
+            </div>
+            <div>
+              <FontAwesomeIcon icon={faPhone} />
               <div>
-                <p className="tag">{contact.phoneLabel}</p>
+                <p className="sr-only">{contact.phoneLabel}</p>
                 <a href={phoneHref}>{contact.phone}</a>
               </div>
+            </div>
+            <div>
+              <FontAwesomeIcon icon={faEnvelope} />
               <div>
-                <p className="tag">{contact.emailLabel}</p>
+                <p className="sr-only">{contact.emailLabel}</p>
                 <a href={`mailto:${contact.email}`}>{contact.email}</a>
               </div>
             </div>
+          </div>
+          <div className="contact-card">
             <form className="contact-form" onSubmit={submit} autoComplete="off">
-              <p className="contact-step">
-                {t.estimate.step} {step + 1} / {fields.length}
-              </p>
               {status === 'sent' ? (
                 <p className="contact-sent">{contact.sent}</p>
               ) : (
                 <>
-                  <label className="contact-field">
-                    <span>{labels[step]}</span>
-                    {field === 'message' ? (
+                  <div className="contact-form-grid">
+                    <label className="contact-field">
+                      <span>{contact.name}</span>
+                      <input
+                        required
+                        type="text"
+                        name="mbq-a"
+                        autoComplete="off"
+                        data-1p-ignore="true"
+                        data-lpignore="true"
+                        data-form-type="other"
+                        value={form.name}
+                        placeholder={contact.namePh}
+                        onChange={(event) => update('name', event.target.value)}
+                      />
+                    </label>
+                    <label className="contact-field">
+                      <span>{contact.emailField}</span>
+                      <input
+                        required
+                        type="text"
+                        inputMode="email"
+                        name="mbq-b"
+                        autoComplete="off"
+                        data-1p-ignore="true"
+                        data-lpignore="true"
+                        data-form-type="other"
+                        value={form.email}
+                        placeholder={contact.emailPh}
+                        onChange={(event) => update('email', event.target.value)}
+                      />
+                    </label>
+                    <label className="contact-field">
+                      <span>{contact.phoneField}</span>
+                      <input
+                        type="text"
+                        inputMode="tel"
+                        name="mbq-e"
+                        autoComplete="off"
+                        data-1p-ignore="true"
+                        data-lpignore="true"
+                        data-form-type="other"
+                        value={form.phone}
+                        placeholder={contact.phonePh}
+                        onChange={(event) => update('phone', event.target.value)}
+                      />
+                    </label>
+                    <label className="contact-field">
+                      <span>{contact.company}</span>
+                      <input
+                        type="text"
+                        name="mbq-f"
+                        autoComplete="off"
+                        data-1p-ignore="true"
+                        data-lpignore="true"
+                        data-form-type="other"
+                        value={form.company}
+                        placeholder={contact.companyPh}
+                        onChange={(event) => update('company', event.target.value)}
+                      />
+                    </label>
+                    <label className="contact-field is-wide">
+                      <span>{contact.subject}</span>
+                      <input
+                        required
+                        type="text"
+                        name="mbq-c"
+                        autoComplete="off"
+                        data-1p-ignore="true"
+                        data-lpignore="true"
+                        data-form-type="other"
+                        value={form.subject}
+                        placeholder={contact.subjectPh}
+                        onChange={(event) => update('subject', event.target.value)}
+                      />
+                    </label>
+                    <label className="contact-field is-wide">
+                      <span>{contact.message}</span>
                       <textarea
                         required
+                        rows={8}
                         autoComplete="off"
                         data-1p-ignore="true"
                         data-lpignore="true"
                         data-form-type="other"
                         value={form.message}
-                        placeholder={placeholders[step]}
+                        placeholder={contact.messagePh}
                         onChange={(event) => update('message', event.target.value)}
                       />
-                    ) : (
-                      <input
-                        required
-                        type="text"
-                        inputMode={field === 'email' ? 'email' : 'text'}
-                        name={field === 'name' ? 'mbq-a' : field === 'email' ? 'mbq-b' : 'mbq-c'}
-                        autoComplete="off"
-                        data-1p-ignore="true"
-                        data-lpignore="true"
-                        data-form-type="other"
-                        value={form[field]}
-                        placeholder={placeholders[step]}
-                        onChange={(event) => update(field, event.target.value)}
-                      />
-                    )}
-                  </label>
+                    </label>
+                  </div>
                   <div className="contact-actions">
-                    {step > 0 ? (
-                      <button type="button" className="mb-btn" onClick={() => setStep((value) => value - 1)}>
-                        {contact.prev}
-                      </button>
-                    ) : null}
                     <button type="submit" className="mb-btn mb-btn-fill" disabled={status === 'pending'}>
-                      {status === 'pending' ? t.home2.formPending : step === fields.length - 1 ? contact.send : contact.next}
+                      {status === 'pending' ? t.home2.formPending : contact.send}
                     </button>
                   </div>
                   {status === 'error' || status === 'activate' ? (
