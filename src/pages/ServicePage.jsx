@@ -6,6 +6,14 @@ import appVideo from '../assets/video/app.mp4'
 import printVideo from '../assets/video/print.mp4'
 import numeriqueVideo from '../assets/video/numerique.mp4'
 import printStill from '../assets/img/print01.jpg'
+import printFace from '../assets/img/print02.jpg'
+import printShot from '../assets/img/print03.jpg'
+import appWatch from '../assets/img/app01.jpg'
+import appBefore from '../assets/img/app02.jpg'
+import appEssence from '../assets/img/app03.jpg'
+import webWatch from '../assets/img/web03.jpg'
+import webBefore from '../assets/img/web02.jpg'
+import webEssence from '../assets/img/web01.jpg'
 import { useLanguage } from '../context/LanguageContext'
 import '../assets/css/Service.css'
 import '../assets/css/NumeriqueFit.css'
@@ -14,6 +22,12 @@ const PAGE_VIDEO = {
   applications: appVideo,
   imprime: printVideo,
   numerique: numeriqueVideo,
+}
+
+const PAGE_SHOTS = {
+  imprime: { a: printFace, b: printShot, c: printStill },
+  applications: { a: appBefore, b: appEssence, c: appWatch },
+  web: { a: webBefore, b: webEssence, c: webWatch },
 }
 
 export default function ServicePage() {
@@ -87,7 +101,9 @@ export default function ServicePage() {
         showBanner={false}
         video={PAGE_VIDEO[slug]}
         loopAt={PAGE_VIDEO[slug] ? 15 : undefined}
-        shotC={slug === 'imprime' ? printStill : undefined}
+        shotA={PAGE_SHOTS[slug]?.a}
+        shotB={PAGE_SHOTS[slug]?.b}
+        shotC={PAGE_SHOTS[slug]?.c}
       />
       <div className="container py-5">
         {data.intro || data.body?.length ? (
