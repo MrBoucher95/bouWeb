@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-  faBars,
   faCircleQuestion,
   faDisplay,
   faEnvelope,
@@ -16,7 +15,6 @@ import {
   faSun,
   faUser,
   faVideo,
-  faXmark,
 } from '@fortawesome/free-solid-svg-icons'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useLanguage } from '../context/LanguageContext'
@@ -250,7 +248,20 @@ export default function Nav() {
             onClick={toggle}
           >
             <div className="nav-button-highlight" />
-            <FontAwesomeIcon className="nav-button-svg" icon={open ? faXmark : faBars} />
+            {open ? (
+              <svg className="nav-button-svg" viewBox="0 0 41 41" fill="currentColor" aria-hidden="true">
+                <path
+                  fillRule="evenodd"
+                  d="M22.311 20.5001L30.8009 28.9899L28.9889 30.8019L20.4991 22.312L12.0092 30.8019L10.1973 28.9899L18.6871 20.5001L10.1973 12.0102L12.0092 10.1982L20.4991 18.6881L28.9889 10.1982L30.8009 12.0102L22.311 20.5001Z"
+                />
+              </svg>
+            ) : (
+              <svg className="nav-button-svg" viewBox="0 0 41 41" fill="currentColor" aria-hidden="true">
+                <path d="M32.6719 19.2188H8.32812V21.7812H32.6719V19.2188Z" />
+                <path d="M32.6719 9.96875H8.32812V12.5312H32.6719V9.96875Z" />
+                <path d="M32.6719 29.1094H8.32812V31.6719H32.6719V29.1094Z" />
+              </svg>
+            )}
           </button>
         </div>
       </div>

@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import HomeShapes from '../components/HomeShapes'
 import PageShell from '../components/PageShell'
 import PitchSection from '../components/PitchSection'
 import QuoteSwiper from '../components/QuoteSwiper'
@@ -19,8 +18,6 @@ export default function Home() {
 
   return (
     <PageShell>
-      <div className="mb-home">
-      <HomeShapes />
       <header className="mb-hero">
         <p className="mb-news">{home2.kicker}</p>
         <h1 className="mb-title">{home.name}</h1>
@@ -60,7 +57,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-      </div>
     </PageShell>
   )
 }

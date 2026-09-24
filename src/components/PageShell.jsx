@@ -1,5 +1,6 @@
 import { useLayoutEffect } from 'react'
 import Footer from './Footer'
+import HomeShapes from './HomeShapes'
 import '../assets/css/Home2.css'
 
 export default function PageShell({ children, className = '' }) {
@@ -10,7 +11,12 @@ export default function PageShell({ children, className = '' }) {
 
   return (
     <div className={['mb-page', className].filter(Boolean).join(' ')}>
-      <main className="mb">{children}</main>
+      <main className="mb">
+        <div className="mb-home">
+          <HomeShapes />
+          {children}
+        </div>
+      </main>
       <Footer />
     </div>
   )

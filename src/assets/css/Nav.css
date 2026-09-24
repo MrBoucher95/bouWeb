@@ -96,7 +96,7 @@ html[data-theme='light'] .brand-nav.open .nav-wrapper:not(.nav-wrapper-gridlines
 }
 
 .brand-nav .tile-visual svg {
-  width: min(46%, 140px);
+  width: min(22%, 52px);
   height: auto;
 }
 
@@ -781,7 +781,7 @@ html[data-theme='light'] .brand-nav.open .nav-brand {
   }
 
   .brand-nav .tile-visual svg {
-    width: min(32%, 58px);
+    width: min(20%, 32px);
   }
 
   .brand-nav:not(.open) .nav-tile-1,
