@@ -36,7 +36,7 @@
 }
 
 .mb-svc-explode {
-  height: 250vh;
+  height: 420vh;
 }
 
 .mb-svc-explode-stage {
@@ -92,8 +92,6 @@
   z-index: 5;
   align-content: end;
   min-height: 100%;
-  background: var(--svc-bg);
-  color: var(--svc-fg);
 }
 
 .mb-svc-bento-side {
@@ -134,28 +132,28 @@
   line-height: 1.5;
 }
 
-.mb-svc-bento-main p,
-.mb-svc-bento-main .mb-svc-index {
-  color: color-mix(in srgb, var(--svc-fg) 78%, transparent);
-}
-
-.mb-svc-bento-main h3 {
-  color: var(--svc-fg);
-}
-
 .mb-svc-bento span {
   margin-top: 1.1rem;
   font-size: 0.88rem;
   font-weight: 600;
 }
 
-.mb-svc-bento-side .mb-svc:hover {
+.mb-svc-bento-main:hover,
+.mb-svc-bento-main:focus-visible,
+.mb-svc-bento-side .mb-svc:hover,
+.mb-svc-bento-side .mb-svc:focus-visible {
   background: var(--svc-bg);
   color: var(--svc-fg);
 }
 
+.mb-svc-bento-main:hover p,
+.mb-svc-bento-main:hover .mb-svc-index,
+.mb-svc-bento-main:focus-visible p,
+.mb-svc-bento-main:focus-visible .mb-svc-index,
 .mb-svc-bento-side .mb-svc:hover p,
-.mb-svc-bento-side .mb-svc:hover .mb-svc-index {
+.mb-svc-bento-side .mb-svc:hover .mb-svc-index,
+.mb-svc-bento-side .mb-svc:focus-visible p,
+.mb-svc-bento-side .mb-svc:focus-visible .mb-svc-index {
   color: color-mix(in srgb, var(--svc-fg) 78%, transparent);
 }
 

@@ -28,7 +28,7 @@ function pinProgress(el) {
   const rect = el.getBoundingClientRect()
   const total = rect.height - window.innerHeight
   if (total <= 1) return 1
-  return clamp((-rect.top / total) * 1.12)
+  return clamp(-rect.top / total)
 }
 
 function viewProgress(el) {
