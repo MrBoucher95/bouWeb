@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import PageShell from '../components/PageShell'
 import ServiceHero from '../components/ServiceHero'
@@ -16,6 +16,7 @@ import webBefore from '../assets/img/web02.jpg'
 import webEssence from '../assets/img/web01.jpg'
 import { useLanguage } from '../context/LanguageContext'
 import '../assets/css/Service.css'
+import '../assets/css/Faq.css'
 import '../assets/css/NumeriqueFit.css'
 
 const PAGE_VIDEO = {
@@ -39,6 +40,21 @@ export default function ServicePage() {
   useEffect(() => {
     setActive(0)
   }, [slug])
+
+  useLayoutEffect(() => {
+    const snap = () => {
+      const ratio = window.devicePixelRatio || 1
+      document.querySelectorAll('.faq-mark').forEach((mark) => {
+        mark.style.translate = '0 -50%'
+        const { top } = mark.getBoundingClientRect()
+        const shift = (Math.round(top * ratio) - top * ratio) / ratio
+        mark.style.translate = `0 calc(-50% + ${shift}px)`
+      })
+    }
+    snap()
+    window.addEventListener('resize', snap)
+    return () => window.removeEventListener('resize', snap)
+  }, [data?.faq])
 
   useEffect(() => {
     if (!data) return
@@ -167,10 +183,16 @@ export default function ServicePage() {
           <section className="sv-faq">
             <h2>{t.blog.faq}</h2>
             {data.faq.map((item) => (
-              <div className="sv-faq-item" key={item.q}>
-                <h3>{item.q}</h3>
+              <details className="faq-item" key={item.q}>
+                <summary>
+                  {item.q}
+                  <span className="faq-mark" aria-hidden="true">
+                    <span />
+                    <span />
+                  </span>
+                </summary>
                 <p>{item.a}</p>
-              </div>
+              </details>
             ))}
           </section>
         ) : null}

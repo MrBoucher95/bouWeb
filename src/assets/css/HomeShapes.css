@@ -17,7 +17,7 @@
   position: absolute;
   color: var(--mb-fg);
   opacity: 0;
-  animation: mb-shape-in 1s ease-in-out 2s forwards;
+  animation: mb-shape-in 0.45s ease-out 0.1s forwards;
   transition: transform 0.2s ease-out;
 }
 
@@ -95,6 +95,16 @@
 .x4 { top: 78%; right: 12%; }
 .x5 { top: 12%; left: 10%; }
 
+.mb-home .sq1 {
+  top: 16vh;
+  right: 4%;
+}
+
+.mb-home .x5 {
+  top: 26vh;
+  left: 3%;
+}
+
 @keyframes mb-shape-in {
   to {
     opacity: var(--fade);
@@ -120,6 +130,16 @@
   .c5 { top: 38%; right: 2%; }
   .x4 { top: 78%; right: -2%; }
   .x5 { top: 12%; left: -4%; }
+
+  .mb-home .sq1 {
+    top: 12vh;
+    right: -8%;
+  }
+
+  .mb-home .x5 {
+    top: 20vh;
+    left: -6%;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
