@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useLanguage } from '../context/LanguageContext'
 import { sendMessage, plainText } from '../lib/mail'
@@ -38,6 +38,20 @@ export const socials = [
 ]
 
 const footFields = ['name', 'email', 'subject', 'message']
+const footerQuery = '(max-width: 560px)'
+
+function useNarrowFooter() {
+  const [narrow, setNarrow] = useState(() => window.matchMedia(footerQuery).matches)
+
+  useEffect(() => {
+    const media = window.matchMedia(footerQuery)
+    const sync = () => setNarrow(media.matches)
+    media.addEventListener('change', sync)
+    return () => media.removeEventListener('change', sync)
+  }, [])
+
+  return narrow
+}
 
 export default function Footer() {
   const { t } = useLanguage()
@@ -45,6 +59,24 @@ export default function Footer() {
   const [status, setStatus] = useState('')
   const [step, setStep] = useState(0)
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
+  const [openCols, setOpenCols] = useState({})
+  const narrow = useNarrowFooter()
+
+  useLayoutEffect(() => {
+    if (!narrow) return undefined
+    const snap = () => {
+      const ratio = window.devicePixelRatio || 1
+      document.querySelectorAll('.mb-foot-mark').forEach((mark) => {
+        mark.style.translate = '0 -50%'
+        const { top } = mark.getBoundingClientRect()
+        const shift = (Math.round(top * ratio) - top * ratio) / ratio
+        mark.style.translate = `0 calc(-50% + ${shift}px)`
+      })
+    }
+    snap()
+    window.addEventListener('resize', snap)
+    return () => window.removeEventListener('resize', snap)
+  }, [narrow])
   const field = footFields[step]
   const labels = [contact.name, contact.emailField, contact.subject, contact.message]
   const placeholders = [contact.namePh, contact.emailPh, contact.subjectPh, contact.messagePh]
@@ -74,25 +106,25 @@ export default function Footer() {
       ],
     },
     {
+      title: home2.colStudio,
+      links: [
+        { label: nav.home, to: '/' },
+        { label: nav.about, to: '/a-propos' },
+        { label: nav.contact, to: '/contact' },
+      ],
+    },
+    {
       title: home2.colWork,
       links: [
         { label: nav.portfolio, to: '/portfolio' },
-        { label: nav.home, to: '/' },
+        { label: nav.estimate, to: '/estimation' },
       ],
     },
     {
       title: home2.colResources,
       links: [
-        { label: nav.estimate, to: '/estimation' },
         { label: nav.blog, to: '/blog' },
         { label: nav.faq, to: '/faq' },
-      ],
-    },
-    {
-      title: home2.colStudio,
-      links: [
-        { label: nav.about, to: '/a-propos' },
-        { label: nav.contact, to: '/contact' },
       ],
     },
   ]
@@ -126,10 +158,26 @@ export default function Footer() {
         <div className="container">
           <div className="mb-foot-cols">
             {columns.map((column) => (
-              <div key={column.title} className="mb-foot-col">
-                <h3>
-                  {column.href ? <Link to={column.href}>{column.title}</Link> : column.title}
-                </h3>
+              <details
+                key={column.title}
+                className="mb-foot-col"
+                open={!narrow || Boolean(openCols[column.title])}
+                onToggle={(event) => {
+                  const isOpen = event.currentTarget.open
+                  setOpenCols((current) =>
+                    current[column.title] === isOpen ? current : { ...current, [column.title]: isOpen },
+                  )
+                }}
+              >
+                <summary>
+                  <h3>
+                    {column.href ? <Link to={column.href}>{column.title}</Link> : column.title}
+                  </h3>
+                  <span className="mb-foot-mark" aria-hidden="true">
+                    <span />
+                    <span />
+                  </span>
+                </summary>
                 <ul>
                   {column.links.map((link) => (
                     <li key={`${column.title}-${link.label}`}>
@@ -146,12 +194,12 @@ export default function Footer() {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </details>
             ))}
           </div>
 
           <div className="mb-foot-bar">
-            <p>
+            <p className="mb-foot-copy">
               <strong>© 2026 m-boucher</strong>{t.footer.replace(/^© 2026 m-boucher/, '')}
             </p>
             <div className="mb-foot-socials">

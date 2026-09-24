@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useLayoutEffect } from 'react'
 import { Link } from 'react-router-dom'
 import PageShell from '../components/PageShell'
 import { useLanguage } from '../context/LanguageContext'
@@ -7,6 +7,21 @@ import '../assets/css/Faq.css'
 export default function Faq() {
   const { t } = useLanguage()
   const { faq, home } = t
+
+  useLayoutEffect(() => {
+    const snap = () => {
+      const ratio = window.devicePixelRatio || 1
+      document.querySelectorAll('.faq-mark').forEach((mark) => {
+        mark.style.translate = '0 -50%'
+        const { top } = mark.getBoundingClientRect()
+        const shift = (Math.round(top * ratio) - top * ratio) / ratio
+        mark.style.translate = `0 calc(-50% + ${shift}px)`
+      })
+    }
+    snap()
+    window.addEventListener('resize', snap)
+    return () => window.removeEventListener('resize', snap)
+  }, [faq.groups])
 
   useEffect(() => {
     document.title = faq.metaTitle
@@ -44,25 +59,18 @@ export default function Faq() {
 
       <div className="container pb-5">
         <div className="faq-page">
-          <nav className="faq-jump" aria-label={faq.title}>
-            {faq.groups.map((group, index) => (
-              <a key={group.id} href={`#faq-${group.id}`}>
-                <span>{String(index + 1).padStart(2, '0')}</span>
-                {group.title}
-              </a>
-            ))}
-          </nav>
-
-          {faq.groups.map((group, index) => (
+          {faq.groups.map((group) => (
             <section className="faq-group" id={`faq-${group.id}`} key={group.id}>
-              <p className="mb-news">
-                {String(index + 1).padStart(2, '0')}
-                <span>{group.title}</span>
-              </p>
               <h2>{group.title}</h2>
               {group.items.map((item) => (
                 <details className="faq-item" key={item.q}>
-                  <summary>{item.q}</summary>
+                  <summary>
+                    {item.q}
+                    <span className="faq-mark" aria-hidden="true">
+                      <span />
+                      <span />
+                    </span>
+                  </summary>
                   <p>{item.a}</p>
                 </details>
               ))}

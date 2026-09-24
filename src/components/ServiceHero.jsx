@@ -29,20 +29,20 @@ function easeOut(t) {
 
 function mediaValues() {
   const width = window.innerWidth
-  if (width <= 480) {
+  if (width <= 640) {
     return {
-      video: { xFrom: 0, xTo: 0, yFrom: 96, yTo: -12, scaleFrom: 0.76, scaleTo: 1.2 },
-      a: { xFrom: -140, xTo: 12, yFrom: -80, yTo: 8, scaleFrom: 0.64, scaleTo: 1.18 },
-      b: { xFrom: -110, xTo: 8, yFrom: 64, yTo: -8, scaleFrom: 0.66, scaleTo: 1.18 },
-      c: { xFrom: 140, xTo: -12, yFrom: 64, yTo: -8, scaleFrom: 0.62, scaleTo: 1.2 },
+      video: { xFrom: 0, xTo: 0, yFrom: 28, yTo: -4, scaleFrom: 0.94, scaleTo: 1.04 },
+      a: { xFrom: -28, xTo: 4, yFrom: -16, yTo: 4, scaleFrom: 0.92, scaleTo: 1.04 },
+      b: { xFrom: -24, xTo: 4, yFrom: 16, yTo: -4, scaleFrom: 0.92, scaleTo: 1.04 },
+      c: { xFrom: 28, xTo: -4, yFrom: 12, yTo: -4, scaleFrom: 0.92, scaleTo: 1.04 },
     }
   }
-  if (width <= 768) {
+  if (width <= 1100) {
     return {
-      video: { xFrom: 0, xTo: 0, yFrom: 140, yTo: -16, scaleFrom: 0.72, scaleTo: 1.26 },
-      a: { xFrom: -200, xTo: 18, yFrom: -110, yTo: 12, scaleFrom: 0.6, scaleTo: 1.22 },
-      b: { xFrom: -160, xTo: 14, yFrom: 80, yTo: -12, scaleFrom: 0.62, scaleTo: 1.22 },
-      c: { xFrom: 210, xTo: -18, yFrom: 88, yTo: -12, scaleFrom: 0.58, scaleTo: 1.24 },
+      video: { xFrom: 0, xTo: 0, yFrom: 40, yTo: -6, scaleFrom: 0.92, scaleTo: 1.06 },
+      a: { xFrom: -40, xTo: 6, yFrom: -20, yTo: 6, scaleFrom: 0.9, scaleTo: 1.06 },
+      b: { xFrom: -32, xTo: 6, yFrom: 20, yTo: -6, scaleFrom: 0.9, scaleTo: 1.06 },
+      c: { xFrom: 44, xTo: -6, yFrom: 16, yTo: -6, scaleFrom: 0.9, scaleTo: 1.06 },
     }
   }
   if (width <= 1440) {

@@ -4,41 +4,12 @@
   max-width: 52rem;
 }
 
-.faq-jump {
-  display: grid;
-  gap: 0.4rem;
-  margin-bottom: 0.4rem;
-}
-
-.faq-jump a {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  padding: 0.85rem 1rem;
-  border-radius: 16px;
-  color: var(--mb-muted);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-}
-
-.faq-jump a span {
-  flex: none;
-  color: var(--accent);
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-}
-
-.faq-jump a:hover {
-  color: var(--mb-fg);
-  background: var(--mb-card);
-}
-
 .faq-group {
   scroll-margin-top: 6rem;
 }
 
 .faq-group h2 {
-  margin: 0.7rem 0 1.2rem;
+  margin: 0 0 1.2rem;
   font-size: clamp(1.6rem, 3vw, 2.2rem);
   font-weight: 800;
   letter-spacing: -0.045em;
@@ -47,6 +18,17 @@
 
 .faq-item {
   border-top: 1px solid var(--mb-line);
+  interpolate-size: allow-keywords;
+}
+
+.faq-item::details-content {
+  height: 0;
+  overflow: clip;
+  transition: height 0.35s ease, content-visibility 0.35s ease allow-discrete;
+}
+
+.faq-item[open]::details-content {
+  height: auto;
 }
 
 .faq-item:last-child {
@@ -67,19 +49,39 @@
   display: none;
 }
 
-.faq-item summary::after {
-  content: '+';
+.faq-mark {
   position: absolute;
-  top: 1.1rem;
+  top: 50%;
   right: 0;
-  color: var(--accent);
-  font-size: 1.2rem;
-  font-weight: 500;
-  line-height: 1;
+  width: 14px;
+  height: 14px;
+  translate: 0 -50%;
 }
 
-.faq-item[open] summary::after {
-  content: '–';
+.faq-mark span {
+  position: absolute;
+  background: var(--accent);
+  transform-origin: center;
+  transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+.faq-mark span:first-child {
+  top: 6px;
+  left: 0;
+  width: 14px;
+  height: 2px;
+}
+
+.faq-mark span:last-child {
+  top: 0;
+  left: 6px;
+  width: 2px;
+  height: 14px;
+}
+
+.faq-item[open] .faq-mark span:last-child {
+  transform: rotate(90deg);
+  opacity: 0;
 }
 
 .faq-item p {
@@ -89,8 +91,10 @@
   line-height: 1.7;
 }
 
-@media (max-width: 639px) {
-  .faq-jump a {
-    padding: 0.75rem 0.2rem;
+@media (prefers-reduced-motion: reduce) {
+  .faq-item::details-content,
+  .faq-mark span {
+    transition: none;
   }
 }
+
