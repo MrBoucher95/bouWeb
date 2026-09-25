@@ -68,11 +68,11 @@ body.mb-on .brand-nav:not(.open) .nav-brand {
   display: grid;
   justify-items: center;
   text-align: center;
-  padding: 5.6rem 1.25rem 2.8rem;
+  padding: 1.6rem 1.25rem 2.8rem;
 }
 
 .mb-hero .mb-news {
-  margin-top: 3rem;
+  margin-top: 0;
   margin-bottom: 1rem;
 }
 
@@ -805,9 +805,9 @@ html[data-theme='light'] .mb-newslet-sticker {
   object-fit: cover;
 }
 
-.mb-newslet-form h2 {
+.mb-newslet-cta h2 {
   max-width: 18ch;
-  margin: 0 0 1.2rem;
+  margin: 0 0 0.85rem;
   color: #111;
   font-size: clamp(1.5rem, 3vw, 2.15rem);
   font-weight: 800;
@@ -815,138 +815,35 @@ html[data-theme='light'] .mb-newslet-sticker {
   line-height: 1.12;
 }
 
-html[data-theme='light'] .mb-newslet-form h2 {
+html[data-theme='light'] .mb-newslet-cta h2 {
   color: #f4f4f4;
 }
 
-.mb-newslet-step {
-  margin: 0 0 0.7rem;
+.mb-newslet-cta p {
+  max-width: 32ch;
+  margin: 0 0 1.35rem;
   color: inherit;
-  font-size: 0.82rem;
+  font-size: 1rem;
+  line-height: 1.55;
 }
 
-.mb-newslet-field {
-  display: grid;
-  gap: 0.45rem;
-  max-width: 28rem;
-}
-
-.mb-newslet-field span {
-  color: inherit;
-  font-size: 0.82rem;
-}
-
-.mb-newslet-form input,
-.mb-newslet-form textarea {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  min-width: 0;
-  padding: 0.72rem 1rem;
-  color: #111;
-  background: #f4f4f4;
-  background-clip: padding-box;
-  border: 0;
-  border-radius: 16px;
-  outline: none;
-  font: inherit;
-  transform: translateZ(0);
-}
-
-.mb-newslet-form input:-webkit-autofill,
-.mb-newslet-form input:-webkit-autofill:focus,
-.mb-newslet-form textarea:-webkit-autofill,
-.mb-newslet-form textarea:-webkit-autofill:focus {
-  -webkit-text-fill-color: #111;
-  caret-color: #111;
-  box-shadow: 0 0 0 1000px #f4f4f4 inset;
-  transition: background-color 9999s ease-out;
-}
-
-.mb-newslet-form textarea {
-  min-height: 96px;
-  resize: vertical;
-}
-
-.mb-newslet-form input:focus,
-.mb-newslet-form textarea:focus {
-  box-shadow: 0 0 0 1px var(--accent);
-}
-
-.mb-newslet-form input::placeholder,
-.mb-newslet-form textarea::placeholder {
-  color: #6b6b6b;
-}
-
-.mb-newslet-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.55rem;
-  margin-top: 0.85rem;
-}
-
-.mb-newslet-prev,
 .mb-newslet-submit {
-  padding: 0.6rem 1.1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.6rem 1.15rem;
   border: 0;
   border-radius: 999px;
-  font-size: 0.86rem;
-  font-weight: 600;
-  white-space: nowrap;
-  cursor: pointer;
-}
-
-.mb-newslet-prev {
-  color: #111;
-  background: transparent;
-  box-shadow: 0 0 0 1px #d0d0d0;
-}
-
-.mb-newslet-prev:hover {
-  box-shadow: 0 0 0 1px #111;
-}
-
-html[data-theme='light'] .mb-newslet-prev {
-  color: #f4f4f4;
-  box-shadow: 0 0 0 1px #3a3a3a;
-}
-
-html[data-theme='light'] .mb-newslet-prev:hover {
-  box-shadow: 0 0 0 1px #f4f4f4;
-}
-
-.mb-newslet-submit {
   color: var(--mb-news-btn-fg);
   background: var(--mb-news-btn);
+  font-size: 0.94rem;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
 .mb-newslet-submit:hover {
   filter: brightness(0.96);
-}
-
-.mb-newslet-submit:disabled {
-  cursor: wait;
-  opacity: 0.72;
-}
-
-.mb-newslet-msg {
-  min-height: 1.2em;
-  margin: 0.65rem 0 0;
-  color: #c45c5c;
-  font-size: 0.82rem;
-  opacity: 0;
-}
-
-.mb-newslet-msg.is-ok {
-  color: #2f7a55;
-}
-
-html[data-theme='light'] .mb-newslet-msg.is-ok {
-  color: #9ad9b5;
-}
-
-.mb-newslet-msg.is-on {
-  opacity: 1;
 }
 
 .sr-only {
@@ -984,7 +881,7 @@ html[data-theme='light'] .mb-newslet-msg.is-ok {
   }
 
   .mb-hero {
-    padding-top: 4.4rem;
+    padding-top: 1.2rem;
   }
 
   .mb-foot-cols {

@@ -5,6 +5,7 @@ import ServiceHero from '../components/ServiceHero'
 import appVideo from '../assets/video/app.mp4'
 import printVideo from '../assets/video/print.mp4'
 import numeriqueVideo from '../assets/video/numerique.mp4'
+import videoVideo from '../assets/video/video.mp4'
 import printStill from '../assets/img/print01.jpg'
 import printFace from '../assets/img/print02.jpg'
 import printShot from '../assets/img/print03.jpg'
@@ -14,6 +15,9 @@ import appEssence from '../assets/img/app03.jpg'
 import webWatch from '../assets/img/web03.jpg'
 import webBefore from '../assets/img/web02.jpg'
 import webEssence from '../assets/img/web01.jpg'
+import videoWatch from '../assets/img/video01.jpg'
+import videoBefore from '../assets/img/video02.jpg'
+import videoEssence from '../assets/img/video03.jpg'
 import { useLanguage } from '../context/LanguageContext'
 import '../assets/css/Service.css'
 import '../assets/css/Faq.css'
@@ -23,12 +27,14 @@ const PAGE_VIDEO = {
   applications: appVideo,
   imprime: printVideo,
   numerique: numeriqueVideo,
+  video: videoVideo,
 }
 
 const PAGE_SHOTS = {
   imprime: { a: printFace, b: printShot, c: printStill },
   applications: { a: appBefore, b: appEssence, c: appWatch },
   web: { a: webBefore, b: webEssence, c: webWatch },
+  video: { a: videoBefore, b: videoEssence, c: videoWatch },
 }
 
 export default function ServicePage() {

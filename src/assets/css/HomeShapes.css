@@ -89,6 +89,10 @@
 .x1 { top: 24%; right: -5%; }
 .x2 { top: 65%; right: 0; }
 .c4 { top: 32%; left: 6%; }
+
+.mb-fit .c4 {
+  left: calc((100% - min(100%, 1180px)) / 2 - 11rem);
+}
 .x3 { top: 52%; right: 8%; }
 .sq4 { top: 72%; left: 4%; }
 .c5 { top: 38%; right: 14%; }

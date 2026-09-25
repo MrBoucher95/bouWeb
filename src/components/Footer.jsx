@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook, faFacebookMessenger, faLinkedin } from '@fortawesome/free-brands-svg-icons'
 import { Link } from 'react-router-dom'
 import { useLanguage } from '../context/LanguageContext'
-import { sendMessage, plainText } from '../lib/mail'
 import taping from '../assets/video/taping.mp4'
 
 export const socials = [
@@ -27,7 +26,6 @@ export const socials = [
   },
 ]
 
-const footFields = ['name', 'email', 'subject', 'message']
 const footerQuery = '(max-width: 560px)'
 
 function useNarrowFooter() {
@@ -45,10 +43,7 @@ function useNarrowFooter() {
 
 export default function Footer() {
   const { t } = useLanguage()
-  const { nav, home2, contact } = t
-  const [status, setStatus] = useState('')
-  const [step, setStep] = useState(0)
-  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
+  const { nav, home, home2 } = t
   const [openCols, setOpenCols] = useState({})
   const narrow = useNarrowFooter()
 
@@ -67,23 +62,6 @@ export default function Footer() {
     window.addEventListener('resize', snap)
     return () => window.removeEventListener('resize', snap)
   }, [narrow])
-  const field = footFields[step]
-  const labels = [contact.name, contact.emailField, contact.subject, contact.message]
-  const placeholders = [contact.namePh, contact.emailPh, contact.subjectPh, contact.messagePh]
-
-  const update = (key, value) => {
-    const next = plainText(value)
-    if (value !== next) return
-    setForm((current) => ({ ...current, [key]: next }))
-    if (status === 'error') setStatus('')
-  }
-
-  const valid = (key, value) => {
-    const trimmed = value.trim()
-    if (key === 'email') return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)
-    return trimmed.length > 0
-  }
-
   const columns = [
     {
       title: home2.colServices,
@@ -118,29 +96,6 @@ export default function Footer() {
       ],
     },
   ]
-
-  async function onSubmit(event) {
-    event.preventDefault()
-    if (status === 'pending') return
-    if (!valid(field, form[field])) {
-      setStatus('error')
-      return
-    }
-    if (step < footFields.length - 1) {
-      setStep((value) => value + 1)
-      setStatus('')
-      return
-    }
-    setStatus('pending')
-    try {
-      await sendMessage(form)
-      setStatus('success')
-      setForm({ name: '', email: '', subject: '', message: '' })
-      setStep(0)
-    } catch (error) {
-      setStatus(error?.code === 'activate' ? 'activate' : 'send-error')
-    }
-  }
 
   return (
     <footer className="mb-foot">
@@ -215,87 +170,13 @@ export default function Footer() {
           <figure className="mb-newslet-sticker" aria-hidden="true">
             <video src={taping} autoPlay loop muted playsInline />
           </figure>
-          <form className="mb-newslet-form" onSubmit={onSubmit} noValidate autoComplete="off" aria-label={home2.formTitle}>
+          <div className="mb-newslet-cta">
             <h2>{home2.formTitle}</h2>
-            {status === 'success' ? (
-              <p className="mb-newslet-msg is-ok is-on" role="status">
-                {contact.sent}
-              </p>
-            ) : (
-              <>
-                <p className="mb-newslet-step">
-                  {t.estimate.step} {step + 1} / {footFields.length}
-                </p>
-                <label className="mb-newslet-field" htmlFor={`footer-${field}`}>
-                  <span>{labels[step]}</span>
-                  {field === 'message' ? (
-                    <textarea
-                      key="message"
-                      id="footer-message"
-                      name="mbq-d"
-                      rows={4}
-                      required
-                      autoComplete="off"
-                      data-1p-ignore="true"
-                      data-lpignore="true"
-                      data-form-type="other"
-                      spellCheck={false}
-                      placeholder={placeholders[step]}
-                      value={form.message}
-                      onChange={(event) => update('message', event.target.value)}
-                      onInput={(event) => update('message', event.target.value)}
-                      aria-invalid={status === 'error'}
-                    />
-                  ) : (
-                    <input
-                      key={field}
-                      id={`footer-${field}`}
-                      type="text"
-                      inputMode={field === 'email' ? 'email' : 'text'}
-                      name={field === 'name' ? 'mbq-a' : field === 'email' ? 'mbq-b' : 'mbq-c'}
-                      autoComplete="off"
-                      data-1p-ignore="true"
-                      data-lpignore="true"
-                      data-form-type="other"
-                      spellCheck={false}
-                      required
-                      placeholder={placeholders[step]}
-                      value={form[field]}
-                      onChange={(event) => update(field, event.target.value)}
-                      onInput={(event) => update(field, event.target.value)}
-                      aria-invalid={status === 'error'}
-                    />
-                  )}
-                </label>
-                <div className="mb-newslet-actions">
-                  {step > 0 ? (
-                    <button type="button" className="mb-newslet-prev" onClick={() => setStep((value) => value - 1)}>
-                      {contact.prev}
-                    </button>
-                  ) : null}
-                  <button className="mb-newslet-submit" type="submit" disabled={status === 'pending'}>
-                    {status === 'pending'
-                      ? home2.formPending
-                      : step === footFields.length - 1
-                        ? contact.send
-                        : contact.next}
-                  </button>
-                </div>
-                <p
-                  className={`mb-newslet-msg${status === 'error' || status === 'send-error' || status === 'activate' ? ' is-on' : ''}`}
-                  role="alert"
-                >
-                  {status === 'error'
-                    ? home2.formError
-                    : status === 'activate'
-                      ? contact.activate
-                      : status === 'send-error'
-                        ? contact.sendError
-                        : ''}
-                </p>
-              </>
-            )}
-          </form>
+            <p>{home2.formLead}</p>
+            <Link className="mb-newslet-submit" to="/contact">
+              {home.ctaContact}
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

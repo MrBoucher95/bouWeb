@@ -76,50 +76,11 @@ export default function Nav() {
   const [closing, setClosing] = useState(false)
   const [enlarged, setEnlarged] = useState(null)
   const [settle, setSettle] = useState(false)
-  const [hidden, setHidden] = useState(false)
-  const [scrolled, setScrolled] = useState(() => window.scrollY > 0)
   const closeTimer = useRef(0)
-  const lastY = useRef(0)
 
   useEffect(() => {
     document.body.classList.toggle('nav-open', open)
     return () => document.body.classList.remove('nav-open')
-  }, [open])
-
-  useEffect(() => {
-    lastY.current = window.scrollY
-    setHidden(false)
-    setScrolled(window.scrollY > 0)
-  }, [pathname])
-
-  useEffect(() => {
-    if (open) {
-      setHidden(false)
-      return undefined
-    }
-
-    let ticking = false
-    const onScroll = () => {
-      if (ticking) return
-      ticking = true
-      window.requestAnimationFrame(() => {
-        const y = window.scrollY
-        const delta = y - lastY.current
-        setScrolled(y > 0)
-        if (y < 24) {
-          setHidden(false)
-        } else if (delta > 6) {
-          setHidden(true)
-        } else if (delta < -6) {
-          setHidden(false)
-        }
-        lastY.current = y
-        ticking = false
-      })
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
   }, [open])
 
   useEffect(() => () => window.clearTimeout(closeTimer.current), [])
@@ -164,7 +125,6 @@ export default function Nav() {
     warp ? 'warp' : '',
     closing ? 'close' : '',
     settle ? 'settle' : '',
-    hidden ? 'nav-hide' : '',
   ]
     .filter(Boolean)
     .join(' ')
@@ -208,7 +168,7 @@ export default function Nav() {
           </div>
         </div>
 
-        <header className={`nav-bar${scrolled ? ' nav-scrolled' : ''}`}>
+        <header className="nav-bar">
           <div className="container nav-bar-inner">
             <Link className="nav-brand" to="/" aria-label={t.nav.home}>
               <svg viewBox="0 0 4558 2658" aria-hidden="true">
